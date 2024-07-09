@@ -2,25 +2,36 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public function adminlte_image()
+    {
+        return 'https://picsum.photos/300/300';
+    }
+    public function adminlte_desc()
+    {
+        // Recupera el nombre del rol del usuario actual
+        return $this->getRoleNames()->implode(', ');
+    }
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
     protected $fillable = [
         'name',
         'email',
         'password',
+        'city',
+        'ci',
     ];
 
     /**
@@ -40,5 +51,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 }
