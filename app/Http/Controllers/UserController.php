@@ -3,82 +3,104 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request): View
+
+    public function index()
     {
-        $users = User::paginate();
+        $users = User::withTrashed()->paginate(); // Incluye usuarios eliminados
 
         return view('user.index', compact('users'))
-            ->with('i', ($request->input('page', 1) - 1) * $users->perPage());
+            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
+    public function create()
     {
         $user = new User();
-
-        return view('user.create', compact('user'));
+        $roles = Role::all();
+        return view('user.create', compact('user','roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(UserRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        User::create($request->validated());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'Regional' => 'required',
+            'ci' => 'required',
+        ]);
+    
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
+        $user->Regional = $request->input('Regional');
+        $user->ci = $request->input('ci');
 
-        return Redirect::route('users.index')
-            ->with('success', 'User created successfully.');
+        $user->save();
+
+        $user->assignRole($request->input('roles'));
+        
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id): View
+    public function show($id)
     {
         $user = User::find($id);
 
         return view('user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id): View
+    public function edit($id)
     {
         $user = User::find($id);
+        $roles = Role::all();
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UserRequest $request, User $user): RedirectResponse
+    public function update(Request $request, User $user)
     {
-        $user->update($request->validated());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
+            'Regional' => 'required',
+            'ci' => 'required',
+        ]);
 
-        return Redirect::route('users.index')
-            ->with('success', 'User updated successfully');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->roles()->sync($request->roles);
+        $user->Regional = $request->input('Regional');
+        $user->ci = $request->input('ci');
+        
+        $user->save();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario actualizado correctamente');
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
-        User::find($id)->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
-        return Redirect::route('users.index')
-            ->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario dado de baja correctamente');
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario reactivado correctamente');
     }
 }

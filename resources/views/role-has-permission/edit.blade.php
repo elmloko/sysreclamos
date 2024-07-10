@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Editar Usuarios')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
     Paqueteria Postal
 @endsection
@@ -13,20 +13,20 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Actualizar') }} Usuarios</span>
+                        <span class="card-title">{{ __('Update') }} Role Has Permission</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('users.update', $user->id) }}"  role="form" enctype="multipart/form-data">
-                            @method('PUT')
+                        <form method="POST" action="{{ route('role-has-permissions.update', $roleHasPermission->id) }}"  role="form" enctype="multipart/form-data">
+                            {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('user.form')
+                            @include('role-has-permission.form')
 
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        @include('footer')
     </section>
+    @include('footer')
 @endsection

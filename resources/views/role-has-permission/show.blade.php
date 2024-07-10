@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
     Paqueteria Postal
 @endsection
@@ -11,28 +11,28 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} User</span>
+                            <span class="card-title">{{ __('Show') }} Role Has Permission</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('role-has-permissions.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Nombre Completo:</strong>
-                            {{ $user->name }}
+                            <strong>Permission Id:</strong>
+                            {{ $roleHasPermission->permission_id }}
                         </div>
                         <div class="form-group">
-                            <strong>Email:</strong>
-                            {{ $user->email }}
+                            <strong>Role Id:</strong>
+                            {{ $roleHasPermission->role_id }}
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-        @include('footer')
     </section>
+    @include('footer')
 @endsection

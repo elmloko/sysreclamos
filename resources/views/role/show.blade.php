@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
     Paqueteria Postal
 @endsection
@@ -11,28 +11,28 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} User</span>
+                            <span class="card-title">{{ __('Show') }} Role</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('roles.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
                     <div class="card-body">
                         
                         <div class="form-group">
-                            <strong>Nombre Completo:</strong>
-                            {{ $user->name }}
+                            <strong>Name:</strong>
+                            {{ $role->name }}
                         </div>
                         <div class="form-group">
-                            <strong>Email:</strong>
-                            {{ $user->email }}
+                            <strong>Guard Name:</strong>
+                            {{ $role->guard_name }}
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-        @include('footer')
     </section>
+    @include('footer')
 @endsection
