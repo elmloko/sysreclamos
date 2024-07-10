@@ -343,6 +343,18 @@ return [
                 ],
             ],
         ],
+        [
+            'text' => 'Consultas Informacion',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Consulta Correspondencia',
+                    'url' => '',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
     ],
 
     /*
