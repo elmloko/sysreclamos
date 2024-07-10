@@ -138,6 +138,5 @@
             </div>
         </div>
         @livewireScripts
-        @livewire('livewire-ui-modal')
     </body>
 </html>
