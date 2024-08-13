@@ -1,4 +1,4 @@
-<div style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+<div style="max-width: 1000px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <input 
             type="text" 
@@ -27,13 +27,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($this->events as $event)
+            @forelse($events as $event)
                 <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">{{ $event['eventType'] ?? $event['action'] }}</td>
-                    <td style="padding: 10px;">{{ $event['condition'] ?? $event['descripcion'] }}</td>
-                    <td style="padding: 10px;">{{ $event['eventDate'] ?? $event['updated_at'] }}</td>
+                    <td style="padding: 10px;">{{ $event['action'] }}</td>
+                    <td style="padding: 10px;">{{ $event['descripcion'] }}</td>
+                    <td style="padding: 10px;">{{ $event['updated_at'] }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="3" style="padding: 10px; text-align: center;">No se encontraron eventos para este código.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

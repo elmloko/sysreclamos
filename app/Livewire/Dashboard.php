@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 class Dashboard extends Component
 {
@@ -13,18 +14,69 @@ class Dashboard extends Component
 
     public function search()
     {
+        // Primera API: Autenticación y obtención del token JWT
+        $client = new Client(['base_uri' => 'http://172.65.10.37/']);
+        $response = $client->post('api/Autenticacion/Validar', [
+            'json' => [
+                'correo' => 'Correos',
+                'clave' => 'AGBClp2020'
+            ]
+        ]);
+        $body = json_decode($response->getBody());
+        $token = $body->token;
+
+        // Primera API: Buscar eventos con el código
+        $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ],
+            'json' => [
+                'id' => $this->codigo
+            ]
+        ]);
+
+        $firstApiEvents = [];
+        if ($response->getStatusCode() === 200) {
+            $results = json_decode($response->getBody(), true);
+
+            // Ordenar y formatear los resultados
+            usort($results, function ($a, $b) {
+                return strtotime($b['eventDate']) - strtotime($a['eventDate']);
+            });
+
+            $firstApiEvents = collect($results)->map(function ($event) {
+                return [
+                    'action' => $event['eventType'],
+                    'descripcion' => $event['office'] . ' - ' . $event['scanned'],
+                    'updated_at' => Carbon::parse($event['eventDate'])->format('d/m/Y H:i:s')
+                ];
+            })->toArray();
+        }
+
+        // Segunda API: Buscar eventos con el código (repetidos)
         $response = Http::withHeaders([
             'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
         ])->withOptions(['verify' => false])->get("https://correos.gob.bo:8000/api/events/repeated-codes/{$this->codigo}");
 
+        $secondApiEvents = [];
         if ($response->successful()) {
-            $this->events = collect($response->json())->map(function ($event) {
-                $event['updated_at'] = Carbon::parse($event['updated_at'])->format('d/m/Y H:i:s');
-                return $event;
+            $secondApiEvents = collect($response->json())->map(function ($event) {
+                return [
+                    'action' => $event['action'],
+                    'descripcion' => $event['descripcion'],
+                    'updated_at' => Carbon::parse($event['updated_at'])->format('d/m/Y H:i:s')
+                ];
             })->toArray();
-        } else {
-            $this->events = [];
         }
+
+        // Combinamos los resultados de ambas APIs
+        $this->events = array_merge($firstApiEvents, $secondApiEvents);
+
+        // Ordenamos todos los eventos por fecha descendente
+        usort($this->events, function ($a, $b) {
+            return strtotime($b['updated_at']) - strtotime($a['updated_at']);
+        });
     }
 
     public function render()
