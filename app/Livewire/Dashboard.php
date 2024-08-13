@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use App\Models\Information;
 
 class Dashboard extends Component
 {
@@ -89,6 +90,33 @@ class Dashboard extends Component
         usort($this->events, function ($a, $b) {
             return strtotime($b['updated_at']) - strtotime($a['updated_at']);
         });
+    }
+
+    public function saveData()
+    {
+        // Asegúrate de que los eventos están ordenados por fecha en orden descendente
+        usort($this->events, function ($a, $b) {
+            return strtotime($b['updated_at']) - strtotime($a['updated_at']);
+        });
+    
+        // Recupera el evento más reciente
+        $latestEvent = $this->events[0] ?? null;
+    
+        Information::create([
+            'codigo' => $this->codigo,
+            'destinatario' => $this->additionalInfo['DESTINATARIO'] ?? null,
+            'last_event' => $this->additionalInfo['ESTADO'] ?? null,
+            'telefono' => $this->additionalInfo['TELEFONO'] ?? null,
+            'ciudad' => $this->additionalInfo['CUIDAD'] ?? null,
+            'ventanilla' => $this->additionalInfo['VENTANILLA'] ?? null,
+            'last_status' => $latestEvent['action'] ?? null,  // Toma el estado del último evento
+            'last_description' => substr($latestEvent['descripcion'] ?? '', 0, 255),  // Toma la descripción del último evento
+            'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
+            'estado' => 'ATM',
+            'created_at' => Carbon::now(),
+        ]);
+    
+        session()->flash('message', 'Información guardada exitosamente.');
     }
 
     public function render()
