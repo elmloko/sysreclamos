@@ -18,6 +18,32 @@
         <h2 style="text-align: center; margin-bottom: 15px;">Eventos del código: {{ $codigo }}</h2>
     @endif
 
+    @if($additionalInfo)
+        <div style="margin-bottom: 20px;">
+            <h3 style="text-align: center;">Información Adicional</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 0 auto; text-align: left;">
+                <thead>
+                    <tr style="background-color: #f1f1f1;">
+                        <th style="padding: 10px;">Destinatario</th>
+                        <th style="padding: 10px;">Estado</th>
+                        <th style="padding: 10px;">Teléfono</th>
+                        <th style="padding: 10px;">Ciudad</th>
+                        <th style="padding: 10px;">Ventanilla</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px;">{{ $additionalInfo['DESTINATARIO'] }}</td>
+                        <td style="padding: 10px;">{{ $additionalInfo['ESTADO'] }}</td>
+                        <td style="padding: 10px;">{{ $additionalInfo['TELEFONO'] }}</td>
+                        <td style="padding: 10px;">{{ $additionalInfo['CUIDAD'] }}</td>
+                        <td style="padding: 10px;">{{ $additionalInfo['VENTANILLA'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    @endif
+
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr style="background-color: #007bff; color: #fff;">
