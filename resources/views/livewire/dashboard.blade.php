@@ -1,19 +1,24 @@
-<div
-    style="max-width: 1000px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+<div style="max-width: 1000px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <input type="text" wire:model="codigo" placeholder="Ingresa el código"
-            style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px;">
-        <button wire:click="search"
-            style="padding: 10px 15px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+        <input 
+            type="text" 
+            wire:model="codigo" 
+            placeholder="Ingresa el código"
+            style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px;"
+        >
+        <button 
+            wire:click="search" 
+            style="padding: 10px 15px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer;"
+        >
             Buscar
         </button>
     </div>
 
-    @if (!empty($codigo) && !empty($events))
+    @if(!empty($codigo) && !empty($events))
         <h2 style="text-align: center; margin-bottom: 15px;">Eventos del código: {{ $codigo }}</h2>
     @endif
 
-    @if ($additionalInfo)
+    @if($additionalInfo)
         <div style="margin-bottom: 20px;">
             <h3 style="text-align: center;">Información Adicional</h3>
             <table style="width: 100%; border-collapse: collapse; margin: 0 auto; text-align: left;">
@@ -56,17 +61,21 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3" style="padding: 10px; text-align: center;">No se encontraron eventos para este
-                        código.</td>
+                    <td colspan="3" style="padding: 10px; text-align: center;">No se encontraron eventos para este código.</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
 
     <div style="text-align: right; margin-top: 20px;">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal"
-            @if (!$additionalInfo) disabled @endif>
-            Registro ATM
+        <button 
+            type="button" 
+            class="btn btn-primary" 
+            data-toggle="modal" 
+            data-target="#atmModal"
+            @if(!$additionalInfo) disabled @endif
+        >
+        Registro ATM
         </button>
     </div>
 
@@ -84,41 +93,33 @@
                     <form>
                         <div class="form-group">
                             <label for="codigo">Código</label>
-                            <input type="text" class="form-control" id="codigo" value="{{ $codigo }}"
-                                readonly>
+                            <input type="text" class="form-control" id="codigo" value="{{ $codigo }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="codigo">Nombre Completo</label>
-                            <input type="text" class="form-control" id="codigo"
-                                value="{{ $additionalInfo['DESTINATARIO'] ?? '' }}" readonly>
+                            <input type="text" class="form-control" id="codigo" value="{{ $additionalInfo['DESTINATARIO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nombre">Ultimo Estado</label>
-                            <input type="text" class="form-control" id="nombre"
-                                value="{{ $additionalInfo['ESTADO'] ?? '' }}" readonly>
+                            <input type="text" class="form-control" id="nombre" value="{{ $additionalInfo['ESTADO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="text" class="form-control" id="telefono"
-                                value="{{ $additionalInfo['TELEFONO'] ?? '' }}" readonly>
+                            <input type="text" class="form-control" id="telefono" value="{{ $additionalInfo['TELEFONO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Ciudad</label>
-                            <input type="text" class="form-control" id="ciudad"
-                                value="{{ $additionalInfo['CUIDAD'] ?? '' }}" readonly>
+                            <input type="text" class="form-control" id="ciudad" value="{{ $additionalInfo['CUIDAD'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="fecha">Fecha</label>
-                            <input type="text" class="form-control" id="fecha"
-                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                            <input type="text" class="form-control" id="fecha" value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveData">
-                        Habilitar Feedback
-                    </button>
+                    <button type="button" class="btn btn-primary">Habilitar Feedback</button>
                 </div>
             </div>
         </div>
