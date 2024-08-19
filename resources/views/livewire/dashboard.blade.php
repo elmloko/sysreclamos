@@ -71,7 +71,7 @@
     <div style="text-align: right; margin-top: 20px;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal"
             @if (!$additionalInfo) disabled @endif>
-            Registro ATM
+            Registro SAC
         </button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
             Registro Llamadas
