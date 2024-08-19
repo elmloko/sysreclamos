@@ -15,6 +15,7 @@ class Dashboard extends Component
     public $additionalInfo = null;
     public $destinatario;
     public $telefono;
+    public $last_description;
 
     public function search()
     {
@@ -114,7 +115,7 @@ class Dashboard extends Component
             'last_status' => $latestEvent['action'] ?? null,  // Toma el estado del último evento
             'last_description' => substr($latestEvent['descripcion'] ?? '', 0, 255),  // Toma la descripción del último evento
             'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
-            'estado' => 'ATM',
+            'estado' => 'SAC',
             'created_at' => Carbon::now(),
         ]);
 
@@ -127,6 +128,7 @@ class Dashboard extends Component
             'codigo' => $this->codigo,
             'destinatario' => $this->destinatario,
             'telefono' => $this->telefono,
+            'last_description' => $this->last_description,
             'estado' => 'LLAMADA',
             'created_at' => Carbon::now(),
         ]);

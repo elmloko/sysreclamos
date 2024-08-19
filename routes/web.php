@@ -5,8 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
+use App\Http\Controllers\InformationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Feedback;
+use App\Models\Information;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/role-has-permission/{roleHasPermission}/edit', [RoleHasPermissionController::class, 'edit'])->name('role-has-permissions.edit');
     Route::put('/role-has-permission/{roleHasPermission', [RoleHasPermissionController::class, 'update'])->name('role-has-permissions.update');
     Route::delete('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'destroy'])->name('role-has-permissions.destroy');
+
+    Route::get('/records', [InformationController::class, 'getRecords']);
+    Route::get('/export-pdf', [InformationController::class, 'exportPdf'])->name('export.pdf');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
