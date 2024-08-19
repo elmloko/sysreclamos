@@ -1,5 +1,10 @@
 <div
     style="max-width: 1000px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <input type="text" wire:model="codigo" placeholder="Ingresa el código"
             style="flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; margin-right: 10px;">
@@ -68,14 +73,17 @@
             @if (!$additionalInfo) disabled @endif>
             Registro ATM
         </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
+            Registro Llamadas
+        </button>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Registro ATM -->
     <div class="modal fade" id="atmModal" tabindex="-1" aria-labelledby="atmModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="atmModalLabel">Registro de Atencion a los Usuario</h5>
+                    <h5 class="modal-title" id="atmModalLabel">Registro de Atención a los Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,7 +101,7 @@
                                 value="{{ $additionalInfo['DESTINATARIO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="nombre">Ultimo Estado</label>
+                            <label for="nombre">Último Estado</label>
                             <input type="text" class="form-control" id="nombre"
                                 value="{{ $additionalInfo['ESTADO'] ?? '' }}" readonly>
                         </div>
@@ -123,4 +131,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Registro Llamadas -->
+    <div class="modal fade" id="llamadaModal" tabindex="-1" aria-labelledby="llamadaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="llamadaModalLabel">Registro de Llamadas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="codigo">Código</label>
+                            <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                        </div>
+                        <div class="form-group">
+                            <label for="destinatario">Destinatario</label>
+                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" wire:model="telefono">
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" class="form-control" id="estado" value="LLAMADA" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="text" class="form-control" id="fecha"
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="saveLlamada">
+                        Guardar Registro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('close-modal', event => {
+        $('#llamadaModal').modal('hide'); // Cierra el modal de Bootstrap
+    });
+</script>

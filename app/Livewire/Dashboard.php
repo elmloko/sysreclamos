@@ -12,7 +12,9 @@ class Dashboard extends Component
 {
     public $codigo;
     public $events = [];
-    public $additionalInfo = null;  // Nueva variable para la información adicional
+    public $additionalInfo = null;
+    public $destinatario;
+    public $telefono;
 
     public function search()
     {
@@ -98,10 +100,10 @@ class Dashboard extends Component
         usort($this->events, function ($a, $b) {
             return strtotime($b['updated_at']) - strtotime($a['updated_at']);
         });
-    
+
         // Recupera el evento más reciente
         $latestEvent = $this->events[0] ?? null;
-    
+
         Information::create([
             'codigo' => $this->codigo,
             'destinatario' => $this->additionalInfo['DESTINATARIO'] ?? null,
@@ -115,8 +117,27 @@ class Dashboard extends Component
             'estado' => 'ATM',
             'created_at' => Carbon::now(),
         ]);
-    
+
         session()->flash('message', 'Información guardada exitosamente.');
+    }
+
+    public function saveLlamada()
+    {
+        Information::create([
+            'codigo' => $this->codigo,
+            'destinatario' => $this->destinatario,
+            'telefono' => $this->telefono,
+            'estado' => 'LLAMADA',
+            'created_at' => Carbon::now(),
+        ]);
+
+        session()->flash('message', 'Llamada registrada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+
+        // Resetear los campos del formulario
+        $this->reset(['codigo', 'destinatario', 'telefono']);
     }
 
     public function render()
