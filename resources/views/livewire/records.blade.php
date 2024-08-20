@@ -21,7 +21,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Registros de Información</h3>
                             <div class="float-right d-flex align-items-center">
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a PDF</button>

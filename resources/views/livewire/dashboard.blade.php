@@ -155,7 +155,7 @@
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="text" class="form-control" id="telefono" wire:model="telefono">
+                            <input type="number" class="form-control" id="telefono" wire:model="telefono" pattern="\d*" maxlength="8">
                         </div>
                         <div class="form-group">
                             <label for="last_description">Descripción</label>
