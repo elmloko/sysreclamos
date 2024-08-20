@@ -7,7 +7,6 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\InformationController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Feedback;
 use App\Models\Information;
 
 /*

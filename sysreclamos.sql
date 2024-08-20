@@ -161,9 +161,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=1225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1197 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~360 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~362 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(1, 1724080080, 60, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
 	(2, 1724079960, 360, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
@@ -530,20 +530,7 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(1189, 1724099820, 60, 'user_request', '1', 'count', 1.00, NULL),
 	(1190, 1724099760, 360, 'user_request', '1', 'count', 1.00, NULL),
 	(1193, 1724100180, 60, 'user_request', '1', 'count', 1.00, NULL),
-	(1194, 1724100120, 360, 'user_request', '1', 'count', 1.00, NULL),
-	(1197, 1724159640, 60, 'user_request', '1', 'count', 2.00, NULL),
-	(1198, 1724159520, 360, 'user_request', '1', 'count', 5.00, NULL),
-	(1199, 1724159520, 1440, 'user_request', '1', 'count', 5.00, NULL),
-	(1200, 1724153760, 10080, 'user_request', '1', 'count', 5.00, NULL),
-	(1205, 1724159700, 60, 'user_request', '1', 'count', 3.00, NULL),
-	(1209, 1724159700, 60, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'count', 1.00, NULL),
-	(1210, 1724159520, 360, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'count', 1.00, NULL),
-	(1211, 1724159520, 1440, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'count', 1.00, NULL),
-	(1212, 1724153760, 10080, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'count', 1.00, NULL),
-	(1217, 1724159700, 60, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'max', 1724159751.00, NULL),
-	(1218, 1724159520, 360, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'max', 1724159751.00, NULL),
-	(1219, 1724159520, 1440, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'max', 1724159751.00, NULL),
-	(1220, 1724153760, 10080, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 'max', 1724159751.00, NULL);
+	(1194, 1724100120, 360, 'user_request', '1', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -558,9 +545,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~254 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~251 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1, 1724080133, 'cache_hit', 'spatie.permission.cache', NULL),
 	(2, 1724080134, 'cache_hit', 'spatie.permission.cache', NULL),
@@ -812,13 +799,7 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(248, 1724099061, 'cache_hit', 'spatie.permission.cache', NULL),
 	(249, 1724099061, 'user_request', '1', NULL),
 	(250, 1724099823, 'user_request', '1', NULL),
-	(251, 1724100238, 'user_request', '1', NULL),
-	(252, 1724159696, 'user_request', '1', NULL),
-	(253, 1724159697, 'user_request', '1', NULL),
-	(254, 1724159720, 'user_request', '1', NULL),
-	(255, 1724159751, 'user_request', '1', NULL),
-	(256, 1724159751, 'exception', '["Illuminate\\\\Contracts\\\\Container\\\\BindingResolutionException","vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Container\\\\Container.php:914"]', 1724159751),
-	(257, 1724159755, 'user_request', '1', NULL);
+	(251, 1724100238, 'user_request', '1', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (

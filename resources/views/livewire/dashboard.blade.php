@@ -236,10 +236,34 @@
             </div>
         </div>
     </div>
+    <!-- Modal Calificando -->
+    <div class="modal fade" id="calificandoModal" tabindex="-1" aria-labelledby="calificandoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <h5 id="calificandoModalLabel">Calificando...</h5>
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Cargando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     document.addEventListener('close-modal', event => {
-        $('#llamadaModal').modal('hide'); // Cierra el modal de Bootstrap
+        $('#atmModal').modal('hide'); // Cierra el modal de Registro ATM
+        $('#sacModal').modal('hide'); // Cierra el modal de SAC Manual
+        $('#llamadaModal').modal('hide'); // Cierra el modal de Registro de Llamadas
+    });
+
+    document.addEventListener('open-calificando-modal', event => {
+        $('#calificandoModal').modal('show'); // Abre el modal de Calificando
+    });
+
+    document.addEventListener('close-calificando-modal', event => {
+        $('#calificandoModal').modal('hide'); // Cierra el modal de Calificando
     });
 </script>

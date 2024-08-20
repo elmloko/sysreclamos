@@ -16,6 +16,13 @@ class Dashboard extends Component
     public $destinatario;
     public $telefono;
     public $last_description;
+    public $feedback;
+    public $view; // Definir la propiedad $view
+
+    public function mount($view = 'dashboard')
+    {
+        $this->view = $view;
+    }
 
     public function search()
     {
@@ -120,6 +127,13 @@ class Dashboard extends Component
         ]);
 
         session()->flash('message', 'Información guardada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
+
+        // Resetear los campos del formulario
+        $this->reset(['codigo', 'destinatario', 'telefono']);   
     }
 
     public function saveLlamada()
@@ -157,10 +171,11 @@ class Dashboard extends Component
             'created_at' => Carbon::now(),
         ]);
 
-        session()->flash('message', 'Llamada registrada exitosamente.');
+        session()->flash('message', 'Registro SAC registrada exitosamente.');
 
         // Emitir un evento para cerrar el modal
         $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
@@ -168,6 +183,10 @@ class Dashboard extends Component
 
     public function render()
     {
+        if ($this->view === 'feedback') {
+            return view('livewire.feedback');
+        }
+    
         return view('livewire.dashboard');
     }
 }

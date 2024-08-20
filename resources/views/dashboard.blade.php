@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    @livewire('dashboard')
+    @livewire('dashboard', ['view' => 'dashboard'])
     @include('footer')
 @stop
 

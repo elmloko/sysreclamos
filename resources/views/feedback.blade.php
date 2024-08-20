@@ -7,7 +7,7 @@
     @livewireStyles
 </head>
 <body>
-    @livewire('feedback')
+    @livewire('dashboard', ['view' => 'feedback'])
     @livewireScripts
 </body>
 </html>
