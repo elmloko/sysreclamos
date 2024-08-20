@@ -22,8 +22,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Registros de Información</h3>
-                        </div>
-
+                            <div class="float-right d-flex align-items-center">
+                                <input type="date" wire:model="selectedDate" class="form-control">
+                                <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a PDF</button>
+                            </div>
+                        </div>                     
                         <div class="card-body">
                             <table id="recordsTable" class="table table-bordered table-hover">
                                 <thead>
@@ -50,7 +53,7 @@
                                             <td>{{ $record->codigo }}</td>
                                             <td>{{ $record->destinatario }}</td>
                                             <td>{{ $record->last_event }}</td>
-                                            <td>{{ $record->telfono }}</td>
+                                            <td>{{ $record->telefono }}</td>
                                             <td>{{ $record->ciudad }}</td>
                                             <td>{{ $record->ventanilla }}</td>
                                             <td>{{ $record->last_status }}</td>

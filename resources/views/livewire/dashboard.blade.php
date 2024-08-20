@@ -133,54 +133,54 @@
     </div>
 
     <!-- Modal Registro Llamadas -->
-<div class="modal fade" id="llamadaModal" tabindex="-1" aria-labelledby="llamadaModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="llamadaModalLabel">Registro de Llamadas</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="codigo">Código</label>
-                        <input type="text" class="form-control" id="codigo" wire:model="codigo">
-                    </div>
-                    <div class="form-group">
-                        <label for="destinatario">Destinatario</label>
-                        <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" class="form-control" id="telefono" wire:model="telefono">
-                    </div>
-                    <div class="form-group">
-                        <label for="last_description">Descripción</label>
-                        <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="estado">Estado</label>
-                        <input type="text" class="form-control" id="estado" value="LLAMADA" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha</label>
-                        <input type="text" class="form-control" id="fecha"
-                            value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" wire:click="saveLlamada">
-                    Guardar Registro
-                </button>
+    <div class="modal fade" id="llamadaModal" tabindex="-1" aria-labelledby="llamadaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="llamadaModalLabel">Registro de Llamadas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="codigo">Código</label>
+                            <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                        </div>
+                        <div class="form-group">
+                            <label for="destinatario">Destinatario</label>
+                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" wire:model="telefono">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_description">Descripción</label>
+                            <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" class="form-control" id="estado" value="LLAMADA" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="text" class="form-control" id="fecha"
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="saveLlamada">
+                        Guardar Registro
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </div>
 
 <script>

@@ -125,11 +125,13 @@ class Dashboard extends Component
     public function saveLlamada()
     {
         Information::create([
-            'codigo' => $this->codigo,
-            'destinatario' => $this->destinatario,
+            'codigo' => strtoupper($this->codigo),
+            'destinatario' => strtoupper($this->destinatario),
             'telefono' => $this->telefono,
-            'last_description' => $this->last_description,
+            'last_description' => strtoupper($this->last_description),
             'estado' => 'LLAMADA',
+            'last_event' => 'INFORMACIONES',
+            'ciudad' => strtoupper(auth()->user()->city),
             'created_at' => Carbon::now(),
         ]);
 
