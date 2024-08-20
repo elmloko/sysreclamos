@@ -69,10 +69,15 @@
     </table>
 
     <div style="text-align: right; margin-top: 20px;">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal"
-            @if (!$additionalInfo) disabled @endif>
-            Registro SAC
-        </button>
+        @if ($additionalInfo)
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal">
+                Registro SAC
+            </button>
+        @else
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sacModal">
+                Registro SAC
+            </button>
+        @endif
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
             Registro Llamadas
         </button>
@@ -155,7 +160,8 @@
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="number" class="form-control" id="telefono" wire:model="telefono" pattern="\d*" maxlength="8">
+                            <input type="number" class="form-control" id="telefono" wire:model="telefono"
+                                pattern="\d*" maxlength="8">
                         </div>
                         <div class="form-group">
                             <label for="last_description">Descripción</label>
@@ -175,6 +181,55 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" wire:click="saveLlamada">
+                        Guardar Registro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Registro Llamadas -->
+    <div class="modal fade" id="sacModal" tabindex="-1" aria-labelledby="sacModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sacModalLabel">Registro de atencion al usuario (Manual)</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="codigo">Código</label>
+                            <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                        </div>
+                        <div class="form-group">
+                            <label for="destinatario">Destinatario</label>
+                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="number" class="form-control" id="telefono" wire:model="telefono"
+                                pattern="\d*" maxlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_description">Descripción</label>
+                            <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado</label>
+                            <input type="text" class="form-control" id="estado" value="SAC MANUAL" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="text" class="form-control" id="fecha"
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="savesac">
                         Guardar Registro
                     </button>
                 </div>

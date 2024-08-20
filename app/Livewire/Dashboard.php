@@ -144,6 +144,28 @@ class Dashboard extends Component
         $this->reset(['codigo', 'destinatario', 'telefono']);
     }
 
+    public function savesac()
+    {
+        Information::create([
+            'codigo' => strtoupper($this->codigo),
+            'destinatario' => strtoupper($this->destinatario),
+            'telefono' => $this->telefono,
+            'last_description' => strtoupper($this->last_description),
+            'estado' => 'SAC MANUAL',
+            'last_event' => 'INFORMACIONES',
+            'ciudad' => strtoupper(auth()->user()->city),
+            'created_at' => Carbon::now(),
+        ]);
+
+        session()->flash('message', 'Llamada registrada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+
+        // Resetear los campos del formulario
+        $this->reset(['codigo', 'destinatario', 'telefono']);
+    }
+
     public function render()
     {
         return view('livewire.dashboard');
