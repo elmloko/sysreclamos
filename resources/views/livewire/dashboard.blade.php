@@ -81,6 +81,9 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
             Registro Llamadas
         </button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cnModal">
+            Registro CN-08
+        </button>
     </div>
 
     <!-- Modal Registro ATM -->
@@ -236,6 +239,116 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Registro CN08 -->
+    <div class="modal fade" id="cnModal" tabindex="-1" aria-labelledby="cnModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cnModalLabel">Registro de reclamo - Formulario Directo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="remitente">Remitente</label>
+                                    <input type="text" class="form-control" id="remitente"
+                                        wire:model="remitente">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telf_remitente">Teléfono del Remitente</label>
+                                    <input type="number" class="form-control" id="telf_remitente"
+                                        wire:model="telf_remitente">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email_r">Email del Remitente</label>
+                                    <input type="email" class="form-control" id="email_r" wire:model="email_r">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="origen">Origen</label>
+                                    <input type="text" class="form-control" id="origen" wire:model="origen">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="contenido">Contenido Paquete</label>
+                                    <input type="text" class="form-control" id="contenido"
+                                        wire:model="contenido">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="valor">Valor</label>
+                                    <input type="number" step="0.01" class="form-control" id="valor"
+                                        wire:model="valor">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fecha_envio">Fecha de Envío</label>
+                                    <input type="date" class="form-control" id="fecha_envio"
+                                        wire:model="fecha_envio">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="destinatario">Destinatario</label>
+                                    <input type="text" class="form-control" id="destinatario"
+                                        wire:model="destinatario">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telf_destinatario">Teléfono del Destinatario</label>
+                                    <input type="number" class="form-control" id="telf_destinatario"
+                                        wire:model="telf_destinatario">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email_d">Email del Destinatario</label>
+                                    <input type="email" class="form-control" id="email_d" wire:model="email_d">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="direccion_d">Dirección del Destinatario</label>
+                                    <input type="text" class="form-control" id="direccion_d"
+                                        wire:model="direccion_d">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="codigo_postal">Código Postal</label>
+                                    <input type="number" class="form-control" id="codigo_postal"
+                                        wire:model="codigo_postal">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="destino">Destino</label>
+                                    <input type="text" class="form-control" id="destino" wire:model="destino">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="codigo">Código</label>
+                                    <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="savecn">
+                        Guardar Registro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Modal Calificando -->
     <div class="modal fade" id="calificandoModal" tabindex="-1" aria-labelledby="calificandoModalLabel"
         aria-hidden="true">
@@ -255,10 +368,13 @@
 <script>
     document.addEventListener('close-modal', event => {
         $('#atmModal').modal('hide'); // Cierra el modal de Registro ATM
-        $('#sacModal').modal('hide'); // Cierra el modal de SAC Manual
+        $('#sacModal').modal('hide');
+        $('#cnModal').modal('hide'); // Cierra el modal de SAC Manual
         $('#llamadaModal').modal('hide'); // Cierra el modal de Registro de Llamadas
     });
-
+    window.livewire.on('close-modal', () => {
+        $('#cnModal').modal('hide'); // Cierra el modal
+    });
     document.addEventListener('open-calificando-modal', event => {
         $('#calificandoModal').modal('show'); // Abre el modal de Calificando
     });

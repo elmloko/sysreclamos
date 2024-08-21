@@ -23,9 +23,10 @@
                         <div class="card-header">
                             <div class="float-right d-flex align-items-center">
                                 <input type="date" wire:model="selectedDate" class="form-control">
-                                <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a PDF</button>
+                                <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
+                                    PDF</button>
                             </div>
-                        </div>                     
+                        </div>
                         <div class="card-body">
                             <table id="recordsTable" class="table table-bordered table-hover">
                                 <thead>
@@ -46,7 +47,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($records as $record)
+                                    @foreach ($records as $record)
                                         <tr>
                                             <td>{{ $record->id }}</td>
                                             <td>{{ $record->codigo }}</td>
@@ -66,9 +67,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        
                         <div class="card-footer">
-                            <button type="button" class="btn btn-primary">Acción</button>
+                            <!-- Enlaces de paginación -->
+                            {{ $records->links() }}
                         </div>
                     </div>
                 </div>

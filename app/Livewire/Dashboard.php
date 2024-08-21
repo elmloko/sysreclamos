@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use App\Models\Information;
+use PDF;
+use App\Models\Claim;
 
 class Dashboard extends Component
 {
@@ -17,7 +19,19 @@ class Dashboard extends Component
     public $telefono;
     public $last_description;
     public $feedback;
-    public $view; // Definir la propiedad $view
+    public $view;
+    public $remitente;
+    public $telf_remitente;
+    public $email_r;
+    public $origen;
+    public $telf_destinatario;
+    public $email_d;
+    public $direccion_d;
+    public $codigo_postal;
+    public $destino;
+    public $fecha_envio;
+    public $contenido;
+    public $valor;
 
     public function mount($view = 'dashboard')
     {
@@ -133,7 +147,7 @@ class Dashboard extends Component
         $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
-        $this->reset(['codigo', 'destinatario', 'telefono']);   
+        $this->reset(['codigo', 'destinatario', 'telefono']);
     }
 
     public function saveLlamada()
@@ -181,12 +195,66 @@ class Dashboard extends Component
         $this->reset(['codigo', 'destinatario', 'telefono']);
     }
 
+    public function savecn()
+    {
+        $this->validate([
+            'remitente' => 'required|string|max:255',
+            'telf_remitente' => 'required|numeric',
+            'email_r' => 'required|email|max:255',
+            'origen' => 'required|string|max:255',
+            'destinatario' => 'required|string|max:255',
+            'telf_destinatario' => 'required|numeric',
+            'email_d' => 'required|email|max:255',
+            'direccion_d' => 'required|string|max:255',
+            'codigo_postal' => 'required|numeric',
+            'destino' => 'required|string|max:255',
+            'codigo' => 'required|string|max:255',
+            'fecha_envio' => 'required|date',
+            'contenido' => 'required|string|max:255',
+            'valor' => 'required|numeric',
+        ]);
+
+        $claim = Claim::create([
+            'remitente' => strtoupper($this->remitente),
+            'telf_remitente' => $this->telf_remitente,
+            'email_r' => $this->email_r,
+            'origen' => strtoupper($this->origen),
+            'destinatario' => strtoupper($this->destinatario),
+            'telf_destinatario' => $this->telf_destinatario,
+            'email_d' => $this->email_d,
+            'direccion_d' => strtoupper($this->direccion_d),
+            'codigo_postal' => $this->codigo_postal,
+            'destino' => strtoupper($this->destino),
+            'codigo' => $this->codigo,
+            'fecha_envio' => Carbon::parse($this->fecha_envio),
+            'contenido' => strtoupper($this->contenido),
+            'valor' => $this->valor,
+            'estado' => 'INFORMACIONES',
+            'created_at' => Carbon::now(),
+        ]);
+
+        session()->flash('message', 'Registro CN08 registrada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+
+        // Resetear los campos del formulario
+        //$this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
+
+        $pdf = PDF::loadView('livewire.pdf-form', compact('claim'));
+
+        // Utiliza streamDownload para transmitir el PDF al navegador
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'records.pdf');
+    }
+
     public function render()
     {
         if ($this->view === 'feedback') {
             return view('livewire.feedback');
         }
-    
+
         return view('livewire.dashboard');
     }
 }

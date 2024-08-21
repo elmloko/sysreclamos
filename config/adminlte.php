@@ -356,6 +356,23 @@ return [
             ],
         ],
         [
+            'text' => 'Consultas Reclamos',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Bandeja',
+                    'url' => '/bandejareclamos',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Seguimiento de Reclamos',
+                    'url' => '/seguimientoreclamos',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
+        [
             'text' => 'Rendimiento',
             'url' => '/pulse',
             'icon' => 'fas fa-user',
