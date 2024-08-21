@@ -239,7 +239,7 @@ class Dashboard extends Component
         $this->dispatch('close-modal');
 
         // Resetear los campos del formulario
-        //$this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
+        $this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
 
         $pdf = PDF::loadView('livewire.pdf-form', compact('claim'));
 

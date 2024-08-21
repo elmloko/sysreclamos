@@ -14,7 +14,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            font-size: 12px;
         }
 
         th,
@@ -33,6 +34,12 @@
             justify-content: space-between;
             align-items: center;
             line-height: 0.5;
+        }
+
+        .special-text {
+            text-align: center;
+            font-size: 12px;
+            border: none !important;
         }
     </style>
 </head>
@@ -118,6 +125,14 @@
             <th>Valor</th>
             <td>{{ $claim->valor }}</td>
         </tr>
+    </table>
+    <br>
+    <br>
+    <table>
+        <td>
+            <p class="special-text">__________________________</p>
+            <p class="special-text">{{ $claim->remitente }}</p>
+        </td>
     </table>
 </body>
 
