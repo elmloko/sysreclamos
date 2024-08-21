@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="container-fluid">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="recordsTable" class="table table-bordered table-hover">
+                            <table id="recordsTable" class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
