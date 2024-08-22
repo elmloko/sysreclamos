@@ -35,20 +35,17 @@ class ReclamosController extends Controller
             'docs' => 'nullable|binary',
         ]);
 
-        // Obtener el valor máximo de ficha asociado al claims_id dado
+        // Obtener el último valor de ficha para este claim_id
         $lastFicha = Follow::where('claims_id', $request->claims_id)->max('ficha');
 
-        // Calcular el nuevo valor de ficha
+        // Si existe un último valor de ficha, se incrementa. Si no, se inicia desde '0001'
         $newFicha = $lastFicha ? str_pad($lastFicha + 1, 4, '0', STR_PAD_LEFT) : '0001';
 
-        // Crear el nuevo seguimiento
-        Follow::create([
-            'claims_id' => $request->claims_id,
-            'ficha' => $newFicha,
-            'seguimiento' => $request->seguimiento,
-            'acciones' => $request->acciones,
-            'docs' => $request->docs,
-        ]);
+        // Añadir el nuevo valor de ficha al array de datos validados
+        $validatedData['ficha'] = $newFicha;
+
+        // Crear el seguimiento con los datos validados
+        Follow::create($validatedData);
 
         return redirect()->route('reclamos.show', $request->claims_id)->with('success', 'Seguimiento creado correctamente');
     }

@@ -13,14 +13,9 @@
                         <h4>Nuevo Seguimiento</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('seguimiento.store') }}" method="POST">
+                        <form action="{{ route('seguimiento.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="claims_id" value="{{ $claim->id }}">
-                        
-                            <div class="form-group">
-                                <label for="ficha">Ficha</label>
-                                <input type="number" name="ficha" class="form-control">
-                            </div>
                         
                             <div class="form-group">
                                 <label for="seguimiento">Seguimiento</label>
