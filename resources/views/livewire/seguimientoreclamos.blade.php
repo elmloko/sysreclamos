@@ -25,8 +25,8 @@
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
                                     PDF</button>
-                                <button type="button" class="btn btn-warning ml-2"
-                                    wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button>
+                                {{-- <button type="button" class="btn btn-warning ml-2"
+                                    wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button> --}}
                             </div>
                         </div>
                         @if (session()->has('message'))
@@ -44,7 +44,7 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox" wire:model="selectAll"></th>
+                                        {{-- <th><input type="checkbox" wire:model="selectAll"></th> --}}
                                         <th>Remitente</th>
                                         <th>Teléfono Remitente</th>
                                         <th>Email Remitente</th>
@@ -65,8 +65,8 @@
                                 <tbody>
                                     @foreach ($claims as $claim)
                                         <tr>
-                                            <td><input type="checkbox" wire:model="selectedClaims"
-                                                    value="{{ $claim->id }}"></td>
+                                            {{-- <td><input type="checkbox" wire:model="selectedClaims"
+                                                    value="{{ $claim->id }}"></td> --}}
                                             <td>{{ $claim->remitente }}</td>
                                             <td>{{ $claim->telf_remitente }}</td>
                                             <td>{{ $claim->email_r }}</td>
