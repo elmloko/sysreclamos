@@ -86,12 +86,18 @@
                         <h4>Seguimientos</h4>
                     </div>
                     <div class="card-body">
-                        @foreach($follows as $follow)
+                        @foreach ($follows as $follow)
                             <div class="mb-3">
-                                <p><strong>Ficha:</strong> {{ $follow->ficha }}</p>
-                                <p><strong>Seguimiento:</strong> {{ $follow->seguimiento }}</p>
-                                <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
-                                <p><strong>Documentos:</strong> {{ $follow->docs }}</p>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Ficha:</strong> {{ $follow->ficha }}</p>
+                                        <p><strong>Seguimiento:</strong> {{ $follow->seguimiento }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Documentos:</strong> {{ $follow->docs }}</p>
+                                        <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
+                                    </div>
+                                </div>
                                 <hr>
                             </div>
                         @endforeach

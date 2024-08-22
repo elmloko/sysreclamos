@@ -19,12 +19,12 @@
                         
                             <div class="form-group">
                                 <label for="seguimiento">Seguimiento</label>
-                                <input type="text" name="seguimiento" class="form-control" maxlength="50">
+                                <textarea name="seguimiento" class="form-control" rows="4" maxlength="255"></textarea>
                             </div>
-                        
+                            
                             <div class="form-group">
                                 <label for="acciones">Acciones</label>
-                                <input type="text" name="acciones" class="form-control" maxlength="50">
+                                <textarea name="acciones" class="form-control" rows="4" maxlength="255"></textarea>
                             </div>
                         
                             <div class="form-group">
