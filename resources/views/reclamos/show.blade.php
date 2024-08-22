@@ -72,6 +72,33 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-right">
+                <a href="{{ route('seguimiento.create', ['claim' => $claim->id]) }}" class="btn btn-success">
+                    Crear Seguimiento
+                </a>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-white">
+                        <h4>Seguimientos</h4>
+                    </div>
+                    <div class="card-body">
+                        @foreach($follows as $follow)
+                            <div class="mb-3">
+                                <p><strong>Ficha:</strong> {{ $follow->ficha }}</p>
+                                <p><strong>Seguimiento:</strong> {{ $follow->seguimiento }}</p>
+                                <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
+                                <p><strong>Documentos:</strong> {{ $follow->docs }}</p>
+                                <hr>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @include('footer')
 @stop

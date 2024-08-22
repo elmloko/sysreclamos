@@ -36,4 +36,8 @@ class Claim extends Model
         'fecha_envio',
         'deleted_at',
     ];
+    public function follows()
+    {
+        return $this->hasMany(Follow::class, 'claims_id');
+    }
 }
