@@ -72,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col-md-12 text-right">
                 <a href="{{ route('seguimiento.create', ['claim' => $claim->id]) }}" class="btn btn-success">
                     Crear Seguimiento
