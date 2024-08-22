@@ -60,6 +60,7 @@
                                         <th>Contenido</th>
                                         <th>Valor</th>
                                         <th>Creado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,6 +83,11 @@
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
                                             <td>{{ $claim->created_at }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-info" wire:click="mostrarReclamo({{ $claim->id }})" target="_blank">
+                                                    Ver Reclamo
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -65,4 +65,10 @@ class Seguimientoreclamos extends Component
             echo $pdf->stream();
         }, 'Reclamos' . ($this->selectedDate ?? 'all') . '.pdf');
     }
+
+    public function mostrarReclamo($claimId)
+    {
+        // Redirigir a la ruta claim.show con el ID del reclamo
+        return redirect()->to(route('reclamos.show', $claimId));
+    }
 }

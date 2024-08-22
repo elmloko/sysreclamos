@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\ReclamosController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ShowClaim;
 use App\Models\Information;
 
 /*
@@ -78,8 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/records', [InformationController::class, 'getRecords']);
     Route::get('/bandejareclamos', [ReclamosController::class, 'getBandeja']);
     Route::get('/seguimientoreclamos', [ReclamosController::class, 'getSeguimiento']);
-    Route::get('/export-pdf', [InformationController::class, 'exportPdf'])->name('export.pdf');
-
+    Route::get('/reclamos/{id}/show', [ReclamosController::class, 'getShow'])->name('reclamos.show');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
