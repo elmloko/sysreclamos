@@ -29,9 +29,8 @@
                         
                             <div class="form-group">
                                 <label for="docs">Documentos</label>
-                                <input type="file" name="docs" class="form-control">
+                                <input type="file" name="docs[]" class="form-control" multiple>
                             </div>
-                        
                             <button type="submit" class="btn btn-primary">Guardar Seguimiento</button>
                         </form>
                     </div>
