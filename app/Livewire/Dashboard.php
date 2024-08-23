@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use App\Models\Information;
 use PDF;
 use App\Models\Claim;
+use App\Models\Complaint;
 
 class Dashboard extends Component
 {
@@ -32,6 +33,12 @@ class Dashboard extends Component
     public $fecha_envio;
     public $contenido;
     public $valor;
+    public $cliente;
+    public $telf;
+    public $ci;
+    public $email;
+    public $queja;
+    public $funcionario;
 
     public function mount($view = 'dashboard')
     {
@@ -242,6 +249,82 @@ class Dashboard extends Component
         $this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
 
         $pdf = PDF::loadView('livewire.pdf-form', compact('claim'));
+
+        // Utiliza streamDownload para transmitir el PDF al navegador
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'records.pdf');
+    }
+
+    public function saveqa()
+    {
+        $this->validate([
+            'cliente' => 'required|string|max:255',
+            'telf' => 'required|numeric',
+            'ci' => 'required|numeric',
+            'email' => 'required|email|max:255',
+            'queja' => 'required|string|max:255',
+            'funcionario' => 'required|string|max:255',
+        ]);
+
+        $complaint = Complaint::create([
+            'cliente' => strtoupper($this->cliente),
+            'telf' => $this->telf,
+            'email' => $this->email,
+            'queja' => strtoupper($this->queja),
+            'funcionario' => strtoupper($this->funcionario),
+            'estado' => 'RECEPCIONADO',
+            'tipo' => 'ADMINISTRATIVO',
+            'created_at' => Carbon::now(),
+        ]);
+
+        session()->flash('message', 'Registro Queja Administrativa registrada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+
+        // Resetear los campos del formulario
+        $this->reset(['cliente', 'telf', 'email', 'queja', 'funcionario']);
+
+        $pdf = PDF::loadView('livewire.pdf-formqa', compact('complaint'));
+
+        // Utiliza streamDownload para transmitir el PDF al navegador
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'records.pdf');
+    }
+
+    public function saveqo()
+    {
+        $this->validate([
+            'cliente' => 'required|string|max:255',
+            'telf' => 'required|numeric',
+            'ci' => 'required|numeric',
+            'email' => 'required|email|max:255',
+            'queja' => 'required|string',
+            'funcionario' => 'required|string|max:255',
+        ]);
+
+        $complaint = Complaint::create([
+            'cliente' => strtoupper($this->cliente),
+            'telf' => $this->telf,
+            'email' => $this->email,
+            'queja' => strtoupper($this->queja),
+            'funcionario' => strtoupper($this->funcionario),
+            'estado' => 'RECEPCIONADO',
+            'tipo' => 'OPERATIVO',
+            'created_at' => Carbon::now(),
+        ]);
+
+        session()->flash('message', 'Registro Queja Operativa registrada exitosamente.');
+
+        // Emitir un evento para cerrar el modal
+        $this->dispatch('close-modal');
+
+        // Resetear los campos del formulario
+        $this->reset(['cliente', 'telf', 'email', 'queja', 'funcionario']);
+
+        $pdf = PDF::loadView('livewire.pdf-formqo', compact('complaint'));
 
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {

@@ -28,6 +28,7 @@ class Claim extends Model
         'contenido',
         'valor',
         'estado',
+        'reclamo',
     ];
 
     protected $dates = [

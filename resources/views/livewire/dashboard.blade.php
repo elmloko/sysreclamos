@@ -81,9 +81,16 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
             Registro Llamadas
         </button>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qaModal">
+            Queja ADMINISTRATIVA
+        </button>
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qoModal">
+            Queja OPERATIVA
+        </button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cnModal">
             Registro CN-08
         </button>
+
     </div>
 
     <!-- Modal Registro ATM -->
@@ -349,6 +356,125 @@
     </div>
 
 
+    <!-- Modal Registro Q1 -->
+    <div class="modal fade" id="qaModal" tabindex="-1" aria-labelledby="qaModalLabel" aria-hidden="true">
+        <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qaModalLabel">Registro de Quejas Administrativas<br>
+                        Formulario Directo
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="cliente">Cliente</label>
+                                    <input type="text" class="form-control" id="cliente" wire:model="cliente">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telf">Teléfono del Cliente</label>
+                                    <input type="number" class="form-control" id="telf" wire:model="telf">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ci">Carnet de Identidad</label>
+                                    <input type="number" class="form-control" id="ci" wire:model="ci">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email del Cliente</label>
+                                    <input type="email" class="form-control" id="email" wire:model="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="funcionario">Funcionario AGBC</label>
+                                    <input type="text" class="form-control" id="funcionario" wire:model="funcionario">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="queja">Descripcion de la Queja Administrativa</label>
+                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="saveqa">
+                        Guardar Registro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal Registro Q2 -->
+        <div class="modal fade" id="qoModal" tabindex="-1" aria-labelledby="qoModalLabel" aria-hidden="true">
+            <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="qoModalLabel">Registro de Quejas Operativas<br>
+                            Formulario Directo
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="cliente">Cliente</label>
+                                        <input type="text" class="form-control" id="cliente" wire:model="cliente">
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="telf">Teléfono del Cliente</label>
+                                        <input type="number" class="form-control" id="telf" wire:model="telf">
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="ci">Carnet de Identidad</label>
+                                        <input type="number" class="form-control" id="ci" wire:model="ci">
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="email">Email del Cliente</label>
+                                        <input type="email" class="form-control" id="email" wire:model="email">
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="funcionario">Funcionario AGBC</label>
+                                        <input type="text" class="form-control" id="funcionario" wire:model="funcionario">
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <label for="queja">Descripcion de la Queja Operativa</label>
+                                        <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" wire:click="saveqo">
+                            Guardar Registro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <!-- Modal Calificando -->
     <div class="modal fade" id="calificandoModal" tabindex="-1" aria-labelledby="calificandoModalLabel"
         aria-hidden="true">
@@ -369,7 +495,9 @@
     document.addEventListener('close-modal', event => {
         $('#atmModal').modal('hide'); // Cierra el modal de Registro ATM
         $('#sacModal').modal('hide');
-        $('#cnModal').modal('hide'); // Cierra el modal de SAC Manual
+        $('#cnModal').modal('hide');
+        $('#qaModal').modal('hide'); // Cierra el modal de SAC Manual
+        $('#qoModal').modal('hide'); // Cierra el modal de SAC Manual
         $('#llamadaModal').modal('hide'); // Cierra el modal de Registro de Llamadas
     });
     window.livewire.on('close-modal', () => {
