@@ -7,6 +7,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\ReclamosController;
+use App\Http\Controllers\QuejasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowClaim;
 use App\Models\Information;
@@ -79,6 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/records', [InformationController::class, 'getRecords']);
     Route::get('/bandejareclamos', [ReclamosController::class, 'getBandeja']);
     Route::get('/seguimientoreclamos', [ReclamosController::class, 'getSeguimiento']);
+    Route::get('/seguimientoquejasad', [QuejasController::class, 'getSeguimientoad']);
+    Route::get('/seguimientoquejasop', [QuejasController::class, 'getSeguimientop']);
     Route::get('/reclamos/{id}/show', [ReclamosController::class, 'getShow'])->name('reclamos.show');
     Route::get('/reclamos/{id}/seguimiento', [ReclamosController::class, 'getShowSeguimiento'])->name('seguimiento.get');
     Route::get('/seguimiento/create/{claim}', [ReclamosController::class, 'createSeguimiento'])->name('seguimiento.create');

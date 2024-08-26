@@ -373,6 +373,23 @@ return [
             ],
         ],
         [
+            'text' => 'Consultas Quejas',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Quejas Operativas',
+                    'url' => '/seguimientoquejasop',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Quejas Administrativas',
+                    'url' => '/seguimientoquejasad',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
+        [
             'text' => 'Rendimiento',
             'url' => '/pulse',
             'icon' => 'fas fa-user',
