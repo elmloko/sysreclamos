@@ -26,6 +26,7 @@ class Operativas extends Component
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
             })
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.operativas', ['complaints' => $complaint]);

@@ -21,7 +21,8 @@ class Records extends Component
         // Filtrar los registros según la fecha seleccionada
         $records = Information::when($this->selectedDate, function($query) {
             return $query->whereDate('created_at', $this->selectedDate);
-        })->paginate($this->perPage);
+        })->orderBy('created_at', 'desc')
+        ->paginate($this->perPage);
 
         return view('livewire.records', ['records' => $records]);
     }

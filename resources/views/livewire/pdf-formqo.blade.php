@@ -74,7 +74,7 @@
         </tr>
         <tr>
             <th>Email del Remitente</th>
-            <td>{{ $complaint->email_r }}</td>
+            <td>{{ $complaint->email }}</td>
         </tr>
         <tr>
             <th>Carnet Identidad</th>

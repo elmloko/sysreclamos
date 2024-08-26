@@ -25,6 +25,7 @@ class Bandejareclamos extends Component
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
             })
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.bandejareclamos', ['claims' => $claim]);

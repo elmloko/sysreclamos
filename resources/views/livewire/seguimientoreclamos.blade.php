@@ -59,7 +59,7 @@
                                         <th>Fecha de Envío</th>
                                         <th>Contenido</th>
                                         <th>Valor</th>
-                                        <th>Creado</th>
+                                        <th>Actualizado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -82,7 +82,7 @@
                                             <td>{{ $claim->fecha_envio }}</td>
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
-                                            <td>{{ $claim->created_at }}</td>
+                                            <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info" wire:click="mostrarReclamo({{ $claim->id }})" target="_blank">
                                                     Ver Reclamo

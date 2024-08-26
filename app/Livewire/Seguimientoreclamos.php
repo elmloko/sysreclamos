@@ -24,8 +24,9 @@ class Seguimientoreclamos extends Component
         // Filtrar los registros según la fecha seleccionada y el estado "RECLAMOS"
         $claim = Claim::where('estado', 'RECLAMOS')
             ->when($this->selectedDate, function ($query) {
-                return $query->whereDate('created_at', $this->selectedDate);
+                return $query->whereDate('updated_at', $this->selectedDate);
             })
+            ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.seguimientoreclamos', ['claims' => $claim]);
