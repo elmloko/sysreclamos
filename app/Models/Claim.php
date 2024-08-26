@@ -29,6 +29,7 @@ class Claim extends Model
         'valor',
         'estado',
         'reclamo',
+        'correlativo',
     ];
 
     protected $dates = [

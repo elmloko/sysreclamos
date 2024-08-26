@@ -26,6 +26,7 @@ class Information extends Model
         'last_date',
         'estado',
         'feedback',
+        'correlativo',
         'created_at',
         'updated_at',
         'deleted_at'

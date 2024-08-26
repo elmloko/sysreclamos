@@ -39,6 +39,7 @@ class Dashboard extends Component
     public $email;
     public $queja;
     public $funcionario;
+    public $someCondition;
 
     public function mount($view = 'dashboard')
     {
@@ -133,6 +134,23 @@ class Dashboard extends Component
         // Recupera el evento más reciente
         $latestEvent = $this->events[0] ?? null;
 
+        // Obtener el último registro de Information con el estado "SAC" para determinar el siguiente número correlativo
+        $lastRecord = Information::where('estado', 'SAC MANUAL')
+            ->where('correlativo', 'LIKE', 'INFSAM%')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica después de 'INFSAC'
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'INFSAM' . $newCorrelativo;
+
         Information::create([
             'codigo' => $this->codigo,
             'destinatario' => $this->additionalInfo['DESTINATARIO'] ?? null,
@@ -143,6 +161,7 @@ class Dashboard extends Component
             'last_status' => $latestEvent['action'] ?? null,  // Toma el estado del último evento
             'last_description' => substr($latestEvent['descripcion'] ?? '', 0, 255),  // Toma la descripción del último evento
             'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
+            'correlativo' => $codigoCorrelativo,
             'estado' => 'SAC',
             'created_at' => Carbon::now(),
         ]);
@@ -151,14 +170,32 @@ class Dashboard extends Component
 
         // Emitir un evento para cerrar el modal
         $this->dispatch('close-modal');
-        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
+
+        // Redirigir a la misma página para recargarla
+        return redirect()->to(url()->previous());
     }
+
+
 
     public function saveLlamada()
     {
+        // Obtener el último registro de Information con el mismo servicio para determinar el siguiente número correlativo
+        $lastRecord = Information::where('estado', 'LLAMADA')->orderBy('id', 'desc')->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord && strpos($lastRecord->correlativo, 'INFLL') === 0) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica después de 'INFLL'
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'INFLL' . $newCorrelativo;
+
         Information::create([
             'codigo' => strtoupper($this->codigo),
             'destinatario' => strtoupper($this->destinatario),
@@ -167,6 +204,7 @@ class Dashboard extends Component
             'estado' => 'LLAMADA',
             'last_event' => 'INFORMACIONES',
             'ciudad' => strtoupper(auth()->user()->city),
+            'correlativo' => $codigoCorrelativo, // Guardar el código correlativo generado
             'created_at' => Carbon::now(),
         ]);
 
@@ -177,11 +215,29 @@ class Dashboard extends Component
 
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
+
+        // Redirigir a la misma página para recargarla
+        return redirect()->to(url()->previous());
     }
 
     public function savesac()
     {
+        // Obtener el último registro de Information con el estado "SAC MANUAL" para determinar el siguiente número correlativo
+        $lastRecord = Information::where('estado', 'SAC MANUAL')->orderBy('id', 'desc')->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord && strpos($lastRecord->correlativo, 'INFSAC') === 0) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica después de 'INFSAC'
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'INFSAC' . $newCorrelativo;
+
         Information::create([
+            'correlativo' => $codigoCorrelativo,
             'codigo' => strtoupper($this->codigo),
             'destinatario' => strtoupper($this->destinatario),
             'telefono' => $this->telefono,
@@ -194,12 +250,8 @@ class Dashboard extends Component
 
         session()->flash('message', 'Registro SAC registrada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
-        $this->dispatch('close-modal');
-        $this->dispatch('open-calificando-modal');
-
-        // Resetear los campos del formulario
-        $this->reset(['codigo', 'destinatario', 'telefono']);
+        // Redirigir a la misma página para recargarla
+        return redirect()->to(url()->previous());
     }
 
     public function savecn()
@@ -221,6 +273,20 @@ class Dashboard extends Component
             'valor' => 'required|numeric',
         ]);
 
+        // Obtener el último registro de Claim para determinar el siguiente número correlativo
+        $lastRecord = Claim::orderBy('id', 'desc')->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica (suponiendo un prefijo de 5 caracteres)
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'RCL' . $newCorrelativo;
+
         $claim = Claim::create([
             'remitente' => strtoupper($this->remitente),
             'telf_remitente' => $this->telf_remitente,
@@ -236,6 +302,7 @@ class Dashboard extends Component
             'fecha_envio' => Carbon::parse($this->fecha_envio),
             'contenido' => strtoupper($this->contenido),
             'valor' => $this->valor,
+            'correlativo' => $codigoCorrelativo,
             'estado' => 'INFORMACIONES',
             'created_at' => Carbon::now(),
         ]);
@@ -267,6 +334,21 @@ class Dashboard extends Component
             'funcionario' => 'required|string|max:255',
         ]);
 
+        // Obtener el último registro de Complaint con el tipo "ADMINISTRATIVO" para determinar el siguiente número correlativo
+        $lastRecord = Complaint::where('tipo', 'ADMINISTRATIVO')->orderBy('id', 'desc')->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'QJAADM' . $newCorrelativo;
+
+        // Guardar la queja en la base de datos
         $complaint = Complaint::create([
             'cliente' => strtoupper($this->cliente),
             'telf' => $this->telf,
@@ -276,6 +358,7 @@ class Dashboard extends Component
             'funcionario' => strtoupper($this->funcionario),
             'estado' => 'RECEPCIONADO',
             'tipo' => 'ADMINISTRATIVO',
+            'correlativo' => $codigoCorrelativo, // Guardar el código correlativo generado
             'created_at' => Carbon::now(),
         ]);
 
@@ -306,6 +389,20 @@ class Dashboard extends Component
             'funcionario' => 'required|string|max:255',
         ]);
 
+        // Obtener el último registro de Complaint con el tipo "OPERATIVO" para determinar el siguiente número correlativo
+        $lastRecord = Complaint::where('tipo', 'OPERATIVO')->orderBy('id', 'desc')->first();
+
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'QJAOP' . $newCorrelativo;
+
         $complaint = Complaint::create([
             'cliente' => strtoupper($this->cliente),
             'telf' => $this->telf,
@@ -313,6 +410,7 @@ class Dashboard extends Component
             'ci' => $this->ci,
             'queja' => strtoupper($this->queja),
             'funcionario' => strtoupper($this->funcionario),
+            'correlativo' => $codigoCorrelativo,
             'estado' => 'RECEPCIONADO',
             'tipo' => 'OPERATIVO',
             'created_at' => Carbon::now(),
