@@ -71,7 +71,7 @@
                                             <td>{{ $complaint->created_at }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info"
-                                                    wire:click="mostrarReclamo({{ $complaint->id }})" target="_blank">
+                                                    wire:click="mostrarQueja({{ $complaint->id }})" target="_blank">
                                                     Ver Reclamo
                                                 </button>
                                             </td>

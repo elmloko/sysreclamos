@@ -35,16 +35,22 @@ class Operativas extends Component
     {
         // Filtrar los registros según la fecha seleccionada para el PDF
         $complaints = Complaint::where('estado', 'RECEPCIONADO')
-        ->where('tipo', 'OPERATIVO')
-        ->when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })
-        ->get();
+            ->where('tipo', 'OPERATIVO')
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandejaq', compact('complaints'));
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Quejas Operativas' . ($this->selectedDate ?? 'all') . '.pdf');
+    }
+
+    public function mostrarQueja($claimId)
+    {
+        // Redirigir a la ruta claim.show con el ID del reclamo
+        return redirect()->to(route('quejas.show', $claimId));
     }
 }

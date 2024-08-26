@@ -47,4 +47,9 @@ class Administrativas extends Component
             echo $pdf->stream();
         }, 'Quejas Administrativas' . ($this->selectedDate ?? 'all') . '.pdf');
     }
+    public function mostrarQueja($claimId)
+    {
+        // Redirigir a la ruta claim.show con el ID del reclamo
+        return redirect()->to(route('quejas.show', $claimId));
+    }
 }
