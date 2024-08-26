@@ -253,7 +253,7 @@ class Dashboard extends Component
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'records.pdf');
+        }, 'Formulario Reclamo.pdf');
     }
 
     public function saveqa()
@@ -291,7 +291,7 @@ class Dashboard extends Component
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'records.pdf');
+        }, 'Formulario Queja Administrativa.pdf');
     }
 
     public function saveqo()
@@ -329,7 +329,7 @@ class Dashboard extends Component
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'records.pdf');
+        }, 'Formulario Queja Operativa.pdf');
     }
 
     public function render()

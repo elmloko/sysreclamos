@@ -500,9 +500,6 @@
         $('#qoModal').modal('hide'); // Cierra el modal de SAC Manual
         $('#llamadaModal').modal('hide'); // Cierra el modal de Registro de Llamadas
     });
-    window.livewire.on('close-modal', () => {
-        $('#cnModal').modal('hide'); // Cierra el modal
-    });
     document.addEventListener('open-calificando-modal', event => {
         $('#calificandoModal').modal('show'); // Abre el modal de Calificando
     });
