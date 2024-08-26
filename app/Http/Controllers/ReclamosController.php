@@ -12,6 +12,10 @@ class ReclamosController extends Controller
     {
         return view('reclamos.bandeja');
     }
+    public function getSeguimiento()
+    {
+        return view('reclamos.seguimientoreclamos');
+    }
 
     public function getShow($id)
     {
