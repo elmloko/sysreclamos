@@ -170,6 +170,7 @@ class Dashboard extends Component
 
         // Emitir un evento para cerrar el modal
         $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
@@ -177,8 +178,6 @@ class Dashboard extends Component
         // Redirigir a la misma página para recargarla
         return redirect()->to(url()->previous());
     }
-
-
 
     public function saveLlamada()
     {
