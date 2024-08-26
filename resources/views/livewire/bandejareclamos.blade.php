@@ -45,6 +45,7 @@
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" wire:model="selectAll"></th>
+                                        <th>Codificacion</th>
                                         <th>Remitente</th>
                                         <th>Teléfono Remitente</th>
                                         <th>Email Remitente</th>
@@ -62,6 +63,7 @@
                                         <tr>
                                             <td><input type="checkbox" wire:model="selectedClaims"
                                                     value="{{ $claim->id }}"></td>
+                                            <td>{{ $claim->correlativo }}</td>
                                             <td>{{ $claim->remitente }}</td>
                                             <td>{{ $claim->telf_remitente }}</td>
                                             <td>{{ $claim->email_r }}</td>

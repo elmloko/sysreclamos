@@ -90,6 +90,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Codificacion</th>
                 <th>Código</th>
                 <th>Destinatario</th>
                 <th>Último Evento</th>
@@ -108,6 +109,7 @@
             @foreach($records as $record)
                 <tr>
                     <td>{{ $record->id }}</td>
+                    <td>{{ $record->correlativo }}</td>
                     <td>{{ $record->codigo }}</td>
                     <td>{{ $record->destinatario }}</td>
                     <td>{{ $record->last_event }}</td>

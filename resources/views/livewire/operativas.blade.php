@@ -45,6 +45,7 @@
                                 <thead>
                                     <tr>
                                         {{-- <th><input type="checkbox" wire:model="selectAll"></th> --}}
+                                        <th>Codificacion</th>
                                         <th>Cliente</th>
                                         <th>Teléfono</th>
                                         <th>Carnet de Identidad</th>
@@ -61,6 +62,7 @@
                                         <tr>
                                             {{-- <td><input type="checkbox" wire:model="selectedcomplaints"
                                                     value="{{ $complaint->id }}"></td> --}}
+                                            <td>{{ $complaint->correlativo }}</td>
                                             <td>{{ $complaint->cliente }}</td>
                                             <td>{{ $complaint->telf }}</td>
                                             <td>{{ $complaint->ci }}</td>

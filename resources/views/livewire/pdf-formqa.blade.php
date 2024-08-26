@@ -41,6 +41,13 @@
             font-size: 12px;
             border: none !important;
         }
+        .correlativo {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -54,6 +61,9 @@
             <h2>ADMINISTRATIVAS</h2>
             <h2>Q1 - FORMULARIO DIRECTO</h2>
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
+        </div>
+        <div class="correlativo">
+            {{ $complaint->correlativo }}
         </div>
     </div>
 

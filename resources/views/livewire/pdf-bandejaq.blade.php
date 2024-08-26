@@ -95,6 +95,7 @@
 <table>
     <thead>
         <tr>
+            <th>Codificacion</th>
             <th>Cliente</th>
             <th>Teléfono</th>
             <th>Carnet de Identidad</th>
@@ -108,6 +109,7 @@
     <tbody>
         @foreach ($complaints as $complaint)
             <tr>
+                <td>{{ $complaint->correlativo }}</td>
                 <td>{{ $complaint->cliente }}</td>
                 <td>{{ $complaint->telf }}</td>
                 <td>{{ $complaint->ci }}</td>

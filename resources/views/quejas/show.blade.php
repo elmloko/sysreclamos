@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center mb-4">Detalle del Queja</h1>
+        <h1 class="text-center mb-4">Detalle del Queja {{ $complaint->correlativo }}</h1>
 
         <div class="row">
             <!-- Primera Columna -->

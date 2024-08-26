@@ -96,6 +96,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Codificacion</th>
             <th>Remitente</th>
             <th>Teléfono Remitente</th>
             <th>Email Remitente</th>
@@ -117,6 +118,7 @@
         @foreach ($claims as $claim)
             <tr>
                 <td>{{ $claim->id }}</td>
+                <td>{{ $claim->correlativo }}</td>
                 <td>{{ $claim->remitente }}</td>
                 <td>{{ $claim->telf_remitente }}</td>
                 <td>{{ $claim->email_r }}</td>
