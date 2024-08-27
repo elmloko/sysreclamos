@@ -378,13 +378,13 @@ return [
             // 'can'  => 'users.index',
             'submenu' => [
                 [
-                    'text' => 'Quejas Operativas',
-                    'url' => '/seguimientoquejasop',
+                    'text' => 'Quejas Administrativas',
+                    'url' => '/seguimientoquejasad',
                     'icon' => 'fas fa-user',
                 ],
                 [
-                    'text' => 'Quejas Administrativas',
-                    'url' => '/seguimientoquejasad',
+                    'text' => 'Quejas Operativas',
+                    'url' => '/seguimientoquejasop',
                     'icon' => 'fas fa-user',
                 ],
             ],
