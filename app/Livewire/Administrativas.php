@@ -15,16 +15,25 @@ class Administrativas extends Component
     public $selectedDate; // Fecha seleccionada
     public $selectedcomplaints = []; // Arreglo de IDs seleccionados
     public $selectAll = false; // Controlar el checkbox "seleccionar todo"
+    public $searchTerm; // Término de búsqueda
 
     protected $paginationTheme = 'bootstrap'; // Para usar los estilos de AdminLTE
 
     public function render()
     {
-        // Filtrar los registros según la fecha seleccionada y el estado "RECLAMOS"
+        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
         $complaint = Complaint::where('estado', 'RECEPCIONADO')
             ->where('tipo', 'ADMINISTRATIVO')
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->when($this->searchTerm, function ($query) {
+                return $query->where(function ($subQuery) {
+                    $subQuery->where('ci', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('cliente', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('telf', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('correlativo', 'like', '%' . $this->searchTerm . '%');
+                });
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
@@ -36,11 +45,11 @@ class Administrativas extends Component
     {
         // Filtrar los registros según la fecha seleccionada para el PDF
         $complaints = Complaint::where('estado', 'RECEPCIONADO')
-        ->where('tipo', 'ADMINISTRATIVO')
-        ->when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })
-        ->get();
+            ->where('tipo', 'ADMINISTRATIVO')
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandejaq', compact('complaints'));
 

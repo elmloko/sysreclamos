@@ -21,6 +21,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
+                            <div class="float-left d-flex align-items-center">
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
+                            </div>
                             <div class="float-right d-flex align-items-center">
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
@@ -41,7 +45,7 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" wire:model="selectAll"></th>

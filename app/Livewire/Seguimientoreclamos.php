@@ -16,15 +16,25 @@ class Seguimientoreclamos extends Component
     public $selectedDate; // Fecha seleccionada
     public $selectedClaims = []; // Arreglo de IDs seleccionados
     public $selectAll = false; // Controlar el checkbox "seleccionar todo"
+    public $searchTerm; // Término de búsqueda
 
     protected $paginationTheme = 'bootstrap'; // Para usar los estilos de AdminLTE
 
     public function render()
     {
-        // Filtrar los registros según la fecha seleccionada y el estado "RECLAMOS"
+
+        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
         $claim = Claim::where('estado', 'RECLAMOS')
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('updated_at', $this->selectedDate);
+            })
+            ->when($this->searchTerm, function ($query) {
+                return $query->where(function ($subQuery) {
+                    $subQuery->where('codigo', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('remitente', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('telf_remitente', 'like', '%' . $this->searchTerm . '%')
+                        ->orWhere('correlativo', 'like', '%' . $this->searchTerm . '%');
+                });
             })
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
