@@ -40,6 +40,7 @@ class Dashboard extends Component
     public $queja;
     public $funcionario;
     public $someCondition;
+    public $createdId;
 
     public function mount($view = 'dashboard')
     {
@@ -151,7 +152,8 @@ class Dashboard extends Component
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFSAM' . $newCorrelativo;
 
-        Information::create([
+        // Crear el nuevo registro en la base de datos
+        $information = Information::create([
             'codigo' => $this->codigo,
             'destinatario' => $this->additionalInfo['DESTINATARIO'] ?? null,
             'last_event' => $this->additionalInfo['ESTADO'] ?? null,
@@ -166,17 +168,59 @@ class Dashboard extends Component
             'created_at' => Carbon::now(),
         ]);
 
+        // Almacenar el ID del registro recién creado
+        $this->createdId = $information->id;
+
         session()->flash('message', 'Información guardada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
+        
+        // // Redirigir a la misma página para recargarla
+        // return redirect()->to(url()->previous());
+    }
 
-        // Resetear los campos del formulario
-        $this->reset(['codigo', 'destinatario', 'telefono']);
+    public function savesac()
+    {
+        // Obtener el último registro de Information con el estado "SAC MANUAL" para determinar el siguiente número correlativo
+        $lastRecord = Information::where('estado', 'SAC MANUAL')->orderBy('id', 'desc')->first();
 
-        // Redirigir a la misma página para recargarla
-        return redirect()->to(url()->previous());
+        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
+        if ($lastRecord && strpos($lastRecord->correlativo, 'INFSAC') === 0) {
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica después de 'INFSAC'
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+        } else {
+            $newCorrelativo = '0001';
+        }
+
+        // Crear el nuevo código correlativo
+        $codigoCorrelativo = 'INFSAC' . $newCorrelativo;
+
+        // Crear el nuevo registro en la base de datos
+        $information = Information::create([
+            'correlativo' => $codigoCorrelativo,
+            'codigo' => strtoupper($this->codigo),
+            'destinatario' => strtoupper($this->destinatario),
+            'telefono' => $this->telefono,
+            'last_description' => strtoupper($this->last_description),
+            'estado' => 'SAC MANUAL',
+            'last_event' => 'INFORMACIONES',
+            'ciudad' => strtoupper(auth()->user()->city),
+            'created_at' => Carbon::now(),
+        ]);
+
+        // Almacenar el ID del registro recién creado
+        $this->createdId = $information->id;
+
+        session()->flash('message', 'Registro SAC registrado exitosamente.');
+
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
+        $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
+        
+        // // Redirigir a la misma página para recargarla
+        // return redirect()->to(url()->previous());
     }
 
     public function saveLlamada()
@@ -214,40 +258,6 @@ class Dashboard extends Component
 
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
-
-        // Redirigir a la misma página para recargarla
-        return redirect()->to(url()->previous());
-    }
-
-    public function savesac()
-    {
-        // Obtener el último registro de Information con el estado "SAC MANUAL" para determinar el siguiente número correlativo
-        $lastRecord = Information::where('estado', 'SAC MANUAL')->orderBy('id', 'desc')->first();
-
-        // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
-        if ($lastRecord && strpos($lastRecord->correlativo, 'INFSAC') === 0) {
-            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica después de 'INFSAC'
-            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
-        } else {
-            $newCorrelativo = '0001';
-        }
-
-        // Crear el nuevo código correlativo
-        $codigoCorrelativo = 'INFSAC' . $newCorrelativo;
-
-        Information::create([
-            'correlativo' => $codigoCorrelativo,
-            'codigo' => strtoupper($this->codigo),
-            'destinatario' => strtoupper($this->destinatario),
-            'telefono' => $this->telefono,
-            'last_description' => strtoupper($this->last_description),
-            'estado' => 'SAC MANUAL',
-            'last_event' => 'INFORMACIONES',
-            'ciudad' => strtoupper(auth()->user()->city),
-            'created_at' => Carbon::now(),
-        ]);
-
-        session()->flash('message', 'Registro SAC registrada exitosamente.');
 
         // Redirigir a la misma página para recargarla
         return redirect()->to(url()->previous());

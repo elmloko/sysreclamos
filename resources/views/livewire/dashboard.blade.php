@@ -394,7 +394,8 @@
 
                                 <div class="form-group">
                                     <label for="funcionario">Funcionario AGBC</label>
-                                    <input type="text" class="form-control" id="funcionario" wire:model="funcionario">
+                                    <input type="text" class="form-control" id="funcionario"
+                                        wire:model="funcionario">
                                 </div>
 
                                 <div class="form-group">
@@ -415,64 +416,65 @@
         </div>
     </div>
 
-        <!-- Modal Registro Q2 -->
-        <div class="modal fade" id="qoModal" tabindex="-1" aria-labelledby="qoModalLabel" aria-hidden="true">
-            <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="qoModalLabel">Registro de Quejas Operativas<br>
-                            Formulario Directo
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="cliente">Cliente</label>
-                                        <input type="text" class="form-control" id="cliente" wire:model="cliente">
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <label for="telf">Teléfono del Cliente</label>
-                                        <input type="number" class="form-control" id="telf" wire:model="telf">
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <label for="ci">Carnet de Identidad</label>
-                                        <input type="number" class="form-control" id="ci" wire:model="ci">
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <label for="email">Email del Cliente</label>
-                                        <input type="email" class="form-control" id="email" wire:model="email">
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <label for="funcionario">Funcionario AGBC</label>
-                                        <input type="text" class="form-control" id="funcionario" wire:model="funcionario">
-                                    </div>
-    
-                                    <div class="form-group">
-                                        <label for="queja">Descripcion de la Queja Operativa</label>
-                                        <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
-                                    </div>
+    <!-- Modal Registro Q2 -->
+    <div class="modal fade" id="qoModal" tabindex="-1" aria-labelledby="qoModalLabel" aria-hidden="true">
+        <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qoModalLabel">Registro de Quejas Operativas<br>
+                        Formulario Directo
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="cliente">Cliente</label>
+                                    <input type="text" class="form-control" id="cliente" wire:model="cliente">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telf">Teléfono del Cliente</label>
+                                    <input type="number" class="form-control" id="telf" wire:model="telf">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="ci">Carnet de Identidad</label>
+                                    <input type="number" class="form-control" id="ci" wire:model="ci">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email del Cliente</label>
+                                    <input type="email" class="form-control" id="email" wire:model="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="funcionario">Funcionario AGBC</label>
+                                    <input type="text" class="form-control" id="funcionario"
+                                        wire:model="funcionario">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="queja">Descripcion de la Queja Operativa</label>
+                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" wire:click="saveqo">
-                            Guardar Registro
-                        </button>
-                    </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="saveqo">
+                        Guardar Registro
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 
 
     <!-- Modal Calificando -->
@@ -485,6 +487,9 @@
                     <div class="spinner-border text-primary" role="status">
                         <span class="sr-only">Cargando...</span>
                     </div>
+                    @if ($createdId)
+                        <p>Registro ID: {{ $createdId }}</p> <!-- Muestra el ID aquí -->
+                    @endif
                 </div>
             </div>
         </div>
@@ -500,11 +505,13 @@
         $('#qoModal').modal('hide'); // Cierra el modal de SAC Manual
         $('#llamadaModal').modal('hide'); // Cierra el modal de Registro de Llamadas
     });
-    document.addEventListener('open-calificando-modal', event => {
-        $('#calificandoModal').modal('show'); // Abre el modal de Calificando
-    });
 
-    document.addEventListener('close-calificando-modal', event => {
-        $('#calificandoModal').modal('hide'); // Cierra el modal de Calificando
+    document.addEventListener('open-calificando-modal', event => {
+        $('#calificandoModal').modal('show');
+
+        // Cierra el modal después de 3 segundos (3000 ms)
+        setTimeout(() => {
+            $('#calificandoModal').modal('hide');
+        }, 5000);
     });
 </script>
