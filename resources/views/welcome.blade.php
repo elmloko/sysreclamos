@@ -40,19 +40,23 @@ URI     : https://colorlib.com
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
-                        <img src="{{ asset('images/LOGOcen.png') }}" class="img-fluid" alt="logo"
+                        <img id="logo" src="{{ asset('images/LOGOcen.png') }}" class="img-fluid" alt="logo"
                             style="max-width: 200px; height: auto;">
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"> <a class="nav-link active"
-                                        href="http://127.0.0.1:8000/">Inicio<span class="sr-only">(current)</span></a>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="http://127.0.0.1:8000/">Inicio<span
+                                            class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="https://correos.gob.bo/about/">Quienes
-                                        Somos</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="https://correos.gob.bo/services/">Nuestros Servicios</a> </li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="https://correos.gob.bo/contact-us/">Contactanos</a> </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://correos.gob.bo/about/">Quienes Somos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://correos.gob.bo/services/">Nuestros Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="https://correos.gob.bo/contact-us/">Contáctanos</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -60,6 +64,7 @@ URI     : https://colorlib.com
             </div>
         </div>
     </div>
+
 
 
     <header class="bg-gradient" id="home">
@@ -74,55 +79,84 @@ URI     : https://colorlib.com
                 class="img-fluid"></div>
     </header>
 
-	<div class="section">
-		<div class="container">
-			<h3 class="text-center mb-4">Libro de Reclamaciones</h3>
-			<form class="mx-auto" style="max-width: 800px;" action="reclamacion.php" method="POST">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="fullName">Nombre Completo *</label>
-							<input type="text" id="fullName" name="fullName" class="form-control"
-								placeholder="Ej. César Rojas" required>
-						</div>
-						<div class="form-group">
-							<label for="address">Dirección *</label>
-							<input type="text" id="address" name="address" class="form-control"
-								placeholder="Ej. Av. Los Ángeles 1025" required>
-						</div>
-						<div class="form-group">
-							<label for="country">País *</label>
-							<input type="text" id="country" name="country" class="form-control"
-								placeholder="Ej. Bolivia" required>
-						</div>
-						<div class="form-group">
-							<label for="identityCard">Carnet de Identidad *</label>
-							<input type="text" id="identityCard" name="identityCard" class="form-control"
-								placeholder="Ej. 40125201" required>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="email">Correo Electrónico *</label>
-							<input type="email" id="email" name="email" class="form-control"
-								placeholder="Ej. nombre@correo.com" required>
-						</div>
-						<div class="form-group">
-							<label for="phone">Teléfono *</label>
-							<input type="text" id="phone" name="phone" class="form-control"
-								placeholder="Ej. 1 294-0008" required>
-						</div>
-						<div class="form-group">
-							<label for="description">Descripción</label>
-							<textarea id="description" name="description" class="form-control" rows="5"
-								placeholder="Escribe aquí tu reclamación, sugerencia o incidencia"></textarea>
-						</div>
-						<button type="submit" class="btn btn-block btn-lg btn-primary">Enviar</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="section">
+        <div class="container">
+            <div class="section-title">
+                <h5>Preguntas Frecuentes</h5>
+                <h3>Tomar en cuenta lo siguiente</h3>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-6">
+                    <h4 class="mb-3">El paquete...</h4>
+                    <p class="light-font mb-5">Mediante está opción podra realizar la reclamación sobre el servicio
+                        postal prestado por un operador legal, con identificación y control individual cuyo peso
+                        unitario no debe exceder los viente (20) Kilogramos.</p>
+                    <h4 class="mb-3">El reclamo...</h4>
+                    <p class="light-font mb-5">Es indespensable para el registro de su reclamación, identificar el
+                        número guía de envío postal. </p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-3">El registro..</h4>
+                    <p class="light-font mb-5">Usted tiene veinte (20) días hábiles, una vez suscitado el hecho, para
+                        presentar su reclamación directa mediante nota, vía teléfono o de forma presencial ante la
+                        oficina ODECO de su proveedor del servicio.</p>
+                    <h4 class="mb-3">El seguimiento...</h4>
+                    <p class="light-font mb-5">Cada reclamo tiene un numero de seguimiento con el cual podremos saber en
+                        que estado esta nuestro reclamo </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h3 class="text-center mb-4">Libro de Reclamaciones</h3>
+            <form class="mx-auto" style="max-width: 800px;" action="reclamacion.php" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fullName">Nombre Completo *</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control"
+                                placeholder="Ej. César Rojas" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Dirección *</label>
+                            <input type="text" id="address" name="address" class="form-control"
+                                placeholder="Ej. Av. Los Ángeles 1025" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">País *</label>
+                            <input type="text" id="country" name="country" class="form-control"
+                                placeholder="Ej. Bolivia" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="identityCard">Carnet de Identidad *</label>
+                            <input type="text" id="identityCard" name="identityCard" class="form-control"
+                                placeholder="Ej. 40125201" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico *</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Ej. nombre@correo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono *</label>
+                            <input type="text" id="phone" name="phone" class="form-control"
+                                placeholder="Ej. 1 294-0008" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descripción</label>
+                            <textarea id="description" name="description" class="form-control" rows="5"
+                                placeholder="Escribe aquí tu reclamación, sugerencia o incidencia"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-lg btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="section light-bg" id="features">
         <div class="container">
@@ -175,7 +209,7 @@ URI     : https://colorlib.com
                 </div>
             </div>
         </div>
-		
+
         <div class="section light-bg">
             <div class="container">
                 <h3 class="text-center">Cómo Enviar Tus Reclamos, Sugerencias e Incidencias</h3>
@@ -241,17 +275,17 @@ URI     : https://colorlib.com
             </div>
         </div>
 
-		<footer class="my-5 text-center">
-			<!-- Copyright removal is not prohibited! -->
-			<p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p>
-			<p class="mb-2"><small>&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
-				Boliviana de Correos <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
-				title="Marco Antonio Espinoza Rojas">Copyright © MAER
-				{{ date('Y') }} </a></small></p>
-				<p class="mb-2"><small>Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
+        <footer class="my-5 text-center">
+            <!-- Copyright removal is not prohibited! -->
+            <p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p>
+            <p class="mb-2"><small>&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
+                    Boliviana de Correos <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
+                        title="Marco Antonio Espinoza Rojas">Copyright © MAER
+                        {{ date('Y') }} </a></small></p>
+            <p class="mb-2"><small>Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
                     Telecomunicaciones - agbc@correos.gob.bo</small></p>
-		</footer>
-		
+        </footer>
+
 
         <!-- jQuery and Bootstrap -->
         <script src="js/jquery-3.2.1.min.js"></script>
@@ -260,6 +294,17 @@ URI     : https://colorlib.com
         <script src="js/owl.carousel.min.js"></script>
         <!-- Custom JS -->
         <script src="js/script.js"></script>
+        <script>
+            document.addEventListener("scroll", function() {
+                const navMenu = document.querySelector(".nav-menu");
+                if (window.scrollY > 50) { // Ajusta el valor según cuándo quieras que ocurra el cambio
+                    navMenu.classList.add("is-scrolling");
+                } else {
+                    navMenu.classList.remove("is-scrolling");
+                }
+            });
+        </script>
+
 
 </body>
 
