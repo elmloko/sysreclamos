@@ -134,6 +134,11 @@ URI     : https://colorlib.com
                             <input type="text" id="identityCard" name="identityCard" class="form-control"
                                 placeholder="Ej. 40125201" required>
                         </div>
+						<div class="form-group">
+                            <label for="codepostal">Codigo de Rastreo *</label>
+                            <input type="text" id="codepostal" name="codepostal" class="form-control"
+                                placeholder="Ej. RP012345678BO" required>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
