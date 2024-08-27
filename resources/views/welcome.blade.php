@@ -184,7 +184,7 @@ URI     : https://colorlib.com
                                         9:00 a 13:00. Teléfono: +591 22152423</p>
                                 </div>
                             </li>
-                            <li class="media">
+                            {{-- <li class="media">
                                 <div class="circle-icon mr-4">3</div>
                                 <div class="media-body">
                                     <h5>Redes Sociales</h5>
@@ -200,7 +200,7 @@ URI     : https://colorlib.com
                                             href="https://www.instagram.com/agbc_oficial">https://www.instagram.com/agbc_oficial</a>
                                     </p>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="col-md-6 d-flex align-items-center">
