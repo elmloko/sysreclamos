@@ -206,7 +206,7 @@ URI     : https://colorlib.com
                     <div class="col-md-6 d-flex align-items-center">
                         <ul class="list-unstyled ui-steps">
                             <li class="media">
-                                <div class="circle-icon mr-4">4</div>
+                                <div class="circle-icon mr-4">3</div>
                                 <div class="media-body">
                                     <h5>Oficinas</h5>
                                     <p>Apersonate a nuestras oficinas en horarios de 8:00 a 20:00. Asegúrate de
@@ -214,7 +214,7 @@ URI     : https://colorlib.com
                                 </div>
                             </li>
                             <li class="media my-4">
-                                <div class="circle-icon mr-4">5</div>
+                                <div class="circle-icon mr-4">4</div>
                                 <div class="media-body">
                                     <h5>Correo Electronico</h5>
                                     <p>Disponible 24 horas .Horario de atención de lunes a viernes no festivos: de 9 a
