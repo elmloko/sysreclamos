@@ -111,7 +111,7 @@
                                 readonly>
                         </div>
                         <div class="form-group">
-                            <label for="codigo">Nombre Completo</label>
+                            <label for="codigo">Nombre completo del cliente</label>
                             <input type="text" class="form-control" id="codigo"
                                 value="{{ $additionalInfo['DESTINATARIO'] ?? '' }}" readonly>
                         </div>
@@ -161,11 +161,11 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="codigo">Código</label>
+                            <label for="codigo">Código de consulta</label>
                             <input type="text" class="form-control" id="codigo" wire:model="codigo">
                         </div>
                         <div class="form-group">
-                            <label for="destinatario">Destinatario</label>
+                            <label for="destinatario">Nombre completo del cliente</label>
                             <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
                         </div>
                         <div class="form-group">
@@ -174,7 +174,7 @@
                                 pattern="\d*" maxlength="8">
                         </div>
                         <div class="form-group">
-                            <label for="last_description">Descripción</label>
+                            <label for="last_description">Descripción de la llamada</label>
                             <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
                         </div>
                         <div class="form-group">
@@ -214,7 +214,7 @@
                             <input type="text" class="form-control" id="codigo" wire:model="codigo">
                         </div>
                         <div class="form-group">
-                            <label for="destinatario">Destinatario</label>
+                            <label for="destinatario">Nombre completo del cliente</label>
                             <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
                         </div>
                         <div class="form-group">
@@ -223,7 +223,7 @@
                                 pattern="\d*" maxlength="8">
                         </div>
                         <div class="form-group">
-                            <label for="last_description">Descripción</label>
+                            <label for="last_description">Descripción de la Consulta</label>
                             <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
                         </div>
                         <div class="form-group">
