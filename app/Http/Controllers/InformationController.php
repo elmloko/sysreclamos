@@ -12,6 +12,6 @@ class InformationController extends Controller
     }
     public function getAll ()
     {
-        return view('information.all ');
+        return view('information.all');
     }
 }
