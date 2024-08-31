@@ -10,4 +10,8 @@ class InformationController extends Controller
     {
         return view('information.records ');
     }
+    public function getAll ()
+    {
+        return view('information.all ');
+    }
 }

@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/role-has-permission/{roleHasPermission', [RoleHasPermissionController::class, 'update'])->name('role-has-permissions.update');
     Route::delete('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'destroy'])->name('role-has-permissions.destroy');
 
+    Route::get('/all', [InformationController::class, 'getAll']);
     Route::get('/records', [InformationController::class, 'getRecords']);
     Route::get('/bandejareclamos', [ReclamosController::class, 'getBandeja']);
     Route::get('/seguimientoreclamos', [ReclamosController::class, 'getSeguimiento']);
