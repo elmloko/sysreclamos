@@ -49,4 +49,23 @@ class Bajareclamos extends Component
             echo $pdf->stream();
         }, 'Casos Resueltos.pdf');
     }
+    public function mostrarReclamo($claimId)
+    {
+        // Redirigir a la ruta claim.show con el ID del reclamo
+        return redirect()->to(route('reclamos.show', $claimId));
+    }
+    public function darDeAlta($claimId)
+    {
+        $claim = Claim::find($claimId);
+
+        if ($claim) {
+            $claim->update([
+                'estado' => 'RECLAMOS',
+                'deleted_at' => null // Si estás utilizando SoftDeletes y quieres restaurarlo
+            ]);
+            session()->flash('message', 'Reclamo dado de alta y marcado como RECLAMOS con éxito.');
+        } else {
+            session()->flash('error', 'No se pudo dar de alta el reclamo.');
+        }
+    }
 }

@@ -81,17 +81,17 @@
                                             <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
-                                                {{-- <div class="d-flex" role="group" aria-label="Acciones">
+                                                <div class="d-flex" role="group" aria-label="Acciones">
                                                     <button type="button" class="btn btn-info mr-2"
                                                         wire:click="mostrarReclamo({{ $claim->id }})"
                                                         target="_blank">
                                                         Ver Reclamo
                                                     </button>
-                                                    <button type="button" class="btn btn-danger"
-                                                        wire:click="darDeBaja({{ $claim->id }})">
-                                                        Dar de Baja
+                                                    <button type="button" class="btn btn-success"
+                                                        wire:click="darDeAlta({{ $claim->id }})">
+                                                        Dar de Alta
                                                     </button>
-                                                </div> --}}
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
