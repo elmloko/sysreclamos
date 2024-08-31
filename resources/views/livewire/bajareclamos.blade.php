@@ -89,7 +89,7 @@
                                                     </button>
                                                     <button type="button" class="btn btn-success"
                                                         wire:click="darDeAlta({{ $claim->id }})">
-                                                        Dar de Alta
+                                                        Abrir Caso
                                                     </button>
                                                 </div>
                                             </td>

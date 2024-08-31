@@ -89,7 +89,7 @@
                                                     </button>
                                                     <button type="button" class="btn btn-danger"
                                                         wire:click="darDeBaja({{ $claim->id }})">
-                                                        Dar de Baja
+                                                        Cerrar Caso
                                                     </button>
                                                 </div>
                                             </td>
