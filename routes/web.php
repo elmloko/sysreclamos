@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\ReclamosController;
 use App\Http\Controllers\QuejasController;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/seguimiento/store', [ReclamosController::class, 'storeSeguimiento'])->name('seguimiento.store');
     Route::get('/quejas/{id}/show', [QuejasController::class, 'getShow'])->name('quejas.show');
     Route::get('/quejas/{id}/seguimiento', [QuejasController::class, 'getShowSeguimiento'])->name('seguimiento.get');
+    Route::get('/sugerencias', [SugerenciaController::class, 'getSugerencia']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

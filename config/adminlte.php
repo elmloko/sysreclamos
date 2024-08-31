@@ -361,6 +361,18 @@ return [
             ],
         ],
         [
+            'text' => 'Consultas Sugerencias',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Libro de Sugerencias',
+                    'url' => '/sugerencias',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
+        [
             'text' => 'Consultas Quejas',
             'icon' => 'fas fa-users',
             // 'can'  => 'users.index',
