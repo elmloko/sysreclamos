@@ -7,6 +7,6 @@
 @endsection
 
 @section('content')
-    {{-- @livewire('bandejareclamos') --}}
+    @livewire('bajareclamos')
     @include('footer')
 @stop

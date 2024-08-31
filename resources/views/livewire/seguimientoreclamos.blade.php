@@ -60,6 +60,7 @@
                                         <th>Contenido</th>
                                         <th>Valor</th>
                                         <th>Actualizado</th>
+                                        <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -77,6 +78,7 @@
                                             <td>{{ $claim->fecha_envio }}</td>
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
+                                            <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
