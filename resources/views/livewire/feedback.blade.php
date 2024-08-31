@@ -7,9 +7,13 @@
                 Califica la atención de ventanilla
             </h3>
 
+            @if ($mensaje)
+                <p style="text-align: center; color: red; font-size: 18px;">{{ $mensaje }}</p>
+            @endif
             <div style="text-align: center; margin-bottom: 20px;">
                 <input type="text" wire:model="inputId" placeholder="Ingresa el ID" 
-                    style="padding: 10px; font-size: 18px; border: 1px solid #ccc; border-radius: 4px;">
+                    style="padding: 10px; font-size: 18px; border: 1px solid #ccc; border-radius: 4px;"
+                    id="inputId" autocomplete="off">
             </div>
 
             <div class="caras" style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
@@ -34,14 +38,45 @@
                     <p style="margin-top: 10px; font-size: 18px; color: #333;">Excelente</p>
                 </div>
             </div>
+            
+            <div style="text-align: center; margin-top: 20px;" id="contador-container" hidden>
+                <h2 id="contador" style="font-size: 24px; color: #ff0000;">3.0</h2>
+                <p style="font-size: 18px; color: #333;">Tiempo restante antes de que la calificación se asigne automáticamente.</p>
+            </div>
         </div>
     @endif
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let tiempoRestante = 180; // 3 minutos en segundos
+            const contadorElemento = document.getElementById('contador');
+            const contadorContainer = document.getElementById('contador-container');
+            let interval;
+
+            document.getElementById('inputId').addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    clearInterval(interval);
+                    tiempoRestante = 180; // Reiniciar el tiempo
+                    contadorContainer.hidden = false; // Mostrar el contador
+
+                    interval = setInterval(function() {
+                        tiempoRestante -= 1;
+                        let segundos = (tiempoRestante / 60).toFixed(1);
+                        contadorElemento.textContent = segundos;
+
+                        if (tiempoRestante <= 0) {
+                            clearInterval(interval);
+                            @this.call('asignarPuntuacionAutomatica');
+                        }
+                    }, 1000);
+                }
+            });
+        });
+
         document.addEventListener('recargar-pagina', function () {
             setTimeout(function() {
                 location.reload();
-            }, 3000); // Recargar la página después de 1.5 segundos
+            }, 3000); // Recargar la página después de 3 segundos
         });
     </script>
 </div>
