@@ -16,6 +16,10 @@ class ReclamosController extends Controller
     {
         return view('reclamos.seguimientoreclamos');
     }
+    public function getBaja()
+    {
+        return view('reclamos.bajareclamo');
+    }
 
     public function getShow($id)
     {

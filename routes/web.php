@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/records', [InformationController::class, 'getRecords']);
     Route::get('/bandejareclamos', [ReclamosController::class, 'getBandeja']);
     Route::get('/seguimientoreclamos', [ReclamosController::class, 'getSeguimiento']);
+    Route::get('/bajareclamos', [ReclamosController::class, 'getBaja']);
     Route::get('/seguimientoquejasad', [QuejasController::class, 'getSeguimientoad']);
     Route::get('/seguimientoquejasop', [QuejasController::class, 'getSeguimientop']);
     Route::get('/reclamos/{id}/show', [ReclamosController::class, 'getShow'])->name('reclamos.show');

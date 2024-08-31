@@ -356,6 +356,23 @@ return [
             ],
         ],
         [
+            'text' => 'Consultas Quejas',
+            'icon' => 'fas fa-users',
+            // 'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Quejas Administrativas',
+                    'url' => '/seguimientoquejasad',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Quejas Operativas',
+                    'url' => '/seguimientoquejasop',
+                    'icon' => 'fas fa-user',
+                ],
+            ],
+        ],
+        [
             'text' => 'Consultas Reclamos',
             'icon' => 'fas fa-users',
             // 'can'  => 'users.index',
@@ -370,21 +387,9 @@ return [
                     'url' => '/seguimientoreclamos',
                     'icon' => 'fas fa-user',
                 ],
-            ],
-        ],
-        [
-            'text' => 'Consultas Quejas',
-            'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
-            'submenu' => [
                 [
-                    'text' => 'Quejas Administrativas',
-                    'url' => '/seguimientoquejasad',
-                    'icon' => 'fas fa-user',
-                ],
-                [
-                    'text' => 'Quejas Operativas',
-                    'url' => '/seguimientoquejasop',
+                    'text' => 'Casos Cerrados',
+                    'url' => '/bajareclamos',
                     'icon' => 'fas fa-user',
                 ],
             ],
