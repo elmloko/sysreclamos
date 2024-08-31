@@ -82,4 +82,18 @@ class Seguimientoreclamos extends Component
         // Redirigir a la ruta claim.show con el ID del reclamo
         return redirect()->to(route('reclamos.show', $claimId));
     }
+    public function darDeBaja($claimId)
+    {
+        $claim = Claim::find($claimId);
+    
+        if ($claim) {
+            $claim->update([
+                'deleted_at' => now(),
+                'estado' => 'RESUELTO'
+            ]);
+            session()->flash('message', 'Reclamo dado de baja y marcado como resuelto con éxito.');
+        } else {
+            session()->flash('error', 'No se pudo dar de baja el reclamo.');
+        }
+    }
 }

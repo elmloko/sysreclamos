@@ -22,7 +22,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left d-flex align-items-center">
-                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..."
+                                    class="form-control" style="margin-right: 10px;">
                                 <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                             </div>
                             <div class="float-right d-flex align-items-center">
@@ -53,12 +54,6 @@
                                         <th>Remitente</th>
                                         <th>Teléfono Remitente</th>
                                         <th>Email Remitente</th>
-                                        <th>Origen</th>
-                                        <th>Destinatario</th>
-                                        <th>Teléfono Destinatario</th>
-                                        <th>Email Destinatario</th>
-                                        <th>Dirección Destinatario</th>
-                                        <th>Código Postal</th>
                                         <th>Destino</th>
                                         <th>Código</th>
                                         <th>Fecha de Envío</th>
@@ -76,13 +71,7 @@
                                             <td>{{ $claim->correlativo }}</td>
                                             <td>{{ $claim->remitente }}</td>
                                             <td>{{ $claim->telf_remitente }}</td>
-                                            <td>{{ $claim->email_r }}</td>
                                             <td>{{ $claim->origen }}</td>
-                                            <td>{{ $claim->destinatario }}</td>
-                                            <td>{{ $claim->telf_destinatario }}</td>
-                                            <td>{{ $claim->email_d }}</td>
-                                            <td>{{ $claim->direccion_d }}</td>
-                                            <td>{{ $claim->codigo_postal }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
                                             <td>{{ $claim->fecha_envio }}</td>
@@ -90,10 +79,17 @@
                                             <td>{{ $claim->valor }}</td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-info"
-                                                    wire:click="mostrarReclamo({{ $claim->id }})" target="_blank">
-                                                    Ver Reclamo
-                                                </button>
+                                                <div class="d-flex" role="group" aria-label="Acciones">
+                                                    <button type="button" class="btn btn-info mr-2"
+                                                        wire:click="mostrarReclamo({{ $claim->id }})"
+                                                        target="_blank">
+                                                        Ver Reclamo
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        wire:click="darDeBaja({{ $claim->id }})">
+                                                        Dar de Baja
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

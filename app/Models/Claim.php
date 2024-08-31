@@ -10,8 +10,10 @@ class Claim extends Model
 {
     use HasFactory, SoftDeletes;
 
+    // Especificar el nombre de la tabla, aunque Laravel puede inferirlo por convención
     protected $table = 'claims';
 
+    // Especificar los campos que se pueden llenar de manera masiva
     protected $fillable = [
         'remitente',
         'telf_remitente',
@@ -32,12 +34,15 @@ class Claim extends Model
         'correlativo',
     ];
 
+    // Especificar los campos que son de tipo fecha
     protected $dates = [
         'created_at',
         'updated_at',
         'fecha_envio',
-        'deleted_at',
+        'deleted_at', // Este campo es necesario para las eliminaciones suaves (soft deletes)
     ];
+
+    // Definir una relación uno a muchos con el modelo Follow
     public function follows()
     {
         return $this->hasMany(Follow::class, 'claims_id');
