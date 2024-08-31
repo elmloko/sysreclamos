@@ -20,6 +20,8 @@ class Suggestion extends Model
         'email',
         'phone',
         'description',
+        'correlativo',
+        'estado',
     ];
 
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
