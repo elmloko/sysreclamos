@@ -30,8 +30,7 @@ class Sugerencia extends Component
                 return $query->where(function ($subQuery) {
                     $subQuery->where('correlativo', 'like', '%' . $this->searchTerm . '%')
                         ->orWhere('fullName', 'like', '%' . $this->searchTerm . '%')
-                        ->orWhere('phone', 'like', '%' . $this->searchTerm . '%')
-                        ->orWhere('identityCard', 'like', '%' . $this->searchTerm . '%');
+                        ->orWhere('phone', 'like', '%' . $this->searchTerm . '%');
                 });
             })
             ->orderBy('created_at', 'desc')

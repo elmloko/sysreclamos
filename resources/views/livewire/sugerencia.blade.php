@@ -55,7 +55,6 @@
                                         <th>Direccion</th>
                                         <th>Email</th>
                                         <th>Teléfono</th>
-                                        <th>Carnet de Identidad</th>
                                         <th>Pais</th>
                                         <th>Codigo Postal</th>
                                         <th>Descripcion</th>
@@ -74,7 +73,6 @@
                                             <td>{{ $suggestion->address }}</td>
                                             <td>{{ $suggestion->email }}</td>
                                             <td>{{ $suggestion->phone }}</td>
-                                            <td>{{ $suggestion->identityCard }}</td>
                                             <td>{{ $suggestion->codepostal }}</td>
                                             <td>{{ $suggestion->country }}</td>
                                             <td>{{ $suggestion->description }}</td>
