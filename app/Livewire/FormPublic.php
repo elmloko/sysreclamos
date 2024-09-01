@@ -18,13 +18,10 @@ class FormPublic extends Component
 
     protected $rules = [
         'fullName' => 'required|string|max:50',
-        'address' => 'required|string',
         'country' => 'required|string|max:50',
-        'identityCard' => 'required|integer',
-        'codepostal' => 'required|string|max:50',
         'email' => 'required|email|max:50',
         'phone' => 'required|integer',
-        'description' => 'nullable|string',
+        'description' => 'required|nullable|string',
     ];
 
     public function submit()
@@ -32,15 +29,15 @@ class FormPublic extends Component
         $this->validate();
 
         Suggestion::create([
-            'fullName' => $this->fullName,
-            'address' => $this->address,
-            'country' => $this->country,
-            'identityCard' => $this->identityCard,
-            'codepostal' => $this->codepostal,
+            'fullName' => strtoupper($this->fullName),
+            'address' => strtoupper($this->address),
+            'country' => strtoupper($this->country),
+            'codepostal' => strtoupper($this->codepostal),
             'email' => $this->email,
-            'phone' => $this->phone,
-            'description' => $this->description,
+            'phone' => strtoupper($this->phone),
+            'description' => strtoupper($this->description),
         ]);
+
 
         session()->flash('message', 'Reclamación enviada con éxito');
 
