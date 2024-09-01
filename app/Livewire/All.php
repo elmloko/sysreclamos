@@ -30,8 +30,8 @@ class All extends Component
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('remitente', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('telf_remitente', 'like', '%' . $this->searchTerm . '%');
+                    ->orWhere('remitente', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('telf_remitente', 'like', '%' . $this->searchTerm . '%');
             })
             ->get();
 
@@ -41,8 +41,8 @@ class All extends Component
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('cliente', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('telf', 'like', '%' . $this->searchTerm . '%');
+                    ->orWhere('cliente', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('telf', 'like', '%' . $this->searchTerm . '%');
             })
             ->get();
 
@@ -52,18 +52,19 @@ class All extends Component
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('destinatario', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('telefono', 'like', '%' . $this->searchTerm . '%');
+                    ->orWhere('destinatario', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('telefono', 'like', '%' . $this->searchTerm . '%');
             })
             ->get();
 
-        $suggestions = Suggestion::select('id', 'fullName as remitente', 'phone as telf', 'created_at')
+        $suggestions = Suggestion::select('id', 'correlativo', 'fullName as remitente', 'phone as telf', 'created_at')
             ->when($this->selectedDate, function ($query) {
                 $query->whereDate('created_at', $this->selectedDate);
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('fullName', 'like', '%' . $this->searchTerm . '%')
-                      ->orWhere('phone', 'like', '%' . $this->searchTerm . '%');
+                    ->orWhere('correlativo', 'like', '%' . $this->searchTerm . '%')
+                    ->orWhere('phone', 'like', '%' . $this->searchTerm . '%');
             })
             ->get();
 
@@ -136,4 +137,3 @@ class All extends Component
         );
     }
 }
-
