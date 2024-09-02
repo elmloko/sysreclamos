@@ -241,34 +241,41 @@ URI     : https://colorlib.com
                             <li><a href="#">Aviso de Privacidad</a></li>
                         </ul>
                         <div class="mt-4">
-                            <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO" style="max-width: 200px; height: auto;" class="mb-3">
-                            <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO" style="max-width: 200px; height: auto;">
+                            <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO"
+                                style="max-width: 200px; height: auto;" class="mb-3">
+                            <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO"
+                                style="max-width: 200px; height: auto;">
                         </div>
                     </div>
-        
+
                     <!-- Tercera columna: Enlaces Externos -->
                     <div class="col-md-2 mb-6">
                         <p class="font-weight-bold mb-4">Enlaces Externos</p>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a href="https://www.att.gob.bo/">Autoridad de Regulación y Fiscalización de Telecomunicaciones y Transportes</a></li>
-                            <li class="mb-2"><a href="https://www.justicia.gob.bo/portal/index.php">Ministerio de Justicia y Transparencia Institucional</a></li>
-                            <li class="mb-2"><a href="https://www.oopp.gob.bo/">Ministerio de Obras Públicas, Servicio y Vivienda</a></li>
+                            <li class="mb-2"><a href="https://www.att.gob.bo/">Autoridad de Regulación y
+                                    Fiscalización de Telecomunicaciones y Transportes</a></li>
+                            <li class="mb-2"><a href="https://www.justicia.gob.bo/portal/index.php">Ministerio de
+                                    Justicia y Transparencia Institucional</a></li>
+                            <li class="mb-2"><a href="https://www.oopp.gob.bo/">Ministerio de Obras Públicas,
+                                    Servicio y Vivienda</a></li>
                             <li class="mb-2"><a href="https://www.upu.int/en/Home">Union Postal Universal</a></li>
-                            <li><a href="https://www.upu.int/en/Home">Unión Postal de las Américas, España y Portugal</a></li>
+                            <li><a href="https://www.upu.int/en/Home">Unión Postal de las Américas, España y
+                                    Portugal</a></li>
                         </ul>
                     </div>
-        
+
                     <!-- Cuarta columna: Redes Sociales -->
                     <div class="col-md-2 mb-6">
                         <p class="font-weight-bold mb-4">Redes Sociales</p>
                         <ul class="list-unstyled">
                             <li class="mb-2"><a href="https://www.facebook.com/agbc.oficial">Facebook</a></li>
                             <li class="mb-2"><a href="https://twitter.com/AGBC_oficial">Twitter</a></li>
-                            <li class="mb-2"><a href="https://www.instagram.com/agenciabolivianadecorreos.of/">Instagram</a></li>
+                            <li class="mb-2"><a
+                                    href="https://www.instagram.com/agenciabolivianadecorreos.of/">Instagram</a></li>
                             <li><a href="https://www.instagram.com/agenciabolivianadecorreos.of/">Tiktok</a></li>
                         </ul>
                     </div>
-        
+
                     <!-- Quinta columna: Sobre Nosotros -->
                     <div class="col-md-2 mb-6">
                         <p class="font-weight-bold mb-4">Sobre Nosotros</p>
@@ -278,25 +285,30 @@ URI     : https://colorlib.com
                             <li><a href="https://correos.gob.bo/contact-us/">Contáctanos</a></li>
                         </ul>
                     </div>
-        
+
                     <!-- Sexta columna: Nuestros Servicios -->
                     <div class="col-md-2 mb-6">
                         <p class="font-weight-bold mb-4">Nuestros Servicios</p>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a href="https://correos.gob.bo/ems/">Envió de Mensajería Urgente</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/ems/">Envió de Mensajería Urgente</a>
+                            </li>
                             <li class="mb-2"><a href="https://correos.gob.bo/sp/">Servicio Prioritario</a></li>
-                            <li class="mb-2"><a href="https://correos.gob.bo/eca/">Envíos de Correspondencia Agrupada</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/eca/">Envíos de Correspondencia
+                                    Agrupada</a></li>
                             <li class="mb-2"><a href="https://correos.gob.bo/eca/">Mi Encomienda</a></li>
-                            <li class="mb-2"><a href="https://correos.gob.bo/filatelia/">Servicio de Filatelia</a></li>
-                            <li class="mb-2"><a href="https://correos.gob.bo/casillas/">Servicio de Casillas</a></li>
-                            <li class="mb-2"><a href="https://correos.gob.bo:8000/">TrackingBO (Rastreo de Paquetes)</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/filatelia/">Servicio de Filatelia</a>
+                            </li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/casillas/">Servicio de Casillas</a>
+                            </li>
+                            <li class="mb-2"><a href="https://correos.gob.bo:8000/">TrackingBO (Rastreo de
+                                    Paquetes)</a></li>
                             <li><a href="https://correos.gob.bo/construccion/">Calculadora Postal</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-          
+
     </div>
 
     <footer class="my-5 text-center">
@@ -328,7 +340,7 @@ URI     : https://colorlib.com
             }
         });
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 
