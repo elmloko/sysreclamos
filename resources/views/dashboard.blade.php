@@ -7,7 +7,12 @@
 @stop
 
 @section('content')
-    @livewire('dashboard')
+    @hasrole('SuperAdmin|Administrador')
+        @livewire('estadisticas')
+    @endhasrole
+    @hasrole('SuperAdmin|Reclamos|Informaciones')
+        @livewire('dashboard')
+    @endhasrole
     @include('footer')
 @stop
 
