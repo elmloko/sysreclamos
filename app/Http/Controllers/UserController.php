@@ -31,7 +31,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'Regional' => 'required',
+            'city' => 'required',
             'ci' => 'required',
         ]);
     
@@ -39,7 +39,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
-        $user->Regional = $request->input('Regional');
+        $user->city = $request->input('city');
         $user->ci = $request->input('ci');
 
         $user->save();
@@ -70,14 +70,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
-            'Regional' => 'required',
+            'city' => 'required',
             'ci' => 'required',
         ]);
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->roles()->sync($request->roles);
-        $user->Regional = $request->input('Regional');
+        $user->city = $request->input('city');
         $user->ci = $request->input('ci');
         
         $user->save();

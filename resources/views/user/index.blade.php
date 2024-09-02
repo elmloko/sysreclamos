@@ -66,7 +66,7 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ str_repeat('*', min(12, strlen($user->password))) }}</td>
-                                            <td>{{ $user->Regional }}</td>
+                                            <td>{{ $user->city }}</td>
                                             <td>{{ $user->ci }}</td>
                                             <td><span class="badge {{ $user->trashed() ? 'badge-danger' : 'badge-info' }}">
                                                 {{ $user->trashed() ? 'Inactivo' : 'Activo' }}

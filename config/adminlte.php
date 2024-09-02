@@ -314,17 +314,18 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/dashboard',
+            'can'  => 'dashboard',
             'icon' => 'fas fa-user',
         ],
         [
             'text' => 'Todos los Casos',
-            'url' => '/all',
+            'can'  => 'dashboard',
             'icon' => 'fas fa-user',
         ],
         [
             'text' => 'Gestion Usuarios',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'can'  => 'odin',
             'submenu' => [
                 [
                     'text' => 'Personal AGBC',
@@ -351,7 +352,7 @@ return [
         [
             'text' => 'Consultas Informacion',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'can'  => 'informaciones.consulta',
             'submenu' => [
                 [
                     'text' => 'Registros de Informacion',
@@ -363,7 +364,7 @@ return [
         [
             'text' => 'Consultas Sugerencias',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'can'  => 'sugerencias',
             'submenu' => [
                 [
                     'text' => 'Libro de Sugerencias',
@@ -375,7 +376,7 @@ return [
         [
             'text' => 'Consultas Quejas',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
+            'can'  => 'quejas',
             'submenu' => [
                 [
                     'text' => 'Quejas Administrativas',
@@ -392,21 +393,23 @@ return [
         [
             'text' => 'Consultas Reclamos',
             'icon' => 'fas fa-users',
-            // 'can'  => 'users.index',
             'submenu' => [
                 [
                     'text' => 'Bandeja',
                     'url' => '/bandejareclamos',
+                    'can'  => 'reclamos.bandeja',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Seguimiento de Reclamos',
                     'url' => '/seguimientoreclamos',
+                    'can'  => 'reclamos.casos',
                     'icon' => 'fas fa-user',
                 ],
                 [
                     'text' => 'Casos Cerrados',
                     'url' => '/bajareclamos',
+                    'can'  => 'reclamos.casos',
                     'icon' => 'fas fa-user',
                 ],
             ],
@@ -414,11 +417,13 @@ return [
         [
             'text' => 'Rendimiento',
             'url' => '/pulse',
+            'can'  => 'odin',
             'icon' => 'fas fa-user',
         ],
         [
             'text' => 'Logs',
             'url' => '/log-viewer',
+            'can'  => 'odin',
             'icon' => 'fas fa-user',
         ],
     ],
