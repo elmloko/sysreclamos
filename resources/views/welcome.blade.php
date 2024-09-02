@@ -40,8 +40,10 @@ URI     : https://colorlib.com
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-dark navbar-expand-lg">
-                        <img id="logo" src="{{ asset('images/LOGOcen.png') }}" class="img-fluid" alt="logo"
-                            style="max-width: 200px; height: auto;">
+                        <a href="/">
+                            <img id="logo" src="{{ asset('images/LOGOcen.png') }}" class="img-fluid" alt="logo"
+                                style="max-width: 200px; height: auto;">
+                        </a>
                         <div class="collapse navbar-collapse" id="navbar">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
@@ -227,35 +229,105 @@ URI     : https://colorlib.com
             </div>
         </div>
 
-        <footer class="my-5 text-center">
-            <!-- Copyright removal is not prohibited! -->
-            <p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p>
-            <p class="mb-2"><small>&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
-                    Boliviana de Correos <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
-                        title="Marco Antonio Espinoza Rojas">Copyright © MAER
-                        {{ date('Y') }} </a></small></p>
-            <p class="mb-2"><small>Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
-                    Telecomunicaciones - agbc@correos.gob.bo</small></p>
-        </footer>
+        <div class="section light-bg">
+            <div class="container mx-auto">
+                <div class="row justify-content-between">
+                    <!-- Segunda columna: Preguntas Frecuentes -->
+                    <div class="col-md-2 mb-6">
+                        <p class="font-weight-bold mb-4">Preguntas Frecuentes</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#">Aviso Legal</a></li>
+                            <li class="mb-2"><a href="#">Condiciones de Uso</a></li>
+                            <li><a href="#">Aviso de Privacidad</a></li>
+                        </ul>
+                        <div class="mt-4">
+                            <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO" style="max-width: 200px; height: auto;" class="mb-3">
+                            <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO" style="max-width: 200px; height: auto;">
+                        </div>
+                    </div>
+        
+                    <!-- Tercera columna: Enlaces Externos -->
+                    <div class="col-md-2 mb-6">
+                        <p class="font-weight-bold mb-4">Enlaces Externos</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://www.att.gob.bo/">Autoridad de Regulación y Fiscalización de Telecomunicaciones y Transportes</a></li>
+                            <li class="mb-2"><a href="https://www.justicia.gob.bo/portal/index.php">Ministerio de Justicia y Transparencia Institucional</a></li>
+                            <li class="mb-2"><a href="https://www.oopp.gob.bo/">Ministerio de Obras Públicas, Servicio y Vivienda</a></li>
+                            <li class="mb-2"><a href="https://www.upu.int/en/Home">Union Postal Universal</a></li>
+                            <li><a href="https://www.upu.int/en/Home">Unión Postal de las Américas, España y Portugal</a></li>
+                        </ul>
+                    </div>
+        
+                    <!-- Cuarta columna: Redes Sociales -->
+                    <div class="col-md-2 mb-6">
+                        <p class="font-weight-bold mb-4">Redes Sociales</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://www.facebook.com/agbc.oficial">Facebook</a></li>
+                            <li class="mb-2"><a href="https://twitter.com/AGBC_oficial">Twitter</a></li>
+                            <li class="mb-2"><a href="https://www.instagram.com/agenciabolivianadecorreos.of/">Instagram</a></li>
+                            <li><a href="https://www.instagram.com/agenciabolivianadecorreos.of/">Tiktok</a></li>
+                        </ul>
+                    </div>
+        
+                    <!-- Quinta columna: Sobre Nosotros -->
+                    <div class="col-md-2 mb-6">
+                        <p class="font-weight-bold mb-4">Sobre Nosotros</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://correos.gob.bo/about/">Quienes Somos</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/services/">Nuestros Servicios</a></li>
+                            <li><a href="https://correos.gob.bo/contact-us/">Contáctanos</a></li>
+                        </ul>
+                    </div>
+        
+                    <!-- Sexta columna: Nuestros Servicios -->
+                    <div class="col-md-2 mb-6">
+                        <p class="font-weight-bold mb-4">Nuestros Servicios</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://correos.gob.bo/ems/">Envió de Mensajería Urgente</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/sp/">Servicio Prioritario</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/eca/">Envíos de Correspondencia Agrupada</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/eca/">Mi Encomienda</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/filatelia/">Servicio de Filatelia</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo/casillas/">Servicio de Casillas</a></li>
+                            <li class="mb-2"><a href="https://correos.gob.bo:8000/">TrackingBO (Rastreo de Paquetes)</a></li>
+                            <li><a href="https://correos.gob.bo/construccion/">Calculadora Postal</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+    </div>
+
+    <footer class="my-5 text-center">
+        <!-- Copyright removal is not prohibited! -->
+        <p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p>
+        <p class="mb-2"><small>&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
+                Boliviana de Correos <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
+                    title="Marco Antonio Espinoza Rojas">Copyright © MAER
+                    {{ date('Y') }} </a></small></p>
+        <p class="mb-2"><small>Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
+                Telecomunicaciones - agbc@correos.gob.bo</small></p>
+    </footer>
 
 
-        <!-- jQuery and Bootstrap -->
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <!-- Plugins JS -->
-        <script src="js/owl.carousel.min.js"></script>
-        <!-- Custom JS -->
-        <script src="js/script.js"></script>
-        <script>
-            document.addEventListener("scroll", function() {
-                const navMenu = document.querySelector(".nav-menu");
-                if (window.scrollY > 50) { // Ajusta el valor según cuándo quieras que ocurra el cambio
-                    navMenu.classList.add("is-scrolling");
-                } else {
-                    navMenu.classList.remove("is-scrolling");
-                }
-            });
-        </script>
+    <!-- jQuery and Bootstrap -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener("scroll", function() {
+            const navMenu = document.querySelector(".nav-menu");
+            if (window.scrollY > 50) { // Ajusta el valor según cuándo quieras que ocurra el cambio
+                navMenu.classList.add("is-scrolling");
+            } else {
+                navMenu.classList.remove("is-scrolling");
+            }
+        });
+    </script>
 
 
 </body>
