@@ -30,8 +30,6 @@
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
                                     PDF</button>
-                                {{-- <button type="button" class="btn btn-warning ml-2"
-                                    wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button> --}}
                             </div>
                         </div>
                         @if (session()->has('message'))

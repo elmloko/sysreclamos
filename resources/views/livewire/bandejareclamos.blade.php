@@ -22,15 +22,18 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left d-flex align-items-center">
-                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..."
+                                    class="form-control" style="margin-right: 10px;">
                                 <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                             </div>
                             <div class="float-right d-flex align-items-center">
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
                                     PDF</button>
-                                <button type="button" class="btn btn-warning ml-2"
-                                    wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button>
+                                @hasrole('SuperAdmin|Administrador|Reclamos')
+                                    <button type="button" class="btn btn-warning ml-2"
+                                        wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button>
+                                @endhasrole
                             </div>
                         </div>
                         @if (session()->has('message'))

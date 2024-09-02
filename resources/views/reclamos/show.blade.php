@@ -74,11 +74,13 @@
         </div>
         <div class="row mt-2">
             <div class="col-md-12 text-right">
-                @if ($claim->estado == 'RECLAMOS')
-                    <a href="{{ route('seguimiento.create', ['claim' => $claim->id]) }}" class="btn btn-success">
-                        Crear Seguimiento
-                    </a>
-                @endif
+                @hasrole('SuperAdmin|Administrador|Reclamos')
+                    @if ($claim->estado == 'RECLAMOS')
+                        <a href="{{ route('seguimiento.create', ['claim' => $claim->id]) }}" class="btn btn-success">
+                            Crear Seguimiento
+                        </a>
+                    @endif
+                @endhasrole
             </div>
         </div>
         <div class="row mt-4">

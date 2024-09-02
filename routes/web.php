@@ -90,7 +90,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/seguimiento/create/{claim}', [ReclamosController::class, 'createSeguimiento'])->name('seguimiento.create');
     Route::post('/seguimiento/store', [ReclamosController::class, 'storeSeguimiento'])->name('seguimiento.store');
     Route::get('/quejas/{id}/show', [QuejasController::class, 'getShow'])->name('quejas.show');
-    // Route::get('/quejas/{id}/seguimiento', [QuejasController::class, 'getShowSeguimiento'])->name('seguimiento.get');
     Route::get('/sugerencias', [SugerenciaController::class, 'getSugerencia']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
