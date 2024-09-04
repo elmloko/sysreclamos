@@ -176,7 +176,7 @@
                     labels: informationPerMonth.map(item => item.month), // Utilizamos los meses de una tabla, ya que las fechas deben coincidir
                     datasets: [
                         {
-                            label: 'Claims por Mes',
+                            label: 'Reclamos por Mes',
                             data: getDataSet(claimsPerMonth).data,
                             backgroundColor: 'rgba(255, 99, 132, 0.2)',
                             borderColor: 'rgba(255, 99, 132, 1)',
@@ -184,7 +184,7 @@
                             fill: true
                         },
                         {
-                            label: 'Complaints por Mes',
+                            label: 'Quejas por Mes',
                             data: getDataSet(complaintsPerMonth).data,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',
@@ -192,7 +192,7 @@
                             fill: true
                         },
                         {
-                            label: 'Information por Mes',
+                            label: 'Informaciones por Mes',
                             data: getDataSet(informationPerMonth).data,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
@@ -200,7 +200,7 @@
                             fill: true
                         },
                         {
-                            label: 'Suggestions por Mes',
+                            label: 'Sugerencias por Mes',
                             data: getDataSet(suggestionsPerMonth).data,
                             backgroundColor: 'rgba(153, 102, 255, 0.2)',
                             borderColor: 'rgba(153, 102, 255, 1)',
