@@ -26,6 +26,7 @@ class Claim extends Model
         'codigo_postal',
         'destino',
         'codigo',
+        'public',
         'fecha_envio',
         'contenido',
         'valor',

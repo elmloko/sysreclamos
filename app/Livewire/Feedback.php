@@ -18,11 +18,11 @@ class Feedback extends Component
         $this->puntuacion = $puntuacion;
 
         if ($this->inputId && $this->puntuacion) {
-            // Buscar el registro con el ID proporcionado
-            $information = Information::find($this->inputId);
+            // Buscar el registro usando 'public' en lugar de 'id'
+            $information = Information::where('public', $this->inputId)->first();
 
             if ($information) {
-                // Verificar si el ID ya ha sido calificado
+                // Verificar si ya ha sido calificado
                 if ($information->feedback !== null) {
                     $this->mensaje = 'ESTE ID YA FUE CALIFICADO.';
                     return;

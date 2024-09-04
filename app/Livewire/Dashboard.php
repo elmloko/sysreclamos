@@ -151,6 +151,7 @@ class Dashboard extends Component
 
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFSAM' . $newCorrelativo;
+        $publicoCorrelativo = 'T' . $newCorrelativo;
 
         // Crear el nuevo registro en la base de datos
         $information = Information::create([
@@ -164,21 +165,22 @@ class Dashboard extends Component
             'last_description' => substr($latestEvent['descripcion'] ?? '', 0, 255),  // Toma la descripción del último evento
             'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
             'correlativo' => $codigoCorrelativo,
+            'public' => $publicoCorrelativo,
             'estado' => 'SAC',
             'created_at' => Carbon::now(),
         ]);
 
         // Almacenar el ID del registro recién creado
-        $this->createdId = $information->id;
+        $this->createdId = $information->public;
 
         session()->flash('message', 'Información guardada exitosamente.');
+
+        // Resetear los campos del formulario
+        $this->reset(['codigo', 'destinatario', 'telefono','last_description']);
 
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
-        
-        // // Redirigir a la misma página para recargarla
-        // return redirect()->to(url()->previous());
     }
 
     public function savesac()
@@ -196,10 +198,12 @@ class Dashboard extends Component
 
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFSAC' . $newCorrelativo;
+        $publicoCorrelativo = 'W' . $newCorrelativo;
 
         // Crear el nuevo registro en la base de datos
         $information = Information::create([
             'correlativo' => $codigoCorrelativo,
+            'public' => $publicoCorrelativo,
             'codigo' => strtoupper($this->codigo),
             'destinatario' => strtoupper($this->destinatario),
             'telefono' => $this->telefono,
@@ -211,16 +215,16 @@ class Dashboard extends Component
         ]);
 
         // Almacenar el ID del registro recién creado
-        $this->createdId = $information->id;
+        $this->createdId = $information->public;
 
         session()->flash('message', 'Registro SAC registrado exitosamente.');
+
+        // Resetear los campos del formulario
+        $this->reset(['codigo', 'destinatario', 'telefono','last_description']);
 
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
-        
-        // // Redirigir a la misma página para recargarla
-        // return redirect()->to(url()->previous());
     }
 
     public function saveLlamada()
@@ -253,7 +257,7 @@ class Dashboard extends Component
 
         session()->flash('message', 'Llamada registrada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
 
         // Resetear los campos del formulario
@@ -295,8 +299,10 @@ class Dashboard extends Component
 
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'RCL' . $newCorrelativo;
+        $publicoCorrelativo = 'P' . $newCorrelativo;
 
         $claim = Claim::create([
+            'public' => $publicoCorrelativo,
             'remitente' => strtoupper($this->remitente),
             'telf_remitente' => $this->telf_remitente,
             'email_r' => $this->email_r,
@@ -316,10 +322,14 @@ class Dashboard extends Component
             'created_at' => Carbon::now(),
         ]);
 
+        // Almacenar el ID del registro recién creado
+        $this->createdId = $claim->public;
+
         session()->flash('message', 'Registro CN08 registrada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
@@ -356,9 +366,11 @@ class Dashboard extends Component
 
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'QJAADM' . $newCorrelativo;
+        $publicoCorrelativo = 'F' . $newCorrelativo;
 
         // Guardar la queja en la base de datos
         $complaint = Complaint::create([
+            'public' => $publicoCorrelativo,
             'cliente' => strtoupper($this->cliente),
             'telf' => $this->telf,
             'email' => $this->email,
@@ -371,10 +383,14 @@ class Dashboard extends Component
             'created_at' => Carbon::now(),
         ]);
 
+        // Almacenar el ID del registro recién creado
+        $this->createdId = $complaint->public;
+
         session()->flash('message', 'Registro Queja Administrativa registrada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['cliente', 'telf', 'email', 'queja', 'funcionario']);
@@ -411,8 +427,10 @@ class Dashboard extends Component
 
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'QJAOP' . $newCorrelativo;
+        $publicoCorrelativo = 'G' . $newCorrelativo;
 
         $complaint = Complaint::create([
+            'public' => $publicoCorrelativo,
             'cliente' => strtoupper($this->cliente),
             'telf' => $this->telf,
             'email' => $this->email,
@@ -424,11 +442,15 @@ class Dashboard extends Component
             'tipo' => 'OPERATIVO',
             'created_at' => Carbon::now(),
         ]);
+        
+        // Almacenar el ID del registro recién creado
+        $this->createdId = $complaint->public;
 
         session()->flash('message', 'Registro Queja Operativa registrada exitosamente.');
 
-        // Emitir un evento para cerrar el modal
+        // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
+        $this->dispatch('open-calificando-modal');
 
         // Resetear los campos del formulario
         $this->reset(['cliente', 'telf', 'email', 'queja', 'funcionario']);

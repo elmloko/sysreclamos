@@ -20,6 +20,7 @@ class Complaint extends Model
         'queja',
         'funcionario',
         'tipo',
+        'public',
         'estado',
         'correlativo',
     ];
