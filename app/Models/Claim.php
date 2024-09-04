@@ -33,6 +33,7 @@ class Claim extends Model
         'estado',
         'reclamo',
         'correlativo',
+        'feedback',
     ];
 
     // Especificar los campos que son de tipo fecha

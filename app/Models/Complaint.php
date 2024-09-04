@@ -23,6 +23,7 @@ class Complaint extends Model
         'public',
         'estado',
         'correlativo',
+        'feedback',
     ];
 
     // Si usas SoftDeletes, Laravel maneja automáticamente las marcas de tiempo de borrado
