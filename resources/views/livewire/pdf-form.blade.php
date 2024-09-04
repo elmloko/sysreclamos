@@ -15,7 +15,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 12px;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         th,
@@ -38,7 +38,7 @@
 
         .special-text {
             text-align: center;
-            font-size: 12px;
+            font-size: 10px;
             border: none !important;
         }
 
@@ -58,9 +58,9 @@
             <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
         </div>
         <div class="title">
-            <h2>BOLETIN DE VERIFICACION INTERNACIONAL</h2>
-            <h2>CN08 - FORMULARIO DIRECTO</h2>
-            <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
+            <h3>BOLETIN DE VERIFICACION INTERNACIONAL</h3>
+            <h3>CN08 - FORMULARIO DIRECTO</h3>
+            <h4>AGENCIA BOLIVIANA DE CORREOS</h4>
         </div>
         <div class="correlativo">
             {{ $claim->correlativo }}
@@ -137,8 +137,15 @@
             <td>{{ $claim->valor }}</td>
         </tr>
     </table>
-    <br>
-    <br>
+
+    <h5>Detalles del Reclamo</h5>
+    <!-- Tercera Tabla: Detalles del Envío -->
+    <table>
+        <tr>
+            <th>Detalles del Reclamo</th>
+            <td>{{ $claim->reclamo }}</td>
+        </tr>
+    </table>
     <table>
         <td>
             <p class="special-text">__________________________</p>

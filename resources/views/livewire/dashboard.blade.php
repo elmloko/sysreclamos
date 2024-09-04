@@ -343,6 +343,10 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="reclamo">Descripcion del Reclamo</label>
+                            <textarea class="form-control" id="reclamo" wire:model="reclamo" rows="5"></textarea>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

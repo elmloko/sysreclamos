@@ -26,6 +26,7 @@ class Dashboard extends Component
     public $email_r;
     public $origen;
     public $telf_destinatario;
+    public $reclamo;
     public $email_d;
     public $direccion_d;
     public $codigo_postal;
@@ -283,6 +284,7 @@ class Dashboard extends Component
             'codigo' => 'required|string|max:255',
             'fecha_envio' => 'required|date',
             'contenido' => 'required|string|max:255',
+            'reclamo' => 'required|string|max:255',
             'valor' => 'required|numeric',
         ]);
 
@@ -316,6 +318,7 @@ class Dashboard extends Component
             'codigo' => $this->codigo,
             'fecha_envio' => Carbon::parse($this->fecha_envio),
             'contenido' => strtoupper($this->contenido),
+            'reclamo' => strtoupper($this->reclamo),
             'valor' => $this->valor,
             'correlativo' => $codigoCorrelativo,
             'estado' => 'INFORMACIONES',
