@@ -319,6 +319,7 @@ return [
         ],
         [
             'text' => 'Todos los Casos',
+            'url' => '/all',
             'can'  => 'dashboard',
             'icon' => 'fas fa-user',
         ],
