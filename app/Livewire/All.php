@@ -18,15 +18,19 @@ class All extends Component
     public $perPage = 10; // Número de registros por página
     public $searchTerm = ''; // Término de búsqueda
     public $selectedDate; // Fecha seleccionada para el filtro
+    public $selectedPrefix = '';
 
     protected $paginationTheme = 'bootstrap'; // Tema Bootstrap para la paginación
 
     public function render()
     {
-        // Recuperar los datos de todas las tablas, incluyendo created_at
+        // Recuperar los datos de todas las tablas, incluyendo el filtro por correlativo y prefijo seleccionado
         $claims = Claim::select('id', 'correlativo', 'remitente', 'telf_remitente', 'estado', 'created_at')
             ->when($this->selectedDate, function ($query) {
                 $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->when($this->selectedPrefix, function ($query) {
+                $query->where('correlativo', 'like', $this->selectedPrefix . '%');
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
@@ -39,6 +43,9 @@ class All extends Component
             ->when($this->selectedDate, function ($query) {
                 $query->whereDate('created_at', $this->selectedDate);
             })
+            ->when($this->selectedPrefix, function ($query) {
+                $query->where('correlativo', 'like', $this->selectedPrefix . '%');
+            })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('cliente', 'like', '%' . $this->searchTerm . '%')
@@ -50,6 +57,9 @@ class All extends Component
             ->when($this->selectedDate, function ($query) {
                 $query->whereDate('created_at', $this->selectedDate);
             })
+            ->when($this->selectedPrefix, function ($query) {
+                $query->where('correlativo', 'like', $this->selectedPrefix . '%');
+            })
             ->when($this->searchTerm, function ($query) {
                 $query->where('correlativo', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('destinatario', 'like', '%' . $this->searchTerm . '%')
@@ -60,6 +70,9 @@ class All extends Component
         $suggestions = Suggestion::select('id', 'correlativo', 'fullName as remitente', 'phone as telf', 'created_at')
             ->when($this->selectedDate, function ($query) {
                 $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->when($this->selectedPrefix, function ($query) {
+                $query->where('correlativo', 'like', $this->selectedPrefix . '%');
             })
             ->when($this->searchTerm, function ($query) {
                 $query->where('fullName', 'like', '%' . $this->searchTerm . '%')
@@ -112,7 +125,7 @@ class All extends Component
         $allRecords = $claims->concat($complaints)->concat($information)->concat($suggestions);
 
         // Ordenar por created_at en orden descendente
-        $allRecords = $allRecords->sortByDesc('created_at');
+        $allRecords = $allRecords->sortByDesc('created_at')->values();
 
         // Generar el PDF
         $pdf = PDF::loadView('livewire.pdf-all', ['records' => $allRecords]);
@@ -128,8 +141,9 @@ class All extends Component
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
+
         return new LengthAwarePaginator(
-            $items->forPage($page, $perPage),
+            $items->forPage($page, $perPage)->values(), // Asegúrate de usar values() aquí
             $items->count(),
             $perPage,
             $page,

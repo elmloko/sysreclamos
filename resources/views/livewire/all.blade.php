@@ -20,10 +20,23 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        
                         <div class="card-header">
                             <div class="float-left d-flex align-items-center">
-                                <input type="text" wire:model="searchTerm" placeholder="Buscar..."
-                                    class="form-control" style="margin-right: 10px;">
+                                <!-- Campo de búsqueda general -->
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                
+                                <!-- Dropdown para seleccionar prefijos -->
+                                <select wire:model="selectedPrefix" class="form-control" style="margin-right: 10px;">
+                                    <option value="">Seleccione un prefijo</option>
+                                    <option value="INFSAC">INFSAC</option>
+                                    <option value="INFSAM">INFSAM</option>
+                                    <option value="RCL">RCL</option>
+                                    <option value="QJAADM">QJAADM</option>
+                                    <option value="QJAOP">QJAOP</option>
+                                    <option value="SGR">SGR</option>
+                                </select>
+
                                 <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                             </div>
                             <div class="float-right d-flex align-items-center">
