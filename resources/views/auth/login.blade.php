@@ -52,36 +52,23 @@
                         <span class="txt1">
                             Contraseña
                         </span>
-
-                        {{-- @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="txt2 bo1 m-l-5">
-                            Forgot?
-                        </a>
-                        @endif --}}
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Contraseña Requerida">
                         <input class="input100" type="password" name="password" required>
                         <span class="focus-input100"></span>
                     </div>
-
-                    <div class="container-login100-form-btn m-t-17">
-                        <button class="login100-form-btn">
-                            Ingresar
-                        </button>
-                    </div>
-
-                    {{-- <div class="w-full text-center p-t-55">
-                        <span class="txt2">
-                            Not a member?
-                        </span>
-
-                        <a href="#" class="txt2 bo1">
-                            Sign up now
-                        </a>
-                    </div> --}}
-                </form>
+                    <div class="g-recaptcha" data-sitekey="6LdIqDcqAAAAAACT4SftkCarELry37YxM2cPRaJi"></div>
+                    @error('g-recaptcha-response')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <button class="login100-form-btn">
+                        Ingresar
+                    </button>
             </div>
+
+            </form>
         </div>
+    </div>
     </div>
 
     <div id="dropDownSelect1"></div>
@@ -95,6 +82,7 @@
     <script src="{{ asset('vendor/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('vendor/countdowntime/countdowntime.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script>
         (function($) {
