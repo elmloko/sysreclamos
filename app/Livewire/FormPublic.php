@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Suggestion;
+use Illuminate\Support\Facades\Http;
 
 class FormPublic extends Component
 {
@@ -15,6 +16,7 @@ class FormPublic extends Component
     public $email;
     public $phone;
     public $description;
+    public $recaptcha;
 
     protected $rules = [
         'fullName' => 'required|string|max:50',
@@ -22,28 +24,43 @@ class FormPublic extends Component
         'email' => 'required|email|max:50',
         'phone' => 'required|integer',
         'description' => 'required|nullable|string',
+        'recaptcha' => 'required',
     ];
 
     public function submit()
     {
+        $this->validate(); // Valida todos los campos incluidos los del reCAPTCHA
+
+        // Verificar reCAPTCHA
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => '6LdIqDcqAAAAAMb08_WCzPXCPDINC_aNSsCPgiH0', // Reemplaza con tu clave secreta
+            'response' => $this->recaptcha, // Utiliza la propiedad Livewire recaptcha
+        ]);
+
+        $responseBody = json_decode($response->body());
+
+        if (!$responseBody->success) {
+            session()->flash('message', 'Por favor, verifica que no eres un robot.');
+            return;
+        }
+
+        // Continuar con el envío del formulario si el captcha es válido
         $this->validate();
 
-        // Obtener el último correlativo
+        // Obtener el último correlativo y crear el nuevo registro
         $lastRecord = Suggestion::where('correlativo', 'like', 'SGR%')
-                        ->orderBy('correlativo', 'desc')
-                        ->first();
+            ->orderBy('correlativo', 'desc')
+            ->first();
 
-        // Generar el nuevo correlativo
         if ($lastRecord) {
-            $lastNumber = (int)substr($lastRecord->correlativo, 3); // Extrae el número
-            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT); // Incrementa y formatea
+            $lastNumber = (int)substr($lastRecord->correlativo, 3);
+            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
         } else {
-            $newNumber = '0001'; // Si no hay registros previos, empieza en 0001
+            $newNumber = '0001';
         }
 
         $newCorrelativo = 'SGR' . $newNumber;
 
-        // Crear el nuevo registro con el correlativo y estado 'PUBLICADO'
         Suggestion::create([
             'fullName' => strtoupper($this->fullName),
             'address' => strtoupper($this->address),
@@ -52,13 +69,12 @@ class FormPublic extends Component
             'email' => $this->email,
             'phone' => strtoupper($this->phone),
             'description' => strtoupper($this->description),
-            'correlativo' => $newCorrelativo, // Asigna el correlativo
-            'estado' => 'PUBLICADO', // Asigna el estado
+            'correlativo' => $newCorrelativo,
+            'estado' => 'PUBLICADO',
         ]);
 
         session()->flash('message', 'Reclamación enviada con éxito');
 
-        // Limpia los campos del formulario
         $this->reset();
     }
 
