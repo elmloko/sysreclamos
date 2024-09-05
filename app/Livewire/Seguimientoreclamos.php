@@ -6,11 +6,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
 use PDF;
+use Carbon\Carbon;
 
 
 class Seguimientoreclamos extends Component
 {
     use WithPagination;
+    
 
     public $perPage = 10; // Número de registros por página
     public $selectedDate; // Fecha seleccionada
@@ -22,7 +24,7 @@ class Seguimientoreclamos extends Component
 
     public function render()
     {
-
+        Carbon::setLocale('es');
         // Filtrar los registros según la fecha seleccionada y el término de búsqueda
         $claim = Claim::where('estado', 'RECLAMOS')
             ->when($this->selectedDate, function ($query) {

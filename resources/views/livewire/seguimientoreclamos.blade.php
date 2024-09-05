@@ -51,14 +51,15 @@
                                         <th>Codificacion</th>
                                         <th>Remitente</th>
                                         <th>Teléfono Remitente</th>
-                                        <th>Email Remitente</th>
+                                        <th>Origen</th>
                                         <th>Destino</th>
                                         <th>Código</th>
                                         <th>Fecha de Envío</th>
                                         <th>Contenido</th>
                                         <th>Valor</th>
-                                        <th>Actualizado</th>
                                         <th>Estado</th>
+                                        <th>Tiempo Trascurrido</th>
+                                        <th>Fecha Recibido</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -77,6 +78,9 @@
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
                                             <td>{{ $claim->estado }}</td>
+                                            <td>
+                                                {{ \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now()) }} días
+                                            </td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
