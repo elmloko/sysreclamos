@@ -77,9 +77,12 @@ URI     : https://colorlib.com
                 los problemas planteados y prevenir inconvenientes futuros, garantizando así una mejor experiencia para
                 nuestros clientes.</p>
         </div>
+        
         <div class="img-holder mt-3"><img src="images/postal-realista-vendimia_97886-229.avif" alt="phone"
                 class="img-fluid"></div>
     </header>
+
+    @livewire('Form-public')
 
     <div class="section">
         <div class="container">
@@ -109,8 +112,6 @@ URI     : https://colorlib.com
             </div>
         </div>
     </div>
-
-    @livewire('Form-public')
 
     <div class="section light-bg" id="features">
         <div class="container">

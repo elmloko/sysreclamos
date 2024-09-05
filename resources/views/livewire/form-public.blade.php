@@ -1,6 +1,6 @@
 <div class="section">
     <div class="container">
-        <h3 class="text-center mb-4">Libro de Reclamaciones / Consultas</h3>
+        <h3 class="text-center pt-1">Libro de Reclamaciones / Consultas</h3>
         @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
