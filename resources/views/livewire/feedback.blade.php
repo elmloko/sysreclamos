@@ -1,47 +1,53 @@
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px;">
     @if ($feedbackEnviado)
-        <h1 style="font-size: 48px; color: #333; text-align: center;">MUCHAS GRACIAS</h1>
+        <h1 style="font-size: 6vw; color: #333; text-align: center;">MUCHAS GRACIAS</h1>
     @else
         <div>
-            <h3 style="text-align: center; font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px;">
+            <h3 style="text-align: center; font-size: 4.5vw; font-weight: bold; color: #333; margin-bottom: 20px;">
                 Califica la atención de ventanilla
             </h3>
 
             @if ($mensaje)
-                <p style="text-align: center; color: red; font-size: 18px;">{{ $mensaje }}</p>
+                <p style="text-align: center; color: red; font-size: 3.5vw;">{{ $mensaje }}</p>
             @endif
+
             <div style="text-align: center; margin-bottom: 20px;">
                 <input type="text" wire:model="inputId" placeholder="Ingresa el ID" 
-                    style="padding: 10px; font-size: 18px; border: 1px solid #ccc; border-radius: 4px;"
+                    style="padding: 10px; font-size: 3.5vw; border: 1px solid #ccc; border-radius: 4px; width: 100%; max-width: 400px;"
                     id="inputId" autocomplete="off">
             </div>
 
-            <div class="caras" style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
+            <div class="caras" style="display: flex; justify-content: space-around; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-malo.png') }}" alt="Malo" wire:click="seleccionarPuntuacion(1)" style="cursor: pointer; width: 150px; height: 150px;">
-                    <p style="margin-top: 10px; font-size: 18px; color: #333;">Malo</p>
-                </div>
+                    <img src="{{ asset('images/cara-malo.png') }}" alt="Malo" wire:click="seleccionarPuntuacion(1)" 
+                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
+                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Malo</p>
+                </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-regular.png') }}" alt="Regular" wire:click="seleccionarPuntuacion(2)" style="cursor: pointer; width: 150px; height: 150px;">
-                    <p style="margin-top: 10px; font-size: 18px; color: #333;">Regular</p>
-                </div>
+                    <img src="{{ asset('images/cara-regular.png') }}" alt="Regular" wire:click="seleccionarPuntuacion(2)" 
+                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
+                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Regular</p>
+                </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-bueno.png') }}" alt="Bueno" wire:click="seleccionarPuntuacion(3)" style="cursor: pointer; width: 150px; height: 150px;">
-                    <p style="margin-top: 10px; font-size: 18px; color: #333;">Bueno</p>
-                </div>
+                    <img src="{{ asset('images/cara-bueno.png') }}" alt="Bueno" wire:click="seleccionarPuntuacion(3)" 
+                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
+                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Bueno</p>
+                </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-muy-bueno.png') }}" alt="Muy Bueno" wire:click="seleccionarPuntuacion(4)" style="cursor: pointer; width: 150px; height: 150px;">
-                    <p style="margin-top: 10px; font-size: 18px; color: #333;">Muy Bueno</p>
-                </div>
+                    <img src="{{ asset('images/cara-muy-bueno.png') }}" alt="Muy Bueno" wire:click="seleccionarPuntuacion(4)" 
+                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
+                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Muy Bueno</p>
+                </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-excelente.png') }}" alt="Excelente" wire:click="seleccionarPuntuacion(5)" style="cursor: pointer; width: 150px; height: 150px;">
-                    <p style="margin-top: 10px; font-size: 18px; color: #333;">Excelente</p>
-                </div>
+                    <img src="{{ asset('images/cara-excelente.png') }}" alt="Excelente" wire:click="seleccionarPuntuacion(5)" 
+                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
+                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Excelente</p>
+                </div><br>
             </div>
             
             <div style="text-align: center; margin-top: 20px;" id="contador-container" hidden>
-                <h2 id="contador" style="font-size: 24px; color: #ff0000;">3.0</h2>
-                <p style="font-size: 18px; color: #333;">Tiempo restante antes de que la calificación se asigne automáticamente.</p>
+                <h2 id="contador" style="font-size: 4.5vw; color: #ff0000;">3.0</h2>
+                <p style="font-size: 3.5vw; color: #333;">Tiempo restante antes de que la calificación se asigne automáticamente.</p>
             </div>
         </div>
     @endif
