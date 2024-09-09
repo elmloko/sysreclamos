@@ -64,13 +64,16 @@ class ReclamosController extends Controller
         // Procesar y guardar los archivos subidos en la tabla `data`
         if ($request->hasFile('docs')) {
             foreach ($request->file('docs') as $file) {
-                // Guarda cada archivo en la carpeta 'uploads' y obtiene la ruta
-                $path = $file->store('uploads', 'public');
-
+                // Obtén el nombre original del archivo
+                $originalName = $file->getClientOriginalName();
+                
+                // Guarda el archivo en la carpeta 'uploads' con el nombre original
+                $path = $file->storeAs('uploads', $originalName, 'public');
+    
                 // Crea una entrada en la tabla `data` para cada archivo
                 Data::create([
-                    'docs' => $path, // Guarda la ruta del archivo como una cadena, no como un array
-                    'follow_id' => $follow->id, // Relaciona el archivo con el claim
+                    'docs' => $path, // Guarda la ruta del archivo como una cadena
+                    'follow_id' => $follow->id, // Relaciona el archivo con el follow
                 ]);
             }
         }
