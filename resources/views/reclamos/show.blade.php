@@ -96,30 +96,34 @@
                                     <div class="col-md-6">
                                         <p><strong>Ficha:</strong> {{ $follow->ficha }}</p>
                                         <p><strong>Seguimiento:</strong> {{ $follow->seguimiento }}</p>
+                                        <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Documentos:</strong></p>
+                                        
                                         @php
                                             // Filtrar los documentos asociados solo a este seguimiento (follow_id)
                                             $documents = \App\Models\Data::where('follow_id', $follow->id)->get();
                                         @endphp
 
                                         @if ($documents->count() > 0)
+                                            <p><strong>Documentos:</strong></p>
                                             <ul>
                                                 @foreach ($documents as $document)
                                                     <li>
-                                                        <a href="{{ route('documents.download', basename($document->docs)) }}"
-                                                            class="btn btn-primary">
-                                                            Descargar archivo
+                                                        <!-- Mostrar el nombre del archivo como enlace -->
+                                                        <a
+                                                            href="{{ route('documents.download', basename($document->docs)) }}">
+                                                            {{ basename($document->docs) }}
                                                         </a>
                                                     </li>
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <p>No hay documentos asociados a este seguimiento.</p>
+                                            <p><strong>Documentos:</strong> No hay documentos asociados a este seguimiento.
+                                            </p>
                                         @endif
 
-                                        <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
+                                        
                                     </div>
                                 </div>
                                 <hr>
