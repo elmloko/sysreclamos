@@ -26,7 +26,10 @@ class ReclamosController extends Controller
     public function getShow($id)
     {
         $claim = Claim::findOrFail($id);
+    
+        // Obtener los seguimientos (follows) como una colección
         $follows = $claim->follows; // Asegúrate de que la relación 'follows' esté bien definida en el modelo Claim
+    
         return view('reclamos.show', compact('claim', 'follows'));
     }
 
@@ -67,7 +70,7 @@ class ReclamosController extends Controller
                 // Crea una entrada en la tabla `data` para cada archivo
                 Data::create([
                     'docs' => $path, // Guarda la ruta del archivo como una cadena, no como un array
-                    'claims_id' => $request->claims_id, // Relaciona el archivo con el claim
+                    'follow_id' => $follow->id, // Relaciona el archivo con el claim
                 ]);
             }
         }

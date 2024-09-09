@@ -106,21 +106,16 @@ CREATE TABLE IF NOT EXISTS `data` (
   `docs` longtext DEFAULT NULL,
   `claims_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.data: ~0 rows (aproximadamente)
-
--- Volcando estructura para tabla sysreclamos.docs
-CREATE TABLE IF NOT EXISTS `docs` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `follow_id` int(11) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `path` longtext DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Volcando datos para la tabla sysreclamos.docs: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.data: ~4 rows (aproximadamente)
+INSERT INTO `data` (`id`, `docs`, `claims_id`, `created_at`, `updated_at`) VALUES
+	(1, 'uploads/BdzniVDgvTd7Oo4RUPaaCptfZkS0anYTd6q9XK2d.jpg', 38, '2024-09-09 05:40:11', '2024-09-09 05:40:11'),
+	(2, 'uploads/z3AKDQCMSYgTowxP5Z7MAxmwpGUi8effd3GdDjyl.jpg', 38, '2024-09-09 05:40:11', '2024-09-09 05:40:11'),
+	(3, 'uploads/CriF6o9irEXgLRXrR1L9vwKrTXxh3g5SPC346uxl.jpg', 38, '2024-09-09 05:43:25', '2024-09-09 05:43:25'),
+	(4, 'uploads/pgkIaLvQ4Ic9vE7z1bn3WQG6YJETbKkQy1vRPw2Y.docx', 38, '2024-09-09 05:44:18', '2024-09-09 05:44:18');
 
 -- Volcando estructura para tabla sysreclamos.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -149,9 +144,9 @@ CREATE TABLE IF NOT EXISTS `follow` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.follow: ~10 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.follow: ~11 rows (aproximadamente)
 INSERT INTO `follow` (`id`, `claims_id`, `ficha`, `seguimiento`, `acciones`, `docs`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 10, 1, 'essada', '0dsadsa', NULL, NULL, NULL, NULL),
 	(2, 10, 2, 'essada', '0dsadsa', NULL, NULL, NULL, NULL),
@@ -162,7 +157,12 @@ INSERT INTO `follow` (`id`, `claims_id`, `ficha`, `seguimiento`, `acciones`, `do
 	(7, 10, 5, 'dsadsa', 'dadsad', NULL, '2024-08-23 01:24:12', '2024-08-23 01:24:12', NULL),
 	(8, 10, 6, 'dsadsadas', 'sadsadadas', NULL, '2024-08-23 01:54:49', '2024-08-23 01:54:49', NULL),
 	(9, 10, 7, 'adsad', 'dsd', NULL, '2024-08-23 02:07:59', '2024-08-23 02:07:59', NULL),
-	(10, 38, 1, 'Se comunico con el cliente', 'Comunicarme con el pais de destino', NULL, '2024-08-29 02:31:33', '2024-08-29 02:31:33', NULL);
+	(10, 38, 1, 'Se comunico con el cliente', 'Comunicarme con el pais de destino', NULL, '2024-08-29 02:31:33', '2024-08-29 02:31:33', NULL),
+	(11, 38, 2, 'xxxxxxxxx', 'xxxxxxxxxxx', NULL, '2024-09-09 05:39:36', '2024-09-09 05:39:36', NULL),
+	(12, 38, 3, 'xxxxxxxxx', 'xxxxxxxxxxx', NULL, '2024-09-09 05:40:11', '2024-09-09 05:40:11', NULL),
+	(13, 38, 4, 'sdsd', 'sadas', NULL, '2024-09-09 05:42:17', '2024-09-09 05:42:17', NULL),
+	(14, 38, 5, 's', 's', NULL, '2024-09-09 05:43:25', '2024-09-09 05:43:25', NULL),
+	(15, 38, 6, 's', 's', NULL, '2024-09-09 05:44:18', '2024-09-09 05:44:18', NULL);
 
 -- Volcando estructura para tabla sysreclamos.information
 CREATE TABLE IF NOT EXISTS `information` (
@@ -339,9 +339,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=12893 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13061 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~532 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~586 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(7100, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
 	(7104, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 2180.00, NULL),
@@ -866,7 +866,7 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(12853, 1725843540, 60, 'user_request', '1', 'count', 6.00, NULL),
 	(12854, 1725843240, 360, 'user_request', '1', 'count', 6.00, NULL),
 	(12855, 1725842880, 1440, 'user_request', '1', 'count', 6.00, NULL),
-	(12856, 1725837120, 10080, 'user_request', '1', 'count', 6.00, NULL),
+	(12856, 1725837120, 10080, 'user_request', '1', 'count', 24.00, NULL),
 	(12857, 1725843540, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(12858, 1725843240, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(12859, 1725842880, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
@@ -874,7 +874,83 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(12865, 1725843540, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
 	(12866, 1725843240, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
 	(12867, 1725842880, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
-	(12868, 1725837120, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL);
+	(12868, 1725837120, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 12.00, NULL),
+	(12893, 1725845640, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(12894, 1725845400, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(12895, 1725844320, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(12896, 1725845640, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12897, 1725845400, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12898, 1725844320, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12901, 1725845640, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12902, 1725845400, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 2.00, NULL),
+	(12903, 1725844320, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 2.00, NULL),
+	(12904, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 3.00, NULL),
+	(12909, 1725845640, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845679.00, NULL),
+	(12910, 1725845400, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845759.00, NULL),
+	(12911, 1725844320, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845759.00, NULL),
+	(12912, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845775.00, NULL),
+	(12913, 1725845700, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(12914, 1725845700, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12921, 1725845700, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845759.00, NULL),
+	(12925, 1725845760, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(12926, 1725845760, 360, 'user_request', '1', 'count', 7.00, NULL),
+	(12927, 1725845760, 1440, 'user_request', '1', 'count', 15.00, NULL),
+	(12928, 1725845760, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(12929, 1725845760, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(12930, 1725845760, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(12941, 1725845760, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12942, 1725845760, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12943, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12949, 1725845760, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845775.00, NULL),
+	(12950, 1725845760, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845775.00, NULL),
+	(12951, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845775.00, NULL),
+	(12953, 1725845940, 60, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'count', 1.00, NULL),
+	(12954, 1725845760, 360, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'count', 1.00, NULL),
+	(12955, 1725845760, 1440, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'count', 1.00, NULL),
+	(12956, 1725837120, 10080, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'count', 1.00, NULL),
+	(12957, 1725845940, 60, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(12958, 1725845760, 360, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(12959, 1725845760, 1440, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(12960, 1725837120, 10080, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(12961, 1725845940, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(12962, 1725845940, 60, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12963, 1725845760, 360, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12964, 1725845760, 1440, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12965, 1725837120, 10080, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'count', 1.00, NULL),
+	(12969, 1725845940, 60, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'max', 1024.00, NULL),
+	(12970, 1725845760, 360, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'max', 1024.00, NULL),
+	(12971, 1725845760, 1440, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'max', 1024.00, NULL),
+	(12972, 1725837120, 10080, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 'max', 1024.00, NULL),
+	(12973, 1725845940, 60, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845946.00, NULL),
+	(12974, 1725845760, 360, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845946.00, NULL),
+	(12975, 1725845760, 1440, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845946.00, NULL),
+	(12976, 1725837120, 10080, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 'max', 1725845946.00, NULL),
+	(12977, 1725845940, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'count', 1.00, NULL),
+	(12978, 1725845760, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'count', 1.00, NULL),
+	(12979, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'count', 1.00, NULL),
+	(12980, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'count', 1.00, NULL),
+	(12985, 1725845940, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'max', 1725845976.00, NULL),
+	(12986, 1725845760, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'max', 1725845976.00, NULL),
+	(12987, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'max', 1725845976.00, NULL),
+	(12988, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 'max', 1725845976.00, NULL),
+	(12989, 1725846000, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(12993, 1725846000, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(13001, 1725846120, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(13002, 1725846120, 360, 'user_request', '1', 'count', 8.00, NULL),
+	(13003, 1725846120, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(13004, 1725846120, 360, 'cache_hit', 'spatie.permission.cache', 'count', 5.00, NULL),
+	(13009, 1725846120, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'count', 1.00, NULL),
+	(13010, 1725846120, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'count', 1.00, NULL),
+	(13011, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'count', 1.00, NULL),
+	(13012, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'count', 1.00, NULL),
+	(13017, 1725846120, 60, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'max', 1725846137.00, NULL),
+	(13018, 1725846120, 360, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'max', 1725846137.00, NULL),
+	(13019, 1725845760, 1440, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'max', 1725846137.00, NULL),
+	(13020, 1725837120, 10080, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 'max', 1725846137.00, NULL),
+	(13021, 1725846180, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(13022, 1725846180, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(13041, 1725846240, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(13042, 1725846240, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -889,9 +965,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=2969 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3004 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~1,376 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~1,394 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -2268,7 +2344,42 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(2965, 1725843590, 'user_request', '1', NULL),
 	(2966, 1725843590, 'cache_hit', 'spatie.permission.cache', NULL),
 	(2967, 1725843593, 'user_request', '1', NULL),
-	(2968, 1725843593, 'cache_hit', 'spatie.permission.cache', NULL);
+	(2968, 1725843593, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2969, 1725845662, 'user_request', '1', NULL),
+	(2970, 1725845663, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2971, 1725845679, 'user_request', '1', NULL),
+	(2972, 1725845679, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 1725845679),
+	(2973, 1725845759, 'user_request', '1', NULL),
+	(2974, 1725845759, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 1725845759),
+	(2975, 1725845762, 'user_request', '1', NULL),
+	(2976, 1725845762, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2977, 1725845762, 'user_request', '1', NULL),
+	(2978, 1725845762, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2979, 1725845774, 'user_request', '1', NULL),
+	(2980, 1725845775, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 1725845775),
+	(2981, 1725845946, 'slow_request', '["POST","\\/seguimiento\\/store","App\\\\Http\\\\Controllers\\\\ReclamosController@storeSeguimiento"]', 1024),
+	(2982, 1725845946, 'slow_user_request', '1', NULL),
+	(2983, 1725845946, 'user_request', '1', NULL),
+	(2984, 1725845946, 'exception', '["Error","app\\\\Http\\\\Controllers\\\\ReclamosController.php:58"]', 1725845946),
+	(2985, 1725845976, 'user_request', '1', NULL),
+	(2986, 1725845976, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:68"]', 1725845976),
+	(2987, 1725846011, 'user_request', '1', NULL),
+	(2988, 1725846011, 'user_request', '1', NULL),
+	(2989, 1725846011, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2990, 1725846128, 'user_request', '1', NULL),
+	(2991, 1725846128, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2992, 1725846137, 'user_request', '1', NULL),
+	(2993, 1725846137, 'exception', '["Illuminate\\\\Database\\\\QueryException","app\\\\Http\\\\Controllers\\\\ReclamosController.php:74"]', 1725846137),
+	(2994, 1725846198, 'user_request', '1', NULL),
+	(2995, 1725846198, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2996, 1725846205, 'user_request', '1', NULL),
+	(2997, 1725846205, 'user_request', '1', NULL),
+	(2998, 1725846206, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2999, 1725846249, 'user_request', '1', NULL),
+	(3000, 1725846249, 'cache_hit', 'spatie.permission.cache', NULL),
+	(3001, 1725846258, 'user_request', '1', NULL),
+	(3002, 1725846258, 'user_request', '1', NULL),
+	(3003, 1725846258, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (

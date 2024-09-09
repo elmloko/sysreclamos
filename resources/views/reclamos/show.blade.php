@@ -98,7 +98,26 @@
                                         <p><strong>Seguimiento:</strong> {{ $follow->seguimiento }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Documentos:</strong> {{ $follow->docs }}</p>
+                                        <p><strong>Documentos:</strong></p>
+                                        @php
+                                            // Filtrar los documentos asociados solo a este seguimiento (follow_id)
+                                            $documents = \App\Models\Data::where('follow_id', $follow->id)->get();
+                                        @endphp
+
+                                        @if ($documents->count() > 0)
+                                            <ul>
+                                                @foreach ($documents as $document)
+                                                    <li>
+                                                        <a href="{{ asset('storage/' . $document->docs) }}" target="_blank"
+                                                            class="btn btn-primary">
+                                                            Descargar archivo
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <p>No hay documentos asociados a este seguimiento.</p>
+                                        @endif
                                         <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
                                     </div>
                                 </div>
@@ -111,4 +130,5 @@
         </div>
     </div>
     @include('footer')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 @stop

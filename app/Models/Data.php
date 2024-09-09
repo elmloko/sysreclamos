@@ -10,6 +10,6 @@ class Data extends Model
 
     protected $fillable = [
         'docs', // La ruta del documento
-        'claims_id', // El id del reclamo
+        'follow_id', // El id del reclamo
     ];
 }
