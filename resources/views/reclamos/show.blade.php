@@ -108,7 +108,7 @@
                                             <ul>
                                                 @foreach ($documents as $document)
                                                     <li>
-                                                        <a href="{{ asset('storage/' . $document->docs) }}" target="_blank"
+                                                        <a href="{{ route('documents.download', basename($document->docs)) }}"
                                                             class="btn btn-primary">
                                                             Descargar archivo
                                                         </a>
@@ -118,6 +118,7 @@
                                         @else
                                             <p>No hay documentos asociados a este seguimiento.</p>
                                         @endif
+
                                         <p><strong>Acciones:</strong> {{ $follow->acciones }}</p>
                                     </div>
                                 </div>

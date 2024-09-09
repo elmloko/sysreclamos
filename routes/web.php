@@ -9,6 +9,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\SugerenciaController;
 use App\Http\Controllers\ReclamosController;
 use App\Http\Controllers\QuejasController;
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowClaim;
 use App\Models\Information;
@@ -91,6 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/seguimiento/store', [ReclamosController::class, 'storeSeguimiento'])->name('seguimiento.store');
     Route::get('/quejas/{id}/show', [QuejasController::class, 'getShow'])->name('quejas.show');
     Route::get('/sugerencias', [SugerenciaController::class, 'getSugerencia']);
+    Route::get('/download/{file}', [DocumentController::class, 'download'])->name('documents.download');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
