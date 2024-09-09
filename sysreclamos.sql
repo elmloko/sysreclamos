@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Versión del servidor:         10.4.32-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -99,6 +99,17 @@ INSERT INTO `complaints` (`id`, `correlativo`, `cliente`, `telf`, `ci`, `email`,
 	(37, 'QJAOP0004', 'CHISTRIAN', 758788987, 105165166, 'chris@gmail.com', 'FEO', 'MARCO', 'OPERATIVO', 'RECEPCIONADO', 4, 'G0004', '2024-09-04 23:04:14', '2024-09-04 23:26:33', NULL),
 	(38, 'QJAADM0008', 'GUSTAVO', 757789998, 105165166, 'prueba@correos.gob.bo', 'VAOAO', 'GUSTAVO', 'ADMINISTRATIVO', 'RECEPCIONADO', 4, 'F0008', '2024-09-04 23:12:01', '2024-09-04 23:26:26', NULL),
 	(39, 'QJAOP0005', 'SADSADSA', 2432423, 7920706, 'caleb.conde@correos.gob.bo', '23423', 'WQEW', 'OPERATIVO', 'RECEPCIONADO', NULL, 'G0005', '2024-09-04 23:50:14', '2024-09-04 23:50:14', NULL);
+
+-- Volcando estructura para tabla sysreclamos.data
+CREATE TABLE IF NOT EXISTS `data` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `docs` longtext DEFAULT NULL,
+  `claims_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla sysreclamos.data: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla sysreclamos.docs
 CREATE TABLE IF NOT EXISTS `docs` (
@@ -283,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.permissions: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.permissions: ~7 rows (aproximadamente)
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'dashboard', 'web', '2024-09-02 19:55:29', '2024-09-02 19:55:29'),
 	(4, 'sugerencias', 'web', '2024-09-02 19:56:40', '2024-09-02 19:56:40'),
@@ -328,9 +339,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=12853 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12893 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~508 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~532 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(7100, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
 	(7104, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 2180.00, NULL),
@@ -851,7 +862,19 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(12841, 1725564960, 10080, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'max', 1003.00, NULL),
 	(12845, 1725570840, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(12846, 1725570720, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(12847, 1725570720, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(12847, 1725570720, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12853, 1725843540, 60, 'user_request', '1', 'count', 6.00, NULL),
+	(12854, 1725843240, 360, 'user_request', '1', 'count', 6.00, NULL),
+	(12855, 1725842880, 1440, 'user_request', '1', 'count', 6.00, NULL),
+	(12856, 1725837120, 10080, 'user_request', '1', 'count', 6.00, NULL),
+	(12857, 1725843540, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12858, 1725843240, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12859, 1725842880, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12860, 1725837120, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(12865, 1725843540, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(12866, 1725843240, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(12867, 1725842880, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(12868, 1725837120, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -866,9 +889,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=2959 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2969 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~1.366 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~1,376 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -2235,7 +2258,17 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(2955, 1725570840, 'user_request', '1', NULL),
 	(2956, 1725570841, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 1003),
 	(2957, 1725570841, 'user_request', '1', NULL),
-	(2958, 1725570841, 'cache_hit', 'spatie.permission.cache', NULL);
+	(2958, 1725570841, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2959, 1725843553, 'user_request', '1', NULL),
+	(2960, 1725843554, 'user_request', '1', NULL),
+	(2961, 1725843554, 'cache_miss', 'spatie.permission.cache', NULL),
+	(2962, 1725843586, 'user_request', '1', NULL),
+	(2963, 1725843587, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2964, 1725843590, 'user_request', '1', NULL),
+	(2965, 1725843590, 'user_request', '1', NULL),
+	(2966, 1725843590, 'cache_hit', 'spatie.permission.cache', NULL),
+	(2967, 1725843593, 'user_request', '1', NULL),
+	(2968, 1725843593, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -2281,7 +2314,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.role_has_permissions: ~22 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.role_has_permissions: ~21 rows (aproximadamente)
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(1, 1),
 	(1, 2),

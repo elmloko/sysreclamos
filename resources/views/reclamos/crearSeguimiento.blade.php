@@ -21,7 +21,7 @@
                                 <label for="seguimiento">Seguimiento del caso</label>
                                 <textarea name="seguimiento" class="form-control" rows="4" maxlength="255"></textarea>
                             </div>
-                            
+                        
                             <div class="form-group">
                                 <label for="acciones">Acciones tomadas hasta el tiempo</label>
                                 <textarea name="acciones" class="form-control" rows="4" maxlength="255"></textarea>
@@ -32,7 +32,7 @@
                                 <input type="file" name="docs[]" class="form-control" multiple>
                             </div>
                             <button type="submit" class="btn btn-primary">Guardar Seguimiento</button>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>
