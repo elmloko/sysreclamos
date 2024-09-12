@@ -34,7 +34,7 @@
                     <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Bueno</p>
                 </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-muy-bueno (2).png') }}" alt="Muy Bueno" wire:click="seleccionarPuntuacion(4)" 
+                    <img src="{{ asset('images/cara-muy-bueno.png') }}" alt="Muy Bueno" wire:click="seleccionarPuntuacion(4)" 
                          style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
                     <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Muy Bueno</p>
                 </div><br>
