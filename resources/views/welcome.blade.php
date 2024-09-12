@@ -18,6 +18,7 @@ URI     : https://colorlib.com
     <meta name="keywords" content="sysReclamos | AGBC">
 
     <!-- Font -->
+    <link rel="icon" type="image/png" href="vendor/adminlte/dist/img/AGBClogo.png" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
 
