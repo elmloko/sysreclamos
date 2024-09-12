@@ -22,7 +22,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left d-flex align-items-center">
-                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..."
+                                    class="form-control" style="margin-right: 10px;">
                                 <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                             </div>
                             <div class="float-right d-flex align-items-center">
@@ -46,8 +47,10 @@
                                         <th>Último Estado</th>
                                         <th>Descripción</th>
                                         <th>Fecha del Último Evento</th>
+                                        @hasrole('SuperAdmin|Administrador')
+                                            <th>Calificacion</th>
+                                        @endhasrole
                                         <th>Estado</th>
-                                        <th>Feedback</th>
                                         <th>Creado</th>
                                     </tr>
                                 </thead>
@@ -65,9 +68,11 @@
                                             <td>{{ $record->last_status }}</td>
                                             <td>{{ $record->last_description }}</td>
                                             <td>{{ $record->last_date }}</td>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $record->feedback ?? 0 }}</td>
+                                            @endhasrole
                                             <td>{{ $record->estado }}</td>
-                                            <td>{{ $record->feedback }}</td>
-                                            <td>{{ $record->create_at }}</td>
+                                            <td>{{ $record->created_at }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

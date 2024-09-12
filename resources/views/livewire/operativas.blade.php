@@ -54,6 +54,9 @@
                                         <th>Email</th>
                                         <th>Funcionario AGBC</th>
                                         <th>Tipo</th>
+                                        @hasrole('SuperAdmin|Administrador')
+                                            <th>Calificacion</th>
+                                        @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
                                         <th>Acciones</th>
@@ -71,6 +74,9 @@
                                             <td>{{ $complaint->email }}</td>
                                             <td>{{ $complaint->funcionario }}</td>
                                             <td>{{ $complaint->tipo }}</td>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $complaint->feedback ?? 0 }}</td>
+                                            @endhasrole
                                             <td>{{ $complaint->estado }}</td>
                                             <td>{{ $complaint->created_at }}</td>
                                             <td>

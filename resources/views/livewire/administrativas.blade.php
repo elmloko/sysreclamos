@@ -22,7 +22,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-left d-flex align-items-center">
-                                <input type="text" wire:model="searchTerm" placeholder="Buscar..." class="form-control" style="margin-right: 10px;">
+                                <input type="text" wire:model="searchTerm" placeholder="Buscar..."
+                                    class="form-control" style="margin-right: 10px;">
                                 <button type="button" class="btn btn-primary" wire:click="$refresh">Buscar</button>
                             </div>
                             <div class="float-right d-flex align-items-center">
@@ -54,6 +55,9 @@
                                         <th>Email</th>
                                         <th>Funcionario AGBC</th>
                                         <th>Tipo</th>
+                                        @hasrole('SuperAdmin|Administrador')
+                                            <th>Calificacion</th>
+                                        @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
                                         <th>Acciones</th>
@@ -71,6 +75,9 @@
                                             <td>{{ $complaint->email }}</td>
                                             <td>{{ $complaint->funcionario }}</td>
                                             <td>{{ $complaint->tipo }}</td>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $complaint->feedback ?? 0 }}</td>
+                                            @endhasrole
                                             <td>{{ $complaint->estado }}</td>
                                             <td>{{ $complaint->created_at }}</td>
                                             <td>

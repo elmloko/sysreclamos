@@ -62,6 +62,9 @@
                                         <th>Fecha de Envío</th>
                                         <th>Contenido</th>
                                         <th>Valor</th>
+                                        @hasrole('SuperAdmin|Administrador')
+                                            <th>Calificacion</th>
+                                        @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
                                     </tr>
@@ -81,6 +84,9 @@
                                             <td>{{ $claim->fecha_envio }}</td>
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $claim->feedback ?? 0 }}</td>
+                                            @endhasrole
                                             <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->created_at }}</td>
                                         </tr>
