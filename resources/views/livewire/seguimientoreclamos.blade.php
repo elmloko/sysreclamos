@@ -77,7 +77,7 @@
                                             <td>{{ $claim->fecha_envio }}</td>
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
-                                            <td>{{ $claim->estado }}</td>
+                                            <td>{{ $claim->estado }} - {{ $claim->tipo_reclamo }}</td>
                                             <td>
                                                 {{ \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now()) }} días
                                             </td>
