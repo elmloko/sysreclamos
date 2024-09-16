@@ -30,9 +30,9 @@
                                 <input type="date" wire:model="selectedDate" class="form-control">
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
                                     PDF</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#cnModal">Crear Reclamo</button>
                             </div>
-                            <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
-                                data-target="#cnModal">Crear Reclamo</button>
                         </div>
                         @if (session()->has('message'))
                             <div class="alert alert-success">
