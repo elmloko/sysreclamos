@@ -273,13 +273,13 @@ class Dashboard extends Component
         $this->validate([
             'remitente' => 'required|string|max:255',
             'telf_remitente' => 'required|numeric',
-            'email_r' => 'required|email|max:255',
+            'email_r' => 'nullable|email|max:255',
             'origen' => 'required|string|max:255',
             'destinatario' => 'required|string|max:255',
-            'telf_destinatario' => 'required|numeric',
-            'email_d' => 'required|email|max:255',
+            'telf_destinatario' => 'nullable|numeric',
+            'email_d' => 'nullable|email|max:255',
             'direccion_d' => 'required|string|max:255',
-            'codigo_postal' => 'required|numeric',
+            'codigo_postal' => 'nullable|numeric',
             'destino' => 'required|string|max:255',
             'codigo' => 'required|string|max:255',
             'fecha_envio' => 'required|date',
@@ -287,10 +287,10 @@ class Dashboard extends Component
             'reclamo' => 'required|string|max:255',
             'valor' => 'required|numeric',
         ]);
-
+    
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
         $lastRecord = Claim::orderBy('id', 'desc')->first();
-
+    
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica (suponiendo un prefijo de 5 caracteres)
@@ -298,11 +298,11 @@ class Dashboard extends Component
         } else {
             $newCorrelativo = '0001';
         }
-
+    
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'RCL' . $newCorrelativo;
         $publicoCorrelativo = 'P' . $newCorrelativo;
-
+    
         $claim = Claim::create([
             'public' => $publicoCorrelativo,
             'remitente' => strtoupper($this->remitente),
@@ -315,7 +315,7 @@ class Dashboard extends Component
             'direccion_d' => strtoupper($this->direccion_d),
             'codigo_postal' => $this->codigo_postal,
             'destino' => strtoupper($this->destino),
-            'codigo' => $this->codigo,
+            'codigo' => strtoupper($this->codigo),
             'fecha_envio' => Carbon::parse($this->fecha_envio),
             'contenido' => strtoupper($this->contenido),
             'reclamo' => strtoupper($this->reclamo),
@@ -324,34 +324,34 @@ class Dashboard extends Component
             'estado' => 'INFORMACIONES',
             'created_at' => Carbon::now(),
         ]);
-
+    
         // Almacenar el ID del registro recién creado
         $this->createdId = $claim->public;
-
-        session()->flash('message', 'Registro CN08 registrada exitosamente.');
-
+    
+        session()->flash('message', 'Registro CN08 registrado exitosamente.');
+    
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
-
+    
         // Resetear los campos del formulario
         $this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
-
+    
         $pdf = PDF::loadView('livewire.pdf-form', compact('claim'));
-
+    
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'Formulario Reclamo.pdf');
-    }
+    }    
 
     public function saveqa()
     {
         $this->validate([
             'cliente' => 'required|string|max:255',
             'telf' => 'required|numeric',
-            'ci' => 'required|numeric',
-            'email' => 'required|email|max:255',
+            'ci' => 'numeric',
+            'email' => 'email|max:255',
             'queja' => 'required|string|max:255',
             'funcionario' => 'required|string|max:255',
         ]);
@@ -411,8 +411,8 @@ class Dashboard extends Component
         $this->validate([
             'cliente' => 'required|string|max:255',
             'telf' => 'required|numeric',
-            'ci' => 'required|numeric',
-            'email' => 'required|email|max:255',
+            'ci' => 'numeric',
+            'email' => 'email|max:255',
             'queja' => 'required|string',
             'funcionario' => 'required|string|max:255',
         ]);

@@ -153,95 +153,112 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="llamadaModalLabel">Registro de Llamadas</h5>
+                    <h5 class="modal-title" id="llamadaModalLabel">REGISTRO DE LLAMADAS</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="llamadaForm">
                         <div class="form-group">
-                            <label for="codigo">Código de consulta</label>
-                            <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                            <label for="codigo">CÓDIGO DE CONSULTA</label>
+                            <input type="text" class="form-control" id="codigo" wire:model="codigo"
+                                style="text-transform: uppercase;" required>
+                            <div class="invalid-feedback">Por favor, ingresa el código de consulta.</div>
                         </div>
                         <div class="form-group">
-                            <label for="destinatario">Nombre completo del cliente</label>
-                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
+                            <label for="destinatario">NOMBRE COMPLETO DEL CLIENTE</label>
+                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario"
+                                style="text-transform: uppercase;" required>
+                            <div class="invalid-feedback">Por favor, ingresa el nombre completo del cliente.</div>
                         </div>
                         <div class="form-group">
-                            <label for="telefono">Teléfono</label>
+                            <label for="telefono">TELÉFONO</label>
                             <input type="number" class="form-control" id="telefono" wire:model="telefono"
-                                pattern="\d*" maxlength="8">
+                                pattern="\d*" maxlength="8" required>
+                            <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.</div>
                         </div>
                         <div class="form-group">
-                            <label for="last_description">Descripción de la llamada</label>
-                            <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
+                            <label for="last_description">DESCRIPCIÓN DE LA LLAMADA</label>
+                            <textarea class="form-control" id="last_description" wire:model="last_description"
+                                style="text-transform: uppercase;" required></textarea>
+                            <div class="invalid-feedback">Por favor, ingresa la descripción de la llamada.</div>
                         </div>
                         <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <input type="text" class="form-control" id="estado" value="LLAMADA" readonly>
+                            <label for="estado">ESTADO</label>
+                            <input type="text" class="form-control" id="estado" value="LLAMADA" readonly
+                                style="text-transform: uppercase;">
                         </div>
                         <div class="form-group">
-                            <label for="fecha">Fecha</label>
+                            <label for="fecha">FECHA</label>
                             <input type="text" class="form-control" id="fecha"
-                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly
+                                style="text-transform: uppercase;">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveLlamada">
-                        Guardar Registro
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormularioLlamada()">GUARDAR
+                        REGISTRO</button>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Modal Registro Llamadas -->
     <div class="modal fade" id="sacModal" tabindex="-1" aria-labelledby="sacModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="sacModalLabel">Registro de atencion al usuario (Manual)</h5>
+                    <h5 class="modal-title" id="sacModalLabel">REGISTRO DE ATENCIÓN AL USUARIO (MANUAL)</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="sacForm">
                         <div class="form-group">
-                            <label for="codigo">Código</label>
-                            <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                            <label for="codigo">CÓDIGO</label>
+                            <input type="text" class="form-control" id="codigo" wire:model="codigo"
+                                style="text-transform: uppercase;" required>
+                            <div class="invalid-feedback">Por favor, ingresa un código.</div>
                         </div>
                         <div class="form-group">
-                            <label for="destinatario">Nombre completo del cliente</label>
-                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario">
+                            <label for="destinatario">NOMBRE COMPLETO DEL CLIENTE</label>
+                            <input type="text" class="form-control" id="destinatario" wire:model="destinatario"
+                                style="text-transform: uppercase;" required>
+                            <div class="invalid-feedback">Por favor, ingresa el nombre completo del cliente.</div>
                         </div>
                         <div class="form-group">
-                            <label for="telefono">Teléfono</label>
+                            <label for="telefono">TELÉFONO</label>
                             <input type="number" class="form-control" id="telefono" wire:model="telefono"
-                                pattern="\d*" maxlength="8">
+                                pattern="\d*" maxlength="8" required>
+                            <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.</div>
                         </div>
                         <div class="form-group">
-                            <label for="last_description">Descripción de la Consulta</label>
-                            <textarea class="form-control" id="last_description" wire:model="last_description"></textarea>
+                            <label for="last_description">DESCRIPCIÓN DE LA CONSULTA</label>
+                            <textarea class="form-control" id="last_description" wire:model="last_description"
+                                style="text-transform: uppercase;" required></textarea>
+                            <div class="invalid-feedback">Por favor, ingresa la descripción de la consulta.</div>
                         </div>
                         <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <input type="text" class="form-control" id="estado" value="SAC MANUAL" readonly>
+                            <label for="estado">ESTADO</label>
+                            <input type="text" class="form-control" id="estado" value="SAC MANUAL" readonly
+                                style="text-transform: uppercase;">
                         </div>
                         <div class="form-group">
-                            <label for="fecha">Fecha</label>
+                            <label for="fecha">FECHA</label>
                             <input type="text" class="form-control" id="fecha"
-                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
+                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly
+                                style="text-transform: uppercase;">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="savesac">
-                        Guardar Registro
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormulario()">GUARDAR
+                        REGISTRO</button>
                 </div>
             </div>
         </div>
@@ -249,111 +266,136 @@
 
     <!-- Modal Registro CN08 -->
     <div class="modal fade" id="cnModal" tabindex="-1" aria-labelledby="cnModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+        <div class="modal-dialog modal-xl"> <!-- Se ajusta el tamaño del modal -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cnModalLabel">Registro de reclamo - Formulario Directo</h5>
+                    <h5 class="modal-title" id="cnModalLabel">REGISTRO DE RECLAMO - FORMULARIO DIRECTO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="cnForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="remitente">Remitente</label>
-                                    <input type="text" class="form-control" id="remitente"
-                                        wire:model="remitente">
+                                    <label for="remitente">REMITENTE</label>
+                                    <input type="text" class="form-control" id="remitente" wire:model="remitente"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del remitente.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telf_remitente">Teléfono del Remitente</label>
-                                    <input type="number" class="form-control" id="telf_remitente"
-                                        wire:model="telf_remitente">
+                                    <label for="telf_remitente">TELÉFONO DEL REMITENTE</label>
+                                    <input type="text" class="form-control" id="telf_remitente"
+                                        wire:model="telf_remitente" maxlength="15" required>
+                                    <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email_r">Email del Remitente</label>
+                                    <label for="email_r">EMAIL DEL REMITENTE</label>
                                     <input type="email" class="form-control" id="email_r" wire:model="email_r">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="origen">Origen</label>
-                                    <input type="text" class="form-control" id="origen" wire:model="origen">
+                                    <label for="origen">ORIGEN</label>
+                                    <input type="text" class="form-control" id="origen" wire:model="origen"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el origen.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contenido">Contenido Paquete</label>
-                                    <input type="text" class="form-control" id="contenido"
-                                        wire:model="contenido">
+                                    <label for="contenido">CONTENIDO PAQUETE</label>
+                                    <input type="text" class="form-control" id="contenido" wire:model="contenido"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el contenido del paquete.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="valor">Valor</label>
+                                    <label for="valor">VALOR</label>
                                     <input type="number" step="0.01" class="form-control" id="valor"
-                                        wire:model="valor">
+                                        wire:model="valor" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el valor del paquete.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="fecha_envio">Fecha de Envío</label>
+                                    <label for="fecha_envio">FECHA DE ENVÍO</label>
                                     <input type="date" class="form-control" id="fecha_envio"
-                                        wire:model="fecha_envio">
+                                        wire:model="fecha_envio" required>
+                                    <div class="invalid-feedback">Por favor, selecciona la fecha de envío.</div>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="destinatario">Destinatario</label>
+                                    <label for="destinatario">DESTINATARIO</label>
                                     <input type="text" class="form-control" id="destinatario"
-                                        wire:model="destinatario">
+                                        wire:model="destinatario" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del destinatario.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telf_destinatario">Teléfono del Destinatario</label>
-                                    <input type="number" class="form-control" id="telf_destinatario"
-                                        wire:model="telf_destinatario">
+                                    <label for="telf_destinatario">TELÉFONO DEL DESTINATARIO</label>
+                                    <input type="text" class="form-control" id="telf_destinatario"
+                                        wire:model="telf_destinatario" maxlength="15">
+                                    <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email_d">Email del Destinatario</label>
+                                    <label for="email_d">EMAIL DEL DESTINATARIO</label>
                                     <input type="email" class="form-control" id="email_d" wire:model="email_d">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="direccion_d">Dirección del Destinatario</label>
+                                    <label for="destino">DESTINO</label>
+                                    <input type="text" class="form-control" id="destino" wire:model="destino"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el destino.</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="direccion_d">DIRECCIÓN DEL DESTINATARIO</label>
                                     <input type="text" class="form-control" id="direccion_d"
-                                        wire:model="direccion_d">
+                                        wire:model="direccion_d" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa la dirección del destinatario.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="codigo_postal">Código Postal</label>
+                                    <label for="codigo_postal">CÓDIGO POSTAL</label>
                                     <input type="number" class="form-control" id="codigo_postal"
                                         wire:model="codigo_postal">
+                                    <div class="invalid-feedback">Por favor, ingresa el código postal.</div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="destino">Destino</label>
-                                    <input type="text" class="form-control" id="destino" wire:model="destino">
-                                </div>
+
 
                                 <div class="form-group">
-                                    <label for="codigo">Código</label>
-                                    <input type="text" class="form-control" id="codigo" wire:model="codigo">
+                                    <label for="codigo">CÓDIGO</label>
+                                    <input type="text" class="form-control" id="codigo" wire:model="codigo"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el código.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="reclamo">Descripcion del Reclamo</label>
-                            <textarea class="form-control" id="reclamo" wire:model="reclamo" rows="5"></textarea>
+                            <label for="reclamo">DESCRIPCIÓN DEL RECLAMO</label>
+                            <textarea class="form-control" id="reclamo" wire:model="reclamo" rows="5"
+                                style="text-transform: uppercase;" required></textarea>
+                            <div class="invalid-feedback">Por favor, ingresa la descripción del reclamo.</div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="savecn">
-                        Guardar Registro
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormularioCN()">GUARDAR
+                        REGISTRO</button>
                 </div>
             </div>
         </div>
@@ -362,59 +404,68 @@
 
     <!-- Modal Registro Q1 -->
     <div class="modal fade" id="qaModal" tabindex="-1" aria-labelledby="qaModalLabel" aria-hidden="true">
-        <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+        <div class="modal-dialog modal-lg"> <!-- Se ajusta el tamaño del modal -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="qaModalLabel">Registro de Quejas Administrativas<br>
-                        Formulario Directo
-                    </h5>
+                    <h5 class="modal-title" id="qaModalLabel">REGISTRO DE QUEJAS ADMINISTRATIVAS<br> FORMULARIO
+                        DIRECTO</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="qaForm">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="cliente">Cliente</label>
-                                    <input type="text" class="form-control" id="cliente" wire:model="cliente">
+                                    <label for="cliente">CLIENTE</label>
+                                    <input type="text" class="form-control" id="cliente" wire:model="cliente"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del cliente.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telf">Teléfono del Cliente</label>
-                                    <input type="number" class="form-control" id="telf" wire:model="telf">
+                                    <label for="telf">TELÉFONO DEL CLIENTE</label>
+                                    <input type="number" class="form-control" id="telf" wire:model="telf"
+                                        pattern="\d*" maxlength="15" required>
+                                    <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ci">Carnet de Identidad</label>
+                                    <label for="ci">CARNET DE IDENTIDAD</label>
                                     <input type="number" class="form-control" id="ci" wire:model="ci">
+                                    <div class="invalid-feedback">Por favor, ingresa el carnet de identidad.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">Email del Cliente</label>
+                                    <label for="email">EMAIL DEL CLIENTE</label>
                                     <input type="email" class="form-control" id="email" wire:model="email">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="funcionario">Funcionario AGBC</label>
+                                    <label for="funcionario">FUNCIONARIO AGBC</label>
                                     <input type="text" class="form-control" id="funcionario"
-                                        wire:model="funcionario">
+                                        wire:model="funcionario" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del funcionario.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="queja">Descripcion de la Queja Administrativa</label>
-                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
+                                    <label for="queja">DESCRIPCIÓN DE LA QUEJA ADMINISTRATIVA</label>
+                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5" style="text-transform: uppercase;"
+                                        required></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa la descripción de la queja.</div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveqa">
-                        Guardar Registro
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormularioQA()">GUARDAR
+                        REGISTRO</button>
                 </div>
             </div>
         </div>
@@ -422,59 +473,69 @@
 
     <!-- Modal Registro Q2 -->
     <div class="modal fade" id="qoModal" tabindex="-1" aria-labelledby="qoModalLabel" aria-hidden="true">
-        <div class="modal-dialog"> <!-- Cambia el tamaño del modal a modal-lg para hacerlo más amplio -->
+        <div class="modal-dialog modal-lg"> <!-- Se ajusta el tamaño del modal -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="qoModalLabel">Registro de Quejas Operativas<br>
-                        Formulario Directo
+                    <h5 class="modal-title" id="qoModalLabel">REGISTRO DE QUEJAS OPERATIVAS<br> FORMULARIO DIRECTO
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="qoForm">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="cliente">Cliente</label>
-                                    <input type="text" class="form-control" id="cliente" wire:model="cliente">
+                                    <label for="cliente">CLIENTE</label>
+                                    <input type="text" class="form-control" id="cliente" wire:model="cliente"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del cliente.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="telf">Teléfono del Cliente</label>
-                                    <input type="number" class="form-control" id="telf" wire:model="telf">
+                                    <label for="telf">TELÉFONO DEL CLIENTE</label>
+                                    <input type="number" class="form-control" id="telf" wire:model="telf"
+                                        pattern="\d*" maxlength="15" required>
+                                    <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="ci">Carnet de Identidad</label>
+                                    <label for="ci">CARNET DE IDENTIDAD</label>
                                     <input type="number" class="form-control" id="ci" wire:model="ci">
+                                    <div class="invalid-feedback">Por favor, ingresa el carnet de identidad.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email">Email del Cliente</label>
+                                    <label for="email">EMAIL DEL CLIENTE</label>
                                     <input type="email" class="form-control" id="email" wire:model="email">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="funcionario">Funcionario AGBC</label>
+                                    <label for="funcionario">FUNCIONARIO AGBC</label>
                                     <input type="text" class="form-control" id="funcionario"
-                                        wire:model="funcionario">
+                                        wire:model="funcionario" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del funcionario.</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="queja">Descripcion de la Queja Operativa</label>
-                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5"></textarea>
+                                    <label for="queja">DESCRIPCIÓN DE LA QUEJA OPERATIVA</label>
+                                    <textarea class="form-control" id="queja" wire:model="queja" rows="5" style="text-transform: uppercase;"
+                                        required></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa la descripción de la queja
+                                        operativa.</div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveqo">
-                        Guardar Registro
-                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+                    <button type="button" class="btn btn-primary" onclick="validarFormularioQO()">GUARDAR
+                        REGISTRO</button>
                 </div>
             </div>
         </div>
@@ -518,4 +579,64 @@
             $('#calificandoModal').modal('hide');
         }, 5000);
     });
+</script>
+<script>
+    function validarFormulario() {
+        const form = document.getElementById('sacForm');
+        if (form.checkValidity() === false) {
+            // Si hay errores, mostrar las alertas de validación
+            form.classList.add('was-validated');
+        } else {
+            // Enviar el formulario si es válido
+            @this.savesac(); // Llamada a Livewire si el formulario es válido
+        }
+    }
+</script>
+<script>
+    function validarFormularioLlamada() {
+        const form = document.getElementById('llamadaForm');
+        if (form.checkValidity() === false) {
+            // Si hay errores, mostrar las alertas de validación
+            form.classList.add('was-validated');
+        } else {
+            // Enviar el formulario si es válido
+            @this.saveLlamada(); // Llamada a Livewire si el formulario es válido
+        }
+    }
+</script>
+<script>
+    function validarFormularioQA() {
+        const form = document.getElementById('qaForm');
+        if (form.checkValidity() === false) {
+            // Si hay errores, mostrar las alertas de validación
+            form.classList.add('was-validated');
+        } else {
+            // Enviar el formulario si es válido
+            @this.saveqa(); // Llamada a Livewire si el formulario es válido
+        }
+    }
+</script>
+<script>
+    function validarFormularioQO() {
+        const form = document.getElementById('qoForm');
+        if (form.checkValidity() === false) {
+            // Si hay errores, mostrar las alertas de validación
+            form.classList.add('was-validated');
+        } else {
+            // Enviar el formulario si es válido
+            @this.saveqo(); // Llamada a Livewire si el formulario es válido
+        }
+    }
+</script>
+<script>
+    function validarFormularioCN() {
+        const form = document.getElementById('cnForm');
+        if (form.checkValidity() === false) {
+            // Si hay errores, mostrar las alertas de validación
+            form.classList.add('was-validated');
+        } else {
+            // Enviar el formulario si es válido
+            @this.savecn(); // Llamada a Livewire si el formulario es válido
+        }
+    }
 </script>
