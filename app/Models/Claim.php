@@ -34,6 +34,7 @@ class Claim extends Model
         'reclamo',
         'correlativo',
         'feedback',
+        'tipo_reclamo'
     ];
 
     // Especificar los campos que son de tipo fecha

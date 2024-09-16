@@ -401,7 +401,6 @@
         </div>
     </div>
 
-
     <!-- Modal Registro Q1 -->
     <div class="modal fade" id="qaModal" tabindex="-1" aria-labelledby="qaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg"> <!-- Se ajusta el tamaño del modal -->
