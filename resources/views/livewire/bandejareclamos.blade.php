@@ -31,8 +31,8 @@
                                 <button type="button" class="btn btn-primary ml-2" wire:click="exportPdf">Exportar a
                                     PDF</button>
                                 @hasrole('SuperAdmin|Administrador|Reclamos')
-                                    <button type="button" class="btn btn-warning ml-2"
-                                        wire:click="cambiarEstadoReclamos">Cambiar a Reclamos</button>
+                                    <button type="button" class="btn btn-warning ml-2" data-toggle="modal"
+                                        data-target="#tipoReclamoModal">Cambiar a Reclamos</button>
                                 @endhasrole
                             </div>
                         </div>
@@ -103,4 +103,37 @@
             </div>
         </div>
     </section>
+    <!-- Modal para seleccionar el tipo de reclamo -->
+    <div class="modal fade" id="tipoReclamoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">TIPO DE RECLAMOS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="tipo_reclamo">Seleccione el tipo de reclamo</label>
+                        <select wire:model="tipoReclamo" class="form-control" id="tipo_reclamo">
+                            <option value="">Seleccione</option>
+                            <option value="ENTRADA">ENTRADA</option>
+                            <option value="SALIDA">SALIDA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="guardarTipoReclamo">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('modal-close', event => {
+            $('#tipoReclamoModal').modal('hide');
+        });
+    </script>
 </div>

@@ -11,21 +11,21 @@ class Bandejareclamos extends Component
 {
     use WithPagination;
 
-    public $perPage = 10; // Número de registros por página
-    public $selectedDate; // Fecha seleccionada
-    public $selectedClaims = []; // Arreglo de IDs seleccionados
-    public $selectAll = false; // Controlar el checkbox "seleccionar todo"
-    public $searchTerm; // Término de búsqueda
+    public $perPage = 10;
+    public $selectedDate;
+    public $selectedClaims = [];
+    public $selectAll = false;
+    public $searchTerm;
+    public $tipoReclamo; // Nueva propiedad para almacenar el tipo de reclamo seleccionado
 
-    protected $paginationTheme = 'bootstrap'; // Para usar los estilos de AdminLTE
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
         $claim = Claim::where('estado', 'INFORMACIONES')
-        ->when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
             ->when($this->searchTerm, function ($query) {
                 return $query->where(function ($subQuery) {
                     $subQuery->where('codigo', 'like', '%' . $this->searchTerm . '%')
@@ -40,18 +40,21 @@ class Bandejareclamos extends Component
         return view('livewire.bandejareclamos', ['claims' => $claim]);
     }
 
-    public function cambiarEstadoReclamos()
+    public function guardarTipoReclamo()
     {
-        if (count($this->selectedClaims) > 0) {
-            Claim::whereIn('id', $this->selectedClaims)->update(['estado' => 'RECLAMOS']);
-            session()->flash('message', 'Reclamo Recibido con exito!.');
-            $this->reset(['selectedClaims', 'selectAll']);
+        if (count($this->selectedClaims) > 0 && $this->tipoReclamo) {
+            // Actualizar estado y tipo de reclamo
+            Claim::whereIn('id', $this->selectedClaims)
+                ->update(['estado' => 'RECLAMOS', 'tipo_reclamo' => $this->tipoReclamo]);
+
+            session()->flash('message', 'Reclamo recibido y tipo de reclamo guardado con éxito!');
+            $this->reset(['selectedClaims', 'selectAll', 'tipoReclamo']); // Resetear las selecciones
+            $this->dispatch('modal-close'); // Cerrar el modal
         } else {
-            session()->flash('error', 'No has seleccionado ningún reclamo.');
+            session()->flash('error', 'No has seleccionado ningún reclamo o no has seleccionado el tipo de reclamo.');
         }
     }
 
-    // Método para seleccionar/deseleccionar todos los checkboxes
     public function updatedSelectAll($value)
     {
         if ($value) {
@@ -63,7 +66,6 @@ class Bandejareclamos extends Component
 
     public function exportPdf()
     {
-        // Filtrar los registros según la fecha seleccionada para el PDF
         $claims = Claim::when($this->selectedDate, function ($query) {
             return $query->whereDate('created_at', $this->selectedDate);
         })->get();
