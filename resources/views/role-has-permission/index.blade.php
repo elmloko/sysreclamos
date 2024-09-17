@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Paquetes Ordinarios')
 @section('template_title')
-    Paqueteria Postal
+    Accesos
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Role Has Permission') }}
+                                {{ __('Administracion Accesos TrackingBO') }}
                             </span>
 
                             <div class="float-right">

@@ -3,7 +3,7 @@
 @section('title', 'Estadísticas de Paquetes')
 
 @section('template_title')
-    Estadísticas de Paquetería Postal
+    Quejas ADM
 @endsection
 
 @section('content')
