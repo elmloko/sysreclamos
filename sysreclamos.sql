@@ -41,15 +41,16 @@ CREATE TABLE IF NOT EXISTS `claims` (
   `reclamo` text DEFAULT NULL,
   `public` varchar(50) DEFAULT NULL,
   `feedback` int(11) DEFAULT NULL,
+  `ciudad` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.claims: ~1 rows (aproximadamente)
-INSERT INTO `claims` (`id`, `correlativo`, `remitente`, `telf_remitente`, `email_r`, `origen`, `destinatario`, `telf_destinatario`, `email_d`, `direccion_d`, `codigo_postal`, `destino`, `codigo`, `fecha_envio`, `contenido`, `estado`, `valor`, `reclamo`, `public`, `feedback`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'RCL0001', 'RUTH VIOLETA FLORES CALDERON', '76740400', NULL, 'BOLIVIA', 'SLENKA VERONICA FLORES CALDERON', '2409213100', NULL, 'GEORGIA AVENUE #301 SILVER SPRING', NULL, 'CANADA', 'RR000739692BO', '2024-08-15 04:00:00', 'CERTIFICADO DE NOTAS', 'INFORMACIONES', 0, 'NO LLEGO LA CORESPONDENCIA A DESTINO ', 'P0001', NULL, '2024-09-17 01:19:51', '2024-09-17 01:19:51', NULL);
+-- Volcando datos para la tabla sysreclamos.claims: ~0 rows (aproximadamente)
+INSERT INTO `claims` (`id`, `correlativo`, `remitente`, `telf_remitente`, `email_r`, `origen`, `destinatario`, `telf_destinatario`, `email_d`, `direccion_d`, `codigo_postal`, `destino`, `codigo`, `fecha_envio`, `contenido`, `estado`, `valor`, `reclamo`, `public`, `feedback`, `ciudad`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'RCL0001', 'RUTH VIOLETA FLORES CALDERON', '76740400', NULL, 'BOLIVIA', 'SLENKA VERONICA FLORES CALDERON', '2409213100', NULL, 'GEORGIA AVENUE #301 SILVER SPRING', NULL, 'CANADA', 'RR000739692BO', '2024-08-15 04:00:00', 'CERTIFICADO DE NOTAS', 'INFORMACIONES', 0, 'NO LLEGO LA CORESPONDENCIA A DESTINO ', 'P0001', NULL, NULL, '2024-09-17 01:19:51', '2024-09-17 01:19:51', NULL);
 
 -- Volcando estructura para tabla sysreclamos.complaints
 CREATE TABLE IF NOT EXISTS `complaints` (
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `complaints` (
   `correlativo` varchar(50) DEFAULT NULL,
   `cliente` varchar(50) DEFAULT NULL,
   `telf` varchar(50) DEFAULT NULL,
-  `ci` int(11) DEFAULT NULL,
+  `ci` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `queja` text DEFAULT NULL,
   `funcionario` varchar(50) DEFAULT NULL,
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `complaints` (
   `estado` varchar(50) DEFAULT NULL,
   `feedback` int(11) DEFAULT NULL,
   `public` varchar(50) DEFAULT NULL,
+  `ciudad` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -273,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=27161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27177 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.427 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
@@ -7905,7 +7907,15 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(26287, 1726577280, 1440, 'cache_hit', 'lv:v3.10.2:file:a1010030-laravel.log:ecf8427e:chunk:0', 'count', 1.00, NULL),
 	(26288, 1726572960, 10080, 'cache_hit', 'lv:v3.10.2:file:a1010030-laravel.log:ecf8427e:chunk:0', 'count', 1.00, NULL),
 	(27153, 1726578060, 60, 'user_request', '1', 'count', 1.00, NULL),
-	(27154, 1726578060, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(27154, 1726578060, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(27161, 1726583940, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(27162, 1726583760, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(27163, 1726583040, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(27164, 1726583040, 10080, 'user_request', '1', 'count', 2.00, NULL),
+	(27165, 1726583940, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(27166, 1726583760, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(27167, 1726583040, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(27168, 1726583040, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -7920,9 +7930,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=6513 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6517 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.918 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.922 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -12843,7 +12853,11 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(6509, 1726578046, 'cache_hit', 'lv:v3.10.2:file:a1010030-laravel.log:ecf8427e:metadata', NULL),
 	(6510, 1726578046, 'cache_hit', 'lv:v3.10.2:file:a1010030-laravel.log:ecf8427e:chunk:0', NULL),
 	(6511, 1726578066, 'user_request', '1', NULL),
-	(6512, 1726578066, 'cache_hit', 'spatie.permission.cache', NULL);
+	(6512, 1726578066, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6513, 1726583979, 'user_request', '1', NULL),
+	(6514, 1726583979, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6515, 1726583987, 'user_request', '1', NULL),
+	(6516, 1726583987, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -12920,10 +12934,10 @@ CREATE TABLE IF NOT EXISTS `suggestions` (
   `fullName` varchar(50) DEFAULT NULL,
   `address` text DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
-  `identityCard` int(11) DEFAULT NULL,
+  `identityCard` varchar(50) DEFAULT NULL,
   `codepostal` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
