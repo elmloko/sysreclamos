@@ -19,10 +19,13 @@ class Records extends Component
 
     public function render()
     {
-        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+    
+        // Filtrar los registros según el rol del usuario utilizando Spatie
         $records = Information::when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
             ->when($this->searchTerm, function ($query) {
                 return $query->where(function ($subQuery) {
                     $subQuery->where('codigo', 'like', '%' . $this->searchTerm . '%')
@@ -31,23 +34,37 @@ class Records extends Component
                         ->orWhere('correlativo', 'like', '%' . $this->searchTerm . '%');
                 });
             })
+            ->when(auth()->user()->hasRole('Informaciones'), function ($query) use ($userCity) {
+                // Filtrar por la ciudad del usuario solo si tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
-
+    
         return view('livewire.records', ['records' => $records]);
     }
+    
 
     public function exportPdf()
     {
-        // Filtrar los registros según la fecha seleccionada para el PDF
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+    
+        // Filtrar los registros según el rol del usuario para el PDF
         $records = Information::when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })->get();
-
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->when(auth()->user()->hasRole('Informaciones'), function ($query) use ($userCity) {
+                // Filtrar por la ciudad del usuario solo si tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
+            ->get();
+    
         $pdf = PDF::loadView('livewire.pdf-records', compact('records'));
-
+    
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'records_' . ($this->selectedDate ?? 'all') . '.pdf');
     }
+    
 }

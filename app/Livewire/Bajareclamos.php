@@ -17,9 +17,15 @@ class Bajareclamos extends Component
 
     public function render()
     {
-
-        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+        
+        // Filtrar los registros según el rol del usuario utilizando Spatie
         $claim = Claim::where('estado', 'RESUELTO')
+            ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
+                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('updated_at', $this->selectedDate);
             })
@@ -33,22 +39,33 @@ class Bajareclamos extends Component
             })
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
-
+    
         return view('livewire.bajareclamos', ['claims' => $claim]);
     }
+
     public function exportPdf()
     {
-        // Filtrar los registros según la fecha seleccionada para el PDF
-        $claims = Claim::when($this->selectedDate, function ($query) {
-            return $query->whereDate('updated_at', $this->selectedDate);
-        })->get();
-
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+    
+        // Filtrar los registros según el rol del usuario utilizando Spatie
+        $claims = Claim::where('estado', 'RESUELTO')
+            ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
+                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('updated_at', $this->selectedDate);
+            })
+            ->get();
+    
         $pdf = PDF::loadView('livewire.pdf-bajareclamo', compact('claims'));
-
+    
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Casos Resueltos.pdf');
     }
+    
     public function mostrarReclamo($claimId)
     {
         // Redirigir a la ruta claim.show con el ID del reclamo

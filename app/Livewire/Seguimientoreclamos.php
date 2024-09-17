@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
 use Carbon\Carbon;
+use PDF;
 
 class Seguimientoreclamos extends Component
 {
@@ -14,7 +15,7 @@ class Seguimientoreclamos extends Component
     // Propiedades del formulario de reclamo
     public $remitente, $telf_remitente, $email_r, $origen, $contenido, $valor, $fecha_envio;
     public $destinatario, $telf_destinatario, $email_d, $destino, $direccion_d, $codigo_postal, $codigo, $reclamo;
-    
+
     public $perPage = 10;
     public $selectedDate;
     public $selectedClaims = [];
@@ -27,7 +28,16 @@ class Seguimientoreclamos extends Component
     public function render()
     {
         Carbon::setLocale('es');
+
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros según el rol del usuario utilizando Spatie
         $claims = Claim::where('estado', 'RECLAMOS')
+            ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
+                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('updated_at', $this->selectedDate);
             })
@@ -65,10 +75,10 @@ class Seguimientoreclamos extends Component
             'valor' => 'required|numeric',
             'tipo_reclamo' => 'required|in:ENTRADA,SALIDA',
         ]);
-    
+
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
         $lastRecord = Claim::orderBy('id', 'desc')->first();
-    
+
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 3)); // Extraer la parte numérica después del prefijo
@@ -76,11 +86,11 @@ class Seguimientoreclamos extends Component
         } else {
             $newCorrelativo = '0001';
         }
-    
+
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'RCL' . $newCorrelativo; // RCL para Reclamo
         $publicoCorrelativo = 'P' . $newCorrelativo; // P para el correlativo público
-    
+
         // Crear el nuevo reclamo
         $claim = Claim::create([
             'tipo_reclamo' => $this->tipo_reclamo,
@@ -104,27 +114,81 @@ class Seguimientoreclamos extends Component
             'estado' => 'RECLAMOS',
             'created_at' => Carbon::now(),
         ]);
-    
+
         // Almacenar el ID del registro recién creado
         $this->createdId = $claim->public;
-    
+
         // Mensaje de éxito
         session()->flash('message', 'Registro CN08 registrado exitosamente.');
-    
+
         // Emitir eventos para cerrar el modal
         $this->dispatch('close-modal');
-    
+
         // Llamar a resetForm para resetear los campos del formulario
         $this->resetForm();
     }
-    
+
+    public function exportPdf()
+    {
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros según el rol del usuario utilizando Spatie
+        $claims = Claim::where('estado', 'RECLAMOS')
+            ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
+                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->get();
+
+        $pdf = PDF::loadView('livewire.pdf-bandeja', compact('claims'));
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'Reclamos' . ($this->selectedDate ?? 'all') . '.pdf');
+    }
+
     // Resetear el formulario
     public function resetForm()
     {
         $this->reset([
-            'remitente', 'telf_remitente', 'email_r', 'origen', 'contenido', 'valor', 
-            'fecha_envio', 'destinatario', 'telf_destinatario', 'email_d', 
-            'destino', 'direccion_d', 'codigo_postal', 'codigo', 'reclamo'
+            'remitente',
+            'telf_remitente',
+            'email_r',
+            'origen',
+            'contenido',
+            'valor',
+            'fecha_envio',
+            'destinatario',
+            'telf_destinatario',
+            'email_d',
+            'destino',
+            'direccion_d',
+            'codigo_postal',
+            'codigo',
+            'reclamo'
         ]);
+    }
+    public function mostrarReclamo($claimId)
+    {
+        // Redirigir a la ruta claim.show con el ID del reclamo
+        return redirect()->to(route('reclamos.show', $claimId));
+    }
+    public function darDeBaja($claimId)
+    {
+        $claim = Claim::find($claimId);
+
+        if ($claim) {
+            $claim->update([
+                'deleted_at' => now(),
+                'estado' => 'RESUELTO'
+            ]);
+            session()->flash('message', 'Reclamo dado de baja y marcado como resuelto con éxito.');
+        } else {
+            session()->flash('error', 'No se pudo dar de baja el reclamo.');
+        }
     }
 }

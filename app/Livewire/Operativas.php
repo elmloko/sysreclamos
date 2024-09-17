@@ -21,9 +21,16 @@ class Operativas extends Component
 
     public function render()
     {
-        // Filtrar los registros según la fecha seleccionada y el término de búsqueda
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros según el rol del usuario utilizando Spatie
         $complaint = Complaint::where('estado', 'RECEPCIONADO')
             ->where('tipo', 'OPERATIVO')
+            ->when(auth()->user()->hasRole('Informaciones'), function ($query) use ($userCity) {
+                // Filtrar por la ciudad del usuario solo si tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
             })
@@ -37,16 +44,22 @@ class Operativas extends Component
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
-        // Filtrar los registros según la fecha seleccionada y el estado "RECLAMOS"
 
         return view('livewire.operativas', ['complaints' => $complaint]);
     }
 
     public function exportPdf()
     {
-        // Filtrar los registros según la fecha seleccionada para el PDF
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros según el rol del usuario para el PDF
         $complaints = Complaint::where('estado', 'RECEPCIONADO')
-            ->where('tipo', 'OPERATIVO')
+            ->where('tipo', 'ADMINISTRATIVO')
+            ->when(auth()->user()->hasRole('Informaciones'), function ($query) use ($userCity) {
+                // Filtrar por la ciudad del usuario solo si tiene el rol de Reclamos
+                return $query->where('ciudad', $userCity);
+            })
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
             })
@@ -56,7 +69,7 @@ class Operativas extends Component
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Quejas Operativas' . ($this->selectedDate ?? 'all') . '.pdf');
+        }, 'Quejas Administrativas' . ($this->selectedDate ?? 'all') . '.pdf');
     }
 
     public function mostrarQueja($claimId)

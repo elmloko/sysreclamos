@@ -22,7 +22,15 @@ class Bandejareclamos extends Component
 
     public function render()
     {
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros para que solo muestren los que tienen el estado 'INFORMACIONES'
         $claim = Claim::where('estado', 'INFORMACIONES')
+            ->when(auth()->user()->hasAnyRole(['Reclamos', 'Informaciones']), function ($query) use ($userCity) {
+                // Si el usuario tiene el rol 'Reclamos' o 'Informaciones', filtrar por ciudad
+                return $query->where('ciudad', $userCity);
+            })
             ->when($this->selectedDate, function ($query) {
                 return $query->whereDate('created_at', $this->selectedDate);
             })
@@ -35,7 +43,7 @@ class Bandejareclamos extends Component
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($this->perPage); 
+            ->paginate($this->perPage);
 
         return view('livewire.bandejareclamos', ['claims' => $claim]);
     }
@@ -66,9 +74,19 @@ class Bandejareclamos extends Component
 
     public function exportPdf()
     {
-        $claims = Claim::when($this->selectedDate, function ($query) {
-            return $query->whereDate('created_at', $this->selectedDate);
-        })->get();
+        // Obtener la ciudad del usuario autenticado
+        $userCity = auth()->user()->city;
+
+        // Filtrar los registros para exportar a PDF solo los que tienen el estado 'INFORMACIONES'
+        $claims = Claim::where('estado', 'INFORMACIONES')
+            ->when(auth()->user()->hasAnyRole(['Reclamos', 'Informaciones']), function ($query) use ($userCity) {
+                // Si el usuario tiene el rol 'Reclamos' o 'Informaciones', filtrar por ciudad
+                return $query->where('ciudad', $userCity);
+            })
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('created_at', $this->selectedDate);
+            })
+            ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandeja', compact('claims'));
 
