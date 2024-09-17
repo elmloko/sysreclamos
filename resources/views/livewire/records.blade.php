@@ -42,13 +42,13 @@
                                         <th>Destinatario</th>
                                         <th>Último Evento</th>
                                         <th>Teléfono</th>
-                                        <th>Ciudad</th>
                                         <th>Ventanilla</th>
                                         <th>Último Estado</th>
                                         <th>Descripción</th>
                                         <th>Fecha del Último Evento</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
+                                            <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
@@ -63,13 +63,13 @@
                                             <td>{{ $record->destinatario }}</td>
                                             <td>{{ $record->last_event }}</td>
                                             <td>{{ $record->telefono }}</td>
-                                            <td>{{ $record->ciudad }}</td>
                                             <td>{{ $record->ventanilla }}</td>
                                             <td>{{ $record->last_status }}</td>
                                             <td>{{ $record->last_description }}</td>
                                             <td>{{ $record->last_date }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $record->feedback ?? 0 }}</td>
+                                                <td>{{ $record->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $record->estado }}</td>
                                             <td>{{ $record->created_at }}</td>

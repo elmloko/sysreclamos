@@ -64,6 +64,7 @@
                                         <th>Valor</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
+                                            <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
@@ -86,6 +87,7 @@
                                             <td>{{ $claim->valor }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
+                                                <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->created_at }}</td>

@@ -59,6 +59,9 @@
                                         <th>Fecha de Envío</th>
                                         <th>Contenido</th>
                                         <th>Valor</th>
+                                        @hasrole('SuperAdmin|Administrador')
+                                            <th>Ciudad</th>
+                                        @endhasrole
                                         <th>Estado</th>
                                         <th>Tiempo Trascurrido</th>
                                         <th>Fecha Recibido</th>
@@ -79,6 +82,9 @@
                                             <td>{{ $claim->fecha_envio }}</td>
                                             <td>{{ $claim->contenido }}</td>
                                             <td>{{ $claim->valor }}</td>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $claim->ciudad }}</td>
+                                            @endhasrole
                                             <td>{{ $claim->estado }} - {{ $claim->tipo_reclamo }}</td>
                                             <td>
                                                 {{ \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now()) }}

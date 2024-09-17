@@ -56,6 +56,7 @@
                                         <th>Tipo</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
+                                            <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
                                         <th>Creado</th>
@@ -76,6 +77,7 @@
                                             <td>{{ $complaint->tipo }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $complaint->feedback ?? 0 }}</td>
+                                                <td>{{ $complaint->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $complaint->estado }}</td>
                                             <td>{{ $complaint->created_at }}</td>
