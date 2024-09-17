@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use App\Models\Information;
 use PDF;
 use App\Models\Claim;
+use App\Models\Event;
 use App\Models\Complaint;
 
 class Dashboard extends Component
@@ -169,6 +170,13 @@ class Dashboard extends Component
             'public' => $publicoCorrelativo,
             'estado' => 'SAC',
             'created_at' => Carbon::now(),
+        ]);
+
+        Event::create([
+            'action' => 'INFORMACIONES',
+            'descripcion' => 'Consulta SAC Automatico',
+            'user_id' => auth()->user()->name,
+            'codigo' => $information->correlativo,
         ]);
 
         // Almacenar el ID del registro recién creado

@@ -93,6 +93,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/quejas/{id}/show', [QuejasController::class, 'getShow'])->name('quejas.show');
     Route::get('/sugerencias', [SugerenciaController::class, 'getSugerencia']);
     Route::get('/download/{file}', [DocumentController::class, 'download'])->name('documents.download');
+    
+    Route::get('/events', [InformationController::class, 'getEvents'])->name('event.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

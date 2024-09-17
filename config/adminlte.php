@@ -416,6 +416,12 @@ return [
             ],
         ],
         [
+            'text' => 'Eventos',
+            'url' => '/events',
+            'can'  => 'odin',
+            'icon' => 'fas fa-user',
+        ],
+        [
             'text' => 'Rendimiento',
             'url' => '/pulse',
             'can'  => 'odin',

@@ -14,4 +14,8 @@ class InformationController extends Controller
     {
         return view('information.all');
     }
+    public function getEvents ()
+    {
+        return view('event.index');
+    }
 }
