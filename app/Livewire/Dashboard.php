@@ -346,6 +346,7 @@ class Dashboard extends Component
             'reclamo' => strtoupper($this->reclamo),
             'valor' => $this->valor,
             'correlativo' => $codigoCorrelativo,
+            'ciudad' => strtoupper(auth()->user()->city),
             'estado' => 'INFORMACIONES',
             'created_at' => Carbon::now(),
         ]);
@@ -414,6 +415,7 @@ class Dashboard extends Component
             'funcionario' => strtoupper($this->funcionario),
             'estado' => 'RECEPCIONADO',
             'tipo' => 'ADMINISTRATIVO',
+            'ciudad' => strtoupper(auth()->user()->city),
             'correlativo' => $codigoCorrelativo, // Guardar el código correlativo generado
             'created_at' => Carbon::now(),
         ]);
@@ -480,6 +482,7 @@ class Dashboard extends Component
             'queja' => strtoupper($this->queja),
             'funcionario' => strtoupper($this->funcionario),
             'correlativo' => $codigoCorrelativo,
+            'ciudad' => strtoupper(auth()->user()->city),
             'estado' => 'RECEPCIONADO',
             'tipo' => 'OPERATIVO',
             'created_at' => Carbon::now(),
