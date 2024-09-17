@@ -222,6 +222,13 @@ class Dashboard extends Component
             'ciudad' => strtoupper(auth()->user()->city),
             'created_at' => Carbon::now(),
         ]);
+        
+        Event::create([
+            'action' => 'INFORMACIONES',
+            'descripcion' => 'Consulta SAC Manual',
+            'user_id' => auth()->user()->name,
+            'codigo' => $information->correlativo,
+        ]);
 
         // Almacenar el ID del registro recién creado
         $this->createdId = $information->public;
@@ -238,9 +245,9 @@ class Dashboard extends Component
 
     public function saveLlamada()
     {
-        // Obtener el último registro de Information con el mismo servicio para determinar el siguiente número correlativo
+        // Obtener el último registro de Information con el estado 'LLAMADA' para determinar el siguiente número correlativo
         $lastRecord = Information::where('estado', 'LLAMADA')->orderBy('id', 'desc')->first();
-
+    
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord && strpos($lastRecord->correlativo, 'INFLL') === 0) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica después de 'INFLL'
@@ -248,11 +255,12 @@ class Dashboard extends Component
         } else {
             $newCorrelativo = '0001';
         }
-
+    
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFLL' . $newCorrelativo;
-
-        Information::create([
+    
+        // Crear el nuevo registro de Information
+        $information = Information::create([
             'codigo' => strtoupper($this->codigo),
             'destinatario' => strtoupper($this->destinatario),
             'telefono' => $this->telefono,
@@ -263,15 +271,24 @@ class Dashboard extends Component
             'correlativo' => $codigoCorrelativo, // Guardar el código correlativo generado
             'created_at' => Carbon::now(),
         ]);
-
+    
+        // Crear el evento relacionado
+        Event::create([
+            'action' => 'INFORMACIONES',
+            'descripcion' => 'Consulta SAC Llamada',
+            'user_id' => auth()->user()->name,
+            'codigo' => $information->correlativo, // Usar el correlativo recién creado
+        ]);
+    
+        // Mensaje de éxito
         session()->flash('message', 'Llamada registrada exitosamente.');
-
-        // Emitir un evento para cerrar el modal y abrir el modal de calificación
+    
+        // Emitir un evento para cerrar el modal
         $this->dispatch('close-modal');
-
+    
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
-
+    
         // Redirigir a la misma página para recargarla
         return redirect()->to(url()->previous());
     }
@@ -331,6 +348,13 @@ class Dashboard extends Component
             'correlativo' => $codigoCorrelativo,
             'estado' => 'INFORMACIONES',
             'created_at' => Carbon::now(),
+        ]);
+
+        Event::create([
+            'action' => 'RECLAMO',
+            'descripcion' => 'Registro Reclamo por Ventanilla',
+            'user_id' => auth()->user()->name,
+            'codigo' => $claim->correlativo, // Usar el correlativo recién creado
         ]);
     
         // Almacenar el ID del registro recién creado
@@ -394,6 +418,13 @@ class Dashboard extends Component
             'created_at' => Carbon::now(),
         ]);
 
+        Event::create([
+            'action' => 'QUEJA',
+            'descripcion' => 'Registro Queja Administrativa por Ventanilla',
+            'user_id' => auth()->user()->name,
+            'codigo' => $complaint->correlativo, // Usar el correlativo recién creado
+        ]);
+
         // Almacenar el ID del registro recién creado
         $this->createdId = $complaint->public;
 
@@ -452,6 +483,13 @@ class Dashboard extends Component
             'estado' => 'RECEPCIONADO',
             'tipo' => 'OPERATIVO',
             'created_at' => Carbon::now(),
+        ]);
+
+        Event::create([
+            'action' => 'QUEJA',
+            'descripcion' => 'Registro Queja Operativa por Ventanilla',
+            'user_id' => auth()->user()->name,
+            'codigo' => $complaint->correlativo, // Usar el correlativo recién creado
         ]);
         
         // Almacenar el ID del registro recién creado
