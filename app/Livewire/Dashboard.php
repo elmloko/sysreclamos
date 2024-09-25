@@ -355,7 +355,7 @@ class Dashboard extends Component
             'action' => 'RECLAMO',
             'descripcion' => 'Registro Reclamo por Ventanilla',
             'user_id' => auth()->user()->name,
-            'codigo' => $claim->correlativo, // Usar el correlativo recién creado
+            'codigo' => $claim->codigoCorrelativo, // Usar el correlativo recién creado
         ]);
     
         // Almacenar el ID del registro recién creado
