@@ -78,7 +78,7 @@ URI     : https://colorlib.com
                 los problemas planteados y prevenir inconvenientes futuros, garantizando así una mejor experiencia para
                 nuestros clientes.</p>
         </div>
-        
+
         <div class="img-holder mt-3"><img src="images/postal-realista-vendimia_97886-229.avif" alt="phone"
                 class="img-fluid"></div>
     </header>
@@ -324,7 +324,17 @@ URI     : https://colorlib.com
                 Telecomunicaciones - agbc@correos.gob.bo</small></p>
     </footer>
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0KSJWGMEYN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-0KSJWGMEYN');
+    </script>
     <!-- jQuery and Bootstrap -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
