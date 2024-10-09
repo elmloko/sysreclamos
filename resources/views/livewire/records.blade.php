@@ -71,7 +71,17 @@
                                                 <td>{{ $record->feedback ?? 0 }}</td>
                                                 <td>{{ $record->ciudad }}</td>
                                             @endhasrole
-                                            <td>{{ $record->estado }}</td>
+                                            <td>
+                                                @if($record->estado == 'SAC')
+                                                    AUTOMATICO
+                                                @elseif($record->estado == 'SAC MANUAL')
+                                                    MANUAL
+                                                @elseif($record->estado == 'LLAMADA')
+                                                    LLAMADA
+                                                @else
+                                                    {{ $record->estado }}
+                                                @endif
+                                            </td>                                            
                                             <td>{{ $record->created_at }}</td>
                                         </tr>
                                     @endforeach

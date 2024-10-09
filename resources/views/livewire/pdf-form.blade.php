@@ -14,15 +14,22 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
+            /* Reducir el espacio entre tablas */
             font-size: 10px;
         }
 
         th,
         td {
-            padding: 8px;
+            padding: 4px;
+            /* Reducir el padding para menos espacio */
             text-align: left;
             border: 1px solid #ddd;
+        }
+
+        h5 {
+            margin: 4px 0;
+            /* Reducir el margen de los títulos */
         }
 
         .title {
@@ -40,6 +47,8 @@
             text-align: center;
             font-size: 10px;
             border: none !important;
+            margin: 2px 0;
+            /* Reducir márgenes */
         }
 
         .correlativo {
@@ -47,7 +56,8 @@
             font-size: 14px;
             font-weight: bold;
             margin-right: 10px;
-            margin-top: 20px;
+            margin-top: 10px;
+            /* Reducir margen superior */
         }
     </style>
 </head>
@@ -58,9 +68,9 @@
             <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
         </div>
         <div class="title">
-            <h3>BOLETIN DE VERIFICACION INTERNACIONAL</h3>
-            <h3>CN08 - FORMULARIO DIRECTO</h3>
-            <h4>AGENCIA BOLIVIANA DE CORREOS</h4>
+            <h4>BOLETIN DE VERIFICACION INTERNACIONAL</h4>
+            <h4>CN08 - FORMULARIO DIRECTO</h4>
+            <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
         <div class="correlativo">
             {{ $claim->correlativo }}
@@ -68,7 +78,6 @@
     </div>
 
     <h5>Información del Remitente</h5>
-    <!-- Primera Tabla: Información del Remitente -->
     <table>
         <tr>
             <th>Remitente</th>
@@ -85,7 +94,6 @@
     </table>
 
     <h5>Información del Destinatario</h5>
-    <!-- Segunda Tabla: Información del Destinatario -->
     <table>
         <tr>
             <th>Origen</th>
@@ -118,7 +126,6 @@
     </table>
 
     <h5>Detalles del Envío</h5>
-    <!-- Tercera Tabla: Detalles del Envío -->
     <table>
         <tr>
             <th>Código</th>
@@ -139,11 +146,18 @@
     </table>
 
     <h5>Detalles del Reclamo</h5>
-    <!-- Tercera Tabla: Detalles del Envío -->
     <table>
         <tr>
             <th>Detalles del Reclamo</th>
             <td>{{ $claim->reclamo }}</td>
+        </tr>
+        <tr>
+            <th>Fecha:</th>
+            <td>{{ $claim->created_at }}</td>
+        </tr>
+        <tr>
+            <th>Usuario:</th>
+            <td>{{ Auth::user()->name }}</td>
         </tr>
     </table>
     <table>

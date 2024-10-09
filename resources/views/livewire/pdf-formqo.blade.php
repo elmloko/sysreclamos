@@ -103,6 +103,14 @@
             <th>Queja</th>
             <td>{{ $complaint->queja }}</td>
         </tr>
+        <tr>
+            <th>Fecha:</th>
+            <td>{{ $complaint->created_at }}</td>
+        </tr>
+        <tr>
+            <th>Usuario:</th>
+            <td>{{ Auth::user()->name }}</td>
+        </tr>
     </table>
 
     <br>

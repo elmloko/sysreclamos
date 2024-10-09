@@ -71,11 +71,11 @@
     <div style="text-align: right; margin-top: 20px;">
         @if ($additionalInfo)
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal">
-                Registro SAC
+                Registro AUTOMATICO
             </button>
         @else
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sacModal">
-                Registro SAC
+                Registro MANUAL
             </button>
         @endif
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
@@ -88,7 +88,7 @@
             Queja OPERATIVA
         </button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cnModal">
-            Registro CN-08
+            Registro de Reclamo
         </button>
 
     </div>

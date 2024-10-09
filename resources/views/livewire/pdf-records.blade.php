@@ -119,7 +119,17 @@
                     <td>{{ $record->last_status }}</td>
                     <td>{{ $record->last_description }}</td>
                     <td>{{ $record->last_date }}</td>
-                    <td>{{ $record->estado }}</td>
+                    <td>
+                        @if($record->estado == 'SAC')
+                            AUTOMATICO
+                        @elseif($record->estado == 'SAC MANUAL')
+                            MANUAL
+                        @elseif($record->estado == 'LLAMADA')
+                            LLAMADA
+                        @else
+                            {{ $record->estado }}
+                        @endif
+                    </td>                    
                     <td>{{ $record->feedback }}</td>
                     <td>{{ $record->created_at }}</td>
                 </tr>

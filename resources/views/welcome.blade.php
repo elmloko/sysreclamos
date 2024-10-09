@@ -72,7 +72,7 @@ URI     : https://colorlib.com
 
     <header class="bg-gradient" id="home">
         <div class="container mt-5">
-            <h1>Envianos tu Reclamo o Sugerencia</h1>
+            <h1>Envianos tu Consulta o Sugerencia</h1>
             <p class="tagline">En Correos, uno de nuestros recursos más valiosos para mejorar el servicio son las
                 sugerencias, incidencias y consultas de nuestros clientes. Atenderlas con eficacia nos permite resolver
                 los problemas planteados y prevenir inconvenientes futuros, garantizando así una mejor experiencia para
@@ -85,7 +85,7 @@ URI     : https://colorlib.com
 
     @livewire('Form-public')
 
-    <div class="section">
+    {{-- <div class="section">
         <div class="container">
             <div class="section-title">
                 <h5>Preguntas Frecuentes</h5>
@@ -112,7 +112,7 @@ URI     : https://colorlib.com
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="section light-bg" id="features">
         <div class="container">
@@ -168,7 +168,7 @@ URI     : https://colorlib.com
 
         <div class="section light-bg">
             <div class="container">
-                <h3 class="text-center">Cómo Enviar Tus Reclamos, Sugerencias e Incidencias</h3>
+                <h3 class="text-center">Cómo Enviar Tus Consultas, Sugerencias e Incidencias</h3>
                 <div class="row">
                     <div class="col-md-6 d-flex align-items-center">
                         <ul class="list-unstyled ui-steps">
