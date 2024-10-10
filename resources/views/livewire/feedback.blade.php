@@ -24,24 +24,14 @@
                     <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Malo</p>
                 </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-regular.png') }}" alt="Regular" wire:click="seleccionarPuntuacion(2)" 
+                    <img src="{{ asset('images/cara-regular.png') }}" alt="Bueno" wire:click="seleccionarPuntuacion(2)" 
                          style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
                     <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Regular</p>
                 </div><br>
                 <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-bueno.png') }}" alt="Bueno" wire:click="seleccionarPuntuacion(3)" 
+                    <img src="{{ asset('images/cara-excelente.png') }}" alt="Excelente" wire:click="seleccionarPuntuacion(3)" 
                          style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
                     <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Bueno</p>
-                </div><br>
-                <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-muy-bueno.png') }}" alt="Muy Bueno" wire:click="seleccionarPuntuacion(4)" 
-                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
-                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Muy Bueno</p>
-                </div><br>
-                <div style="text-align: center;">
-                    <img src="{{ asset('images/cara-excelente.png') }}" alt="Excelente" wire:click="seleccionarPuntuacion(5)" 
-                         style="cursor: pointer; width: 18vw; height: 18vw; max-width: 200px; max-height: 200px;">
-                    <p style="margin-top: 10px; font-size: 3.5vw; color: #333;">Excelente</p>
                 </div><br>
             </div>
             
