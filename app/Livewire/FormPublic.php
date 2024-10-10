@@ -14,7 +14,6 @@ class FormPublic extends Component
     public $identityCard;
     public $codepostal;
     public $email;
-    public $ci;
     public $phone;
     public $description;
     public $recaptcha;
