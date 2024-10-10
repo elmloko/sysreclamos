@@ -352,15 +352,33 @@
                                         wire:model="codigo_postal">
                                     <div class="invalid-feedback">Por favor, ingresa el código postal.</div>
                                 </div>
-
-
-
+                                
                                 <div class="form-group">
                                     <label for="codigo">CÓDIGO</label>
                                     <input type="text" class="form-control" id="codigo" wire:model="codigo"
                                         style="text-transform: uppercase;" required>
                                     <div class="invalid-feedback">Por favor, ingresa el código.</div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denunciante">NOMBRES DEL DENUNCIANTE</label>
+                                    <input type="text" class="form-control" id="denunciante" wire:model="denunciante"
+                                        style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del denunciante.</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denuncianteci">CARNET DEL DENUNCIANTE</label>
+                                    <input type="text" class="form-control" id="denuncianteci"
+                                        wire:model="denuncianteci" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa carnet del denunciante.</div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group">

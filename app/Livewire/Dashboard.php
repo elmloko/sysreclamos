@@ -44,6 +44,8 @@ class Dashboard extends Component
     public $funcionario;
     public $someCondition;
     public $createdId;
+    public $denuncianteci;
+    public $denunciante;
 
     public function mount($view = 'dashboard')
     {
@@ -314,6 +316,8 @@ class Dashboard extends Component
             'contenido' => 'required|string|max:255',
             'reclamo' => 'required|string|max:255',
             'valor' => 'required|numeric',
+            'denunciante' => 'required|string|max:255',
+            'denuncianteci' => 'required|numeric',
         ]);
 
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
@@ -351,6 +355,8 @@ class Dashboard extends Component
             'correlativo' => $codigoCorrelativo,
             'ciudad' => strtoupper(auth()->user()->city),
             'estado' => 'INFORMACIONES',
+            'denunciante' => strtoupper($this->denunciante),
+            'denuncianteci' => strtoupper($this->denuncianteci),
             'created_at' => Carbon::now(),
         ]);
 

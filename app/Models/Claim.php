@@ -36,6 +36,8 @@ class Claim extends Model
         'feedback',
         'tipo_reclamo',
         'ciudad',
+        'denuncianteci',
+        'denunciante',
     ];
 
     // Especificar los campos que son de tipo fecha
