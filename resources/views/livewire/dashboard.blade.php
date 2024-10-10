@@ -111,14 +111,9 @@
                                 readonly>
                         </div>
                         <div class="form-group">
-                            <label for="codigo">Nombre completo del cliente</label>
-                            <input type="text" class="form-control" id="codigo"
+                            <label for="destinatario">Nombre completo del cliente</label>
+                            <input type="text" class="form-control" id="destinatario"
                                 value="{{ $additionalInfo['DESTINATARIO'] ?? '' }}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Último Estado</label>
-                            <input type="text" class="form-control" id="nombre"
-                                value="{{ $additionalInfo['ESTADO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
@@ -126,21 +121,16 @@
                                 value="{{ $additionalInfo['TELEFONO'] ?? '' }}" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="ciudad">Ciudad</label>
-                            <input type="text" class="form-control" id="ciudad"
-                                value="{{ $additionalInfo['CUIDAD'] ?? '' }}" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha">Fecha</label>
-                            <input type="text" class="form-control" id="fecha"
-                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly>
-                        </div>
+                            <label for="last_description">Descripción de la Consulta</label>
+                            <textarea class="form-control" id="last_description" wire:model="last_description" style="text-transform: uppercase;" required></textarea>
+                            <div class="invalid-feedback">Por favor, ingresa la descripción de la consulta.</div>
+                        </div>                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" wire:click="saveData">
-                        Habilitar Feedback
+                        GUARDAR REGISTRO
                     </button>
                 </div>
             </div>
@@ -241,17 +231,6 @@
                             <textarea class="form-control" id="last_description" wire:model="last_description"
                                 style="text-transform: uppercase;" required></textarea>
                             <div class="invalid-feedback">Por favor, ingresa la descripción de la consulta.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="estado">ESTADO</label>
-                            <input type="text" class="form-control" id="estado" value="SAC MANUAL" readonly
-                                style="text-transform: uppercase;">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha">FECHA</label>
-                            <input type="text" class="form-control" id="fecha"
-                                value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly
-                                style="text-transform: uppercase;">
                         </div>
                     </form>
                 </div>

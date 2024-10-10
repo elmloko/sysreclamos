@@ -20,6 +20,7 @@ class Dashboard extends Component
     public $destinatario;
     public $telefono;
     public $last_description;
+    public $last_status;
     public $feedback;
     public $view;
     public $remitente;
@@ -133,28 +134,31 @@ class Dashboard extends Component
         usort($this->events, function ($a, $b) {
             return strtotime($b['updated_at']) - strtotime($a['updated_at']);
         });
-
+    
         // Recupera el evento más reciente
         $latestEvent = $this->events[0] ?? null;
-
-        // Obtener el último registro de Information con el estado "SAC" para determinar el siguiente número correlativo
+    
+        // Obtener la descripción más reciente
+        $this->last_status = substr(($latestEvent['action'] ?? ''), 0, 255);
+    
+        // Obtener el último registro de Information con el estado "SAC MANUAL" para determinar el siguiente número correlativo
         $lastRecord = Information::where('estado', 'SAC MANUAL')
             ->where('correlativo', 'LIKE', 'INFSAM%')
             ->orderBy('id', 'desc')
             ->first();
-
+    
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord) {
-            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6)); // Extraer la parte numérica después de 'INFSAC'
-            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT); // Incrementar y rellenar con ceros
+            $lastCorrelativo = intval(substr($lastRecord->correlativo, 6));
+            $newCorrelativo = str_pad($lastCorrelativo + 1, 4, '0', STR_PAD_LEFT);
         } else {
             $newCorrelativo = '0001';
         }
-
+    
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFSAM' . $newCorrelativo;
         $publicoCorrelativo = 'T' . $newCorrelativo;
-
+    
         // Crear el nuevo registro en la base de datos
         $information = Information::create([
             'codigo' => $this->codigo,
@@ -163,30 +167,29 @@ class Dashboard extends Component
             'telefono' => $this->additionalInfo['TELEFONO'] ?? null,
             'ciudad' => $this->additionalInfo['CUIDAD'] ?? null,
             'ventanilla' => $this->additionalInfo['VENTANILLA'] ?? null,
-            'last_status' => $latestEvent['action'] ?? null,  // Toma el estado del último evento
-            'last_description' => substr($latestEvent['descripcion'] ?? '', 0, 255),  // Toma la descripción del último evento
+            'last_status' => $this->last_status,
+            'last_description' => $this->last_description, // Aquí se guarda la descripción ingresada
             'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
             'correlativo' => $codigoCorrelativo,
             'public' => $publicoCorrelativo,
-            'estado' => 'SAC',
+            'estado' => 'SAC MANUAL',
             'created_at' => Carbon::now(),
         ]);
-
+    
         Event::create([
             'action' => 'INFORMACIONES',
-            'descripcion' => 'Consulta SAC Automatico',
+            'descripcion' => 'Consulta SAC Automático',
             'user_id' => auth()->user()->name,
             'codigo' => $information->correlativo,
         ]);
-
-        // Almacenar el ID del registro recién creado
+    
         $this->createdId = $information->public;
-
+    
         session()->flash('message', 'Información guardada exitosamente.');
-
+    
         // Resetear los campos del formulario
-        $this->reset(['codigo', 'destinatario', 'telefono','last_description']);
-
+        $this->reset(['codigo', 'destinatario', 'telefono', 'last_description']);
+    
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
@@ -222,7 +225,7 @@ class Dashboard extends Component
             'ciudad' => strtoupper(auth()->user()->city),
             'created_at' => Carbon::now(),
         ]);
-        
+
         Event::create([
             'action' => 'INFORMACIONES',
             'descripcion' => 'Consulta SAC Manual',
@@ -236,7 +239,7 @@ class Dashboard extends Component
         session()->flash('message', 'Registro SAC registrado exitosamente.');
 
         // Resetear los campos del formulario
-        $this->reset(['codigo', 'destinatario', 'telefono','last_description']);
+        $this->reset(['codigo', 'destinatario', 'telefono', 'last_description']);
 
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
@@ -247,7 +250,7 @@ class Dashboard extends Component
     {
         // Obtener el último registro de Information con el estado 'LLAMADA' para determinar el siguiente número correlativo
         $lastRecord = Information::where('estado', 'LLAMADA')->orderBy('id', 'desc')->first();
-    
+
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord && strpos($lastRecord->correlativo, 'INFLL') === 0) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica después de 'INFLL'
@@ -255,10 +258,10 @@ class Dashboard extends Component
         } else {
             $newCorrelativo = '0001';
         }
-    
+
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFLL' . $newCorrelativo;
-    
+
         // Crear el nuevo registro de Information
         $information = Information::create([
             'codigo' => strtoupper($this->codigo),
@@ -271,7 +274,7 @@ class Dashboard extends Component
             'correlativo' => $codigoCorrelativo, // Guardar el código correlativo generado
             'created_at' => Carbon::now(),
         ]);
-    
+
         // Crear el evento relacionado
         Event::create([
             'action' => 'INFORMACIONES',
@@ -279,16 +282,16 @@ class Dashboard extends Component
             'user_id' => auth()->user()->name,
             'codigo' => $information->correlativo, // Usar el correlativo recién creado
         ]);
-    
+
         // Mensaje de éxito
         session()->flash('message', 'Llamada registrada exitosamente.');
-    
+
         // Emitir un evento para cerrar el modal
         $this->dispatch('close-modal');
-    
+
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono']);
-    
+
         // Redirigir a la misma página para recargarla
         return redirect()->to(url()->previous());
     }
@@ -312,10 +315,10 @@ class Dashboard extends Component
             'reclamo' => 'required|string|max:255',
             'valor' => 'required|numeric',
         ]);
-    
+
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
         $lastRecord = Claim::orderBy('id', 'desc')->first();
-    
+
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 5)); // Extraer la parte numérica (suponiendo un prefijo de 5 caracteres)
@@ -323,11 +326,11 @@ class Dashboard extends Component
         } else {
             $newCorrelativo = '0001';
         }
-    
+
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'RCL' . $newCorrelativo;
         $publicoCorrelativo = 'P' . $newCorrelativo;
-    
+
         $claim = Claim::create([
             'public' => $publicoCorrelativo,
             'remitente' => strtoupper($this->remitente),
@@ -357,26 +360,26 @@ class Dashboard extends Component
             'user_id' => auth()->user()->name,
             'codigo' => $claim->codigoCorrelativo, // Usar el correlativo recién creado
         ]);
-    
+
         // Almacenar el ID del registro recién creado
         $this->createdId = $claim->public;
-    
+
         session()->flash('message', 'Registro CN08 registrado exitosamente.');
-    
+
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
-    
+
         // Resetear los campos del formulario
         $this->reset(['remitente', 'telf_remitente', 'email_r', 'origen', 'destinatario', 'telf_destinatario', 'email_d', 'direccion_d', 'codigo_postal', 'destino', 'codigo', 'fecha_envio', 'contenido', 'valor']);
-    
+
         $pdf = PDF::loadView('livewire.pdf-form', compact('claim'));
-    
+
         // Utiliza streamDownload para transmitir el PDF al navegador
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'Formulario Reclamo.pdf');
-    }    
+    }
 
     public function saveqa()
     {
@@ -494,7 +497,7 @@ class Dashboard extends Component
             'user_id' => auth()->user()->name,
             'codigo' => $complaint->correlativo, // Usar el correlativo recién creado
         ]);
-        
+
         // Almacenar el ID del registro recién creado
         $this->createdId = $complaint->public;
 

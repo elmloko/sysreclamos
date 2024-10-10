@@ -2,7 +2,7 @@
 -- Host:                         172.65.10.50
 -- Versión del servidor:         10.6.14-MariaDB - MariaDB Server
 -- SO del servidor:              Linux
--- HeidiSQL Versión:             12.6.0.6765
+-- HeidiSQL Versión:             12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `information` (
   `telefono` int(11) DEFAULT NULL,
   `ciudad` varchar(50) DEFAULT NULL,
   `ventanilla` varchar(50) DEFAULT NULL,
-  `last_status` varchar(50) DEFAULT NULL,
+  `last_status` text DEFAULT NULL,
   `last_description` text DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL,
   `feedback` int(11) DEFAULT NULL,
@@ -291,9 +291,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=28689 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28749 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.973 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.987 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(7100, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
 	(7104, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 2180.00, NULL),
@@ -8474,7 +8474,44 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(28671, 1727899200, 1440, 'user_request', '1', 'count', 3.00, NULL),
 	(28672, 1727893440, 10080, 'user_request', '1', 'count', 3.00, NULL),
 	(28681, 1727900220, 60, 'user_request', '1', 'count', 1.00, NULL),
-	(28682, 1727900220, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(28682, 1727900220, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28689, 1728489900, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(28690, 1728489600, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(28691, 1728489600, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(28692, 1728488160, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(28693, 1728489900, 60, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(28694, 1728489600, 360, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(28695, 1728489600, 1440, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(28696, 1728488160, 10080, 'slow_user_request', '1', 'count', 1.00, NULL),
+	(28697, 1728489900, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(28698, 1728489600, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(28699, 1728489600, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(28700, 1728488160, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(28701, 1728489900, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1042.00, NULL),
+	(28702, 1728489600, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1042.00, NULL),
+	(28703, 1728489600, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1042.00, NULL),
+	(28704, 1728488160, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1042.00, NULL),
+	(28705, 1728489900, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28706, 1728489600, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28707, 1728489600, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28708, 1728488160, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28713, 1728489900, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28714, 1728489600, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28715, 1728489600, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28716, 1728488160, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28721, 1728591840, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(28722, 1728591840, 360, 'user_request', '1', 'count', 4.00, NULL),
+	(28723, 1728591840, 1440, 'user_request', '1', 'count', 4.00, NULL),
+	(28724, 1728588960, 10080, 'user_request', '1', 'count', 4.00, NULL),
+	(28725, 1728591840, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28726, 1728591840, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28727, 1728591840, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28728, 1728588960, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28733, 1728591900, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(28734, 1728591900, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(28735, 1728591840, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(28736, 1728591840, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(28737, 1728588960, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -8489,9 +8526,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=6877 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6891 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~5.154 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~5.168 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -13776,7 +13813,21 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(6873, 1727900186, 'user_request', '1', NULL),
 	(6874, 1727900186, 'cache_hit', 'spatie.permission.cache', NULL),
 	(6875, 1727900242, 'user_request', '1', NULL),
-	(6876, 1727900242, 'cache_hit', 'spatie.permission.cache', NULL);
+	(6876, 1727900242, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6877, 1728489917, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 1042),
+	(6878, 1728489917, 'slow_user_request', '1', NULL),
+	(6879, 1728489917, 'user_request', '1', NULL),
+	(6880, 1728489918, 'user_request', '1', NULL),
+	(6881, 1728489918, 'cache_miss', 'spatie.permission.cache', NULL),
+	(6882, 1728489930, 'user_request', '1', NULL),
+	(6883, 1728489931, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6884, 1728591897, 'user_request', '1', NULL),
+	(6885, 1728591897, 'user_request', '1', NULL),
+	(6886, 1728591897, 'cache_miss', 'spatie.permission.cache', NULL),
+	(6887, 1728591914, 'user_request', '1', NULL),
+	(6888, 1728591914, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6889, 1728591921, 'user_request', '1', NULL),
+	(6890, 1728591921, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -13863,11 +13914,13 @@ CREATE TABLE IF NOT EXISTS `suggestions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.suggestions: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.suggestions: ~3 rows (aproximadamente)
 INSERT INTO `suggestions` (`id`, `correlativo`, `fullName`, `address`, `country`, `identityCard`, `codepostal`, `email`, `phone`, `description`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'SGR0001', 'NADIA RODRIGUEZ ', 'VILLA COPACABANA ', 'BOLIVIA ', NULL, 'RP849633874', 'camila.nadia16@gmail.com', '65562748', 'EXCELENTE SERVIO MEJORO BASTANTE ', 'PUBLICADO', '2024-10-01 03:51:51', '2024-10-01 03:51:51', NULL);
+	(1, 'SGR0001', 'NADIA RODRIGUEZ ', 'VILLA COPACABANA ', 'BOLIVIA ', NULL, 'RP849633874', 'camila.nadia16@gmail.com', '65562748', 'EXCELENTE SERVIO MEJORO BASTANTE ', 'PUBLICADO', '2024-10-01 03:51:51', '2024-10-01 03:51:51', NULL),
+	(2, 'SGR0002', 'HéLIO AUGUSTO FONSêCA PEREIRA', 'AV. JOSé SAMPAIO LUZ, 327 - APT 202 - P VERDE - MACEIó/AL', 'BRASIL', NULL, 'RR001702813BR', 'helio7@bol.com.br', '5582999842385', 'BUENOS DIAS!\n\nLA ENCOMIENDA RR001702813BR TODAVIA NO HA SIDO ENTREGUE.\nHAY ALGUNA DIFICULDAD? CUáL LA ESTIMATIVA PARA QUE EL SERVICIO SEA CONCLUIDO, CON LA ENTREGA .\nASí ESTá EN EL RASTREO.\n\nRECIBIR ENVíO EN OFICINA DE ENTREGA (ENTRADA)\nRR001702813BROFICINA: BOTDDB - TRINIDAD\n2024-09-27 14:40:00\n\nAGRADEZCO POR LA CONTESTACIóN.\n\nSALUDOS CORDIALES,\n\nHéLIO AUGUSTO FONSêCA PEREIRA\n\n', 'PUBLICADO', '2024-10-06 18:22:01', '2024-10-06 18:22:01', NULL),
+	(3, 'SGR0003', 'JOSE MARTIN AGUILA LAZO', 'AV. AMERICA OESTE 575', 'BOLIVIA', NULL, 'EE000679804BO', 'jmartinaguila@gmail.com', '76401343', 'AGRADECERE ME PUEDAN INFORMAR EL STATUS DE LA ENCOMIENDA CON LA GUíA DE REFERENCIA (EE000679804BO) CON DESTINO A CANADá.', 'PUBLICADO', '2024-10-08 23:40:58', '2024-10-08 23:40:58', NULL);
 
 -- Volcando estructura para tabla sysreclamos.users
 CREATE TABLE IF NOT EXISTS `users` (
