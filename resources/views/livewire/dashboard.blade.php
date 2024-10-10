@@ -374,7 +374,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="denuncianteci">CARNET DEL DENUNCIANTE</label>
-                                    <input type="text" class="form-control" id="denuncianteci"
+                                    <input type="number" class="form-control" id="denuncianteci"
                                         wire:model="denuncianteci" style="text-transform: uppercase;" required>
                                     <div class="invalid-feedback">Por favor, ingresa carnet del denunciante.</div>
                                 </div>

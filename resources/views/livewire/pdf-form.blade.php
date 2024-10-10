@@ -148,6 +148,14 @@
     <h5>Detalles del Reclamo</h5>
     <table>
         <tr>
+            <th>Nombres del Denunciante</th>
+            <td>{{ $claim->denunciante }}</td>
+        </tr>
+        <tr>
+            <th>Carnet de Identidad del Denunciante</th>
+            <td>{{ $claim->denuncianteci }}</td>
+        </tr>
+        <tr>
             <th>Detalles del Reclamo</th>
             <td>{{ $claim->reclamo }}</td>
         </tr>
