@@ -14,6 +14,7 @@ class FormPublic extends Component
     public $identityCard;
     public $codepostal;
     public $email;
+    public $ci;
     public $phone;
     public $description;
     public $recaptcha;
@@ -23,6 +24,7 @@ class FormPublic extends Component
         'country' => 'required|string|max:50',
         'email' => 'required|email|max:50',
         'phone' => 'required|integer',
+        'identityCard' => 'required|integer',
         'description' => 'required|nullable|string',
         'recaptcha' => 'required',
     ];
@@ -68,6 +70,7 @@ class FormPublic extends Component
             'codepostal' => strtoupper($this->codepostal),
             'email' => $this->email,
             'phone' => strtoupper($this->phone),
+            'identityCard' => strtoupper($this->identityCard),
             'description' => strtoupper($this->description),
             'correlativo' => $newCorrelativo,
             'estado' => 'PUBLICADO',

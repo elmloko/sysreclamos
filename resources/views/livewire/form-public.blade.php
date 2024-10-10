@@ -19,6 +19,14 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="identityCard">Carnet de Identidad</label>
+                        <input type="text" id="identityCard" name="identityCard" class="form-control"
+                            placeholder="Ej. 10203040" wire:model="identityCard" style="text-transform: uppercase;">
+                        @error('identityCard')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="address">Dirección</label>
                         <input type="text" id="address" name="address" class="form-control"
                             placeholder="Ej. Av. Los Ángeles 1025" wire:model="address"
