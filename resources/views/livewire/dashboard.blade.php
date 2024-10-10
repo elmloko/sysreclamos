@@ -552,9 +552,10 @@
     document.addEventListener('open-calificando-modal', event => {
         $('#calificandoModal').modal('show');
 
-        // Cierra el modal después de 3 segundos (3000 ms)
+        // Cierra el modal después de 5 segundos y recarga la página
         setTimeout(() => {
             $('#calificandoModal').modal('hide');
+            location.reload(); // Recarga la página después de cerrar el modal
         }, 5000);
     });
 </script>
