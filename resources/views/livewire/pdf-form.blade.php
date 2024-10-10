@@ -69,7 +69,7 @@
         </div>
         <div class="title">
             <h4>BOLETIN DE VERIFICACION INTERNACIONAL</h4>
-            <h4>CN08 - FORMULARIO DIRECTO</h4>
+            <h4>FORMULARIO DIRECTO DE RECLAMACIONES</h4>
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
         <div class="correlativo">
