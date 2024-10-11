@@ -55,12 +55,10 @@
                                         <th>Codificacion</th>
                                         <th>Denunciante</th>
                                         <th>Teléfono Denunciante</th>
+                                        <th>Email Denunciante</th>
                                         <th>Origen</th>
                                         <th>Destino</th>
                                         <th>Código de Rastreo</th>
-                                        <th>Fecha de Envío</th>
-                                        <th>Contenido</th>
-                                        <th>Valor</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
                                             <th>Ciudad</th>
@@ -76,14 +74,11 @@
                                                     value="{{ $claim->id }}"></td>
                                             <td>{{ $claim->correlativo }}</td>
                                             <td>{{ $claim->denunciante }}</td>
-                                            <td>{{ $claim->telf_remitente }}</td>
-                                            <td>{{ $claim->email_r }}</td>
+                                            <td>{{ $claim->denunciantetelf }}</td>
+                                            <td>{{ $claim->denuncianteemail }}</td>
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
-                                            <td>{{ $claim->fecha_envio }}</td>
-                                            <td>{{ $claim->contenido }}</td>
-                                            <td>{{ $claim->valor }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
