@@ -19,11 +19,10 @@ class Bajareclamos extends Component
     {
         // Obtener la ciudad del usuario autenticado
         $userCity = auth()->user()->city;
-        
-        // Filtrar los registros según el rol del usuario utilizando Spatie
-        $claim = Claim::where('estado', 'RESUELTO')
+
+        // Filtrar los registros según el rol del usuario
+        $claims = Claim::where('estado', 'RESUELTO')
             ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
-                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
                 return $query->where('ciudad', $userCity);
             })
             ->when($this->selectedDate, function ($query) {
@@ -39,15 +38,21 @@ class Bajareclamos extends Component
             })
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
-    
-        return view('livewire.bajareclamos', ['claims' => $claim]);
+
+        // Calcular los días de diferencia
+        foreach ($claims as $claim) {
+            $claim->days_difference = \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now());
+        }
+
+        return view('livewire.bajareclamos', ['claims' => $claims]);
     }
+
 
     public function exportPdf()
     {
         // Obtener la ciudad del usuario autenticado
         $userCity = auth()->user()->city;
-    
+
         // Filtrar los registros según el rol del usuario utilizando Spatie
         $claims = Claim::where('estado', 'RESUELTO')
             ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
@@ -58,14 +63,14 @@ class Bajareclamos extends Component
                 return $query->whereDate('updated_at', $this->selectedDate);
             })
             ->get();
-    
+
         $pdf = PDF::loadView('livewire.pdf-bajareclamo', compact('claims'));
-    
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Casos Resueltos.pdf');
     }
-    
+
     public function mostrarReclamo($claimId)
     {
         // Redirigir a la ruta claim.show con el ID del reclamo

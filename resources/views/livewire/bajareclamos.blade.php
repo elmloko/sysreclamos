@@ -49,9 +49,9 @@
                                     <tr>
                                         {{-- <th><input type="checkbox" wire:model="selectAll"></th> --}}
                                         <th>Codificacion</th>
-                                        <th>Remitente</th>
-                                        <th>Teléfono Remitente</th>
-                                        <th>Email Remitente</th>
+                                        <th>Denunciante</th>
+                                        <th>Teléfono Denunciante</th>
+                                        <th>Email Denunciante</th>
                                         <th>Destino</th>
                                         <th>Código</th>
                                         <th>Fecha de Envío</th>
@@ -72,8 +72,9 @@
                                             {{-- <td><input type="checkbox" wire:model="selectedClaims"
                                                     value="{{ $claim->id }}"></td> --}}
                                             <td>{{ $claim->correlativo }}</td>
-                                            <td>{{ $claim->remitente }}</td>
-                                            <td>{{ $claim->telf_remitente }}</td>
+                                            <td>{{ $claim->denunciante }}</td>
+                                            <td>{{ $claim->denunciantetelf }}</td>
+                                            <td>{{ $claim->denuncianteemail }}</td>
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>

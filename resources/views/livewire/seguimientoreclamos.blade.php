@@ -70,24 +70,24 @@
                                     @foreach ($claims as $claim)
                                         <tr>
                                             <td>{{ $claim->correlativo }}</td>
-                                            <td>{{ $claim->denunciante }}</td>
-                                            <td>{{ $claim->denunciantetelf }}</td>
-                                            <td>{{ $claim->denuncianteemail }}</td>
-                                            <td>{{ $claim->origen }}</td>
+                                            <td>{{ $claim->remitente }}</td>
+                                            <td>{{ $claim->telf_remitente }}</td>
+                                            <td>{{ $claim->email_r }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
+                                            
                                             @hasrole('SuperAdmin|Administrador')
+                                                <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
-                                            <td>{{ $claim->estado }} - {{ $claim->tipo_reclamo }}</td>
-                                            <td style="background-color: {{ $claim->color }}; color: white;">
-                                                {{ $claim->days_difference }} días
-                                            </td>
+                                            <td>{{ $claim->estado }}</td>
+                                            <td>{{ $claim->days_difference }} días</td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
                                                     <button type="button" class="btn btn-info mr-2"
-                                                        wire:click="mostrarReclamo({{ $claim->id }})" target="_blank">
+                                                        wire:click="mostrarReclamo({{ $claim->id }})"
+                                                        target="_blank">
                                                         Ver Reclamo
                                                     </button>
                                                     @hasrole('SuperAdmin|Administrador')
@@ -100,7 +100,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>                                
+                                </tbody>                                                              
                             </table>
                         </div>
                         <div class="card-footer">
