@@ -43,6 +43,10 @@ CREATE TABLE IF NOT EXISTS `claims` (
   `feedback` int(11) DEFAULT NULL,
   `ciudad` varchar(50) DEFAULT NULL,
   `tipo_reclamo` varchar(50) DEFAULT NULL,
+  `denunciante` varchar(50) DEFAULT NULL,
+  `denuncianteci` text DEFAULT NULL,
+  `denunciantetelf` text DEFAULT NULL,
+  `denuncianteemail` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -50,9 +54,9 @@ CREATE TABLE IF NOT EXISTS `claims` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla sysreclamos.claims: ~3 rows (aproximadamente)
-INSERT INTO `claims` (`id`, `correlativo`, `remitente`, `telf_remitente`, `email_r`, `origen`, `destinatario`, `telf_destinatario`, `email_d`, `direccion_d`, `codigo_postal`, `destino`, `codigo`, `fecha_envio`, `contenido`, `estado`, `valor`, `reclamo`, `public`, `feedback`, `ciudad`, `tipo_reclamo`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(1, 'RCL0001', 'RUTH VIOLETA FLORES CALDERON', '76740400', NULL, 'BOLIVIA', 'SLENKA VERONICA FLORES CALDERON', '2409213100', NULL, 'GEORGIA AVENUE #301 SILVER SPRING', NULL, 'CANADA', 'RR000739692BO', '2024-08-15 04:00:00', 'CERTIFICADO DE NOTAS', 'INFORMACIONES', 0, 'NO LLEGO LA CORESPONDENCIA A DESTINO ', 'P0001', NULL, NULL, NULL, '2024-09-17 01:19:51', '2024-09-17 01:19:51', NULL),
-	(2, 'RCL0002', 'CELIA CARLO CONDORI ', '73205218', 'celiacarlo7@gmail.com', 'BOLIVIA', 'HERNAN CARLO CONDORI ', '0959622045', 'tutucarlo@hotmail.com', 'AV PEDRO VICENTE MALDONADO 558-34 QUITO ', 170507, 'QUITO - ECUADOR ', 'RR000742192BO', '2024-08-16 04:00:00', 'DOCUMENTOS ', 'INFORMACIONES', 0, 'NO LLEGO A SU DESTINO ', 'P0002', NULL, 'LA PAZ', NULL, '2024-09-26 01:43:28', '2024-09-26 01:43:28', NULL);
+INSERT INTO `claims` (`id`, `correlativo`, `remitente`, `telf_remitente`, `email_r`, `origen`, `destinatario`, `telf_destinatario`, `email_d`, `direccion_d`, `codigo_postal`, `destino`, `codigo`, `fecha_envio`, `contenido`, `estado`, `valor`, `reclamo`, `public`, `feedback`, `ciudad`, `tipo_reclamo`, `denunciante`, `denuncianteci`, `denunciantetelf`, `denuncianteemail`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'RCL0001', 'RUTH VIOLETA FLORES CALDERON', '76740400', NULL, 'BOLIVIA', 'SLENKA VERONICA FLORES CALDERON', '2409213100', NULL, 'GEORGIA AVENUE #301 SILVER SPRING', NULL, 'CANADA', 'RR000739692BO', '2024-08-15 04:00:00', 'CERTIFICADO DE NOTAS', 'INFORMACIONES', 0, 'NO LLEGO LA CORESPONDENCIA A DESTINO ', 'P0001', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-17 01:19:51', '2024-09-17 01:19:51', NULL),
+	(2, 'RCL0002', 'CELIA CARLO CONDORI ', '73205218', 'celiacarlo7@gmail.com', 'BOLIVIA', 'HERNAN CARLO CONDORI ', '0959622045', 'tutucarlo@hotmail.com', 'AV PEDRO VICENTE MALDONADO 558-34 QUITO ', 170507, 'QUITO - ECUADOR ', 'RR000742192BO', '2024-08-16 04:00:00', 'DOCUMENTOS ', 'INFORMACIONES', 0, 'NO LLEGO A SU DESTINO ', 'P0002', NULL, 'LA PAZ', NULL, NULL, NULL, NULL, NULL, '2024-09-26 01:43:28', '2024-09-26 01:43:28', NULL);
 
 -- Volcando estructura para tabla sysreclamos.complaints
 CREATE TABLE IF NOT EXISTS `complaints` (
@@ -291,9 +295,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=28749 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28781 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.987 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7,999 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(7100, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
 	(7104, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 2180.00, NULL),
@@ -8511,7 +8515,29 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(28734, 1728591900, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(28735, 1728591840, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
 	(28736, 1728591840, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
-	(28737, 1728588960, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL);
+	(28737, 1728588960, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(28749, 1728599880, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(28750, 1728599760, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(28751, 1728599040, 1440, 'user_request', '1', 'count', 2.00, NULL),
+	(28752, 1728599040, 10080, 'user_request', '1', 'count', 2.00, NULL),
+	(28753, 1728599880, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28754, 1728599760, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28755, 1728599040, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28756, 1728599040, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28761, 1728657660, 60, 'user_request', '1', 'count', 2.00, NULL),
+	(28762, 1728657360, 360, 'user_request', '1', 'count', 2.00, NULL),
+	(28763, 1728656640, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(28764, 1728649440, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(28765, 1728657660, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28766, 1728657360, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28767, 1728656640, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28768, 1728649440, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28773, 1728657900, 60, 'user_request', '1', 'count', 1.00, NULL),
+	(28774, 1728657720, 360, 'user_request', '1', 'count', 1.00, NULL),
+	(28775, 1728657900, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28776, 1728657720, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28777, 1728656640, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(28778, 1728649440, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -8526,9 +8552,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=6891 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6899 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~5.168 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~5,176 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -13827,7 +13853,15 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(6887, 1728591914, 'user_request', '1', NULL),
 	(6888, 1728591914, 'cache_hit', 'spatie.permission.cache', NULL),
 	(6889, 1728591921, 'user_request', '1', NULL),
-	(6890, 1728591921, 'cache_hit', 'spatie.permission.cache', NULL);
+	(6890, 1728591921, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6891, 1728599925, 'user_request', '1', NULL),
+	(6892, 1728599926, 'user_request', '1', NULL),
+	(6893, 1728599926, 'cache_hit', 'spatie.permission.cache', NULL),
+	(6894, 1728657707, 'user_request', '1', NULL),
+	(6895, 1728657708, 'user_request', '1', NULL),
+	(6896, 1728657708, 'cache_miss', 'spatie.permission.cache', NULL),
+	(6897, 1728657937, 'user_request', '1', NULL),
+	(6898, 1728657937, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (

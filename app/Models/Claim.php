@@ -38,6 +38,8 @@ class Claim extends Model
         'ciudad',
         'denuncianteci',
         'denunciante',
+        'denuncianteemail',
+        'denunciantetelf',
     ];
 
     // Especificar los campos que son de tipo fecha

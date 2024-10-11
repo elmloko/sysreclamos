@@ -122,9 +122,10 @@
                         </div>
                         <div class="form-group">
                             <label for="last_description">Descripción de la Consulta</label>
-                            <textarea class="form-control" id="last_description" wire:model="last_description" style="text-transform: uppercase;" required></textarea>
+                            <textarea class="form-control" id="last_description" wire:model="last_description" style="text-transform: uppercase;"
+                                required></textarea>
                             <div class="invalid-feedback">Por favor, ingresa la descripción de la consulta.</div>
-                        </div>                        
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -257,6 +258,7 @@
                     <form id="cnForm">
                         <div class="row">
                             <div class="col-md-6">
+                                <h5>Datos de Remitente</h5>
                                 <div class="form-group">
                                     <label for="remitente">REMITENTE</label>
                                     <input type="text" class="form-control" id="remitente" wire:model="remitente"
@@ -266,7 +268,7 @@
 
                                 <div class="form-group">
                                     <label for="telf_remitente">TELÉFONO DEL REMITENTE</label>
-                                    <input type="text" class="form-control" id="telf_remitente"
+                                    <input type="number" class="form-control" id="telf_remitente"
                                         wire:model="telf_remitente" maxlength="15" required>
                                     <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
                                     </div>
@@ -309,6 +311,7 @@
                             </div>
 
                             <div class="col-md-6">
+                                <h5>Datos de Destinatario</h5>
                                 <div class="form-group">
                                     <label for="destinatario">DESTINATARIO</label>
                                     <input type="text" class="form-control" id="destinatario"
@@ -318,7 +321,7 @@
 
                                 <div class="form-group">
                                     <label for="telf_destinatario">TELÉFONO DEL DESTINATARIO</label>
-                                    <input type="text" class="form-control" id="telf_destinatario"
+                                    <input type="number" class="form-control" id="telf_destinatario"
                                         wire:model="telf_destinatario" maxlength="15">
                                     <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
                                     </div>
@@ -352,7 +355,7 @@
                                         wire:model="codigo_postal">
                                     <div class="invalid-feedback">Por favor, ingresa el código postal.</div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="codigo">CÓDIGO</label>
                                     <input type="text" class="form-control" id="codigo" wire:model="codigo"
@@ -361,12 +364,13 @@
                                 </div>
                             </div>
                         </div>
+                        <h5>Datos de Denunciante</h5>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="denunciante">NOMBRES DEL DENUNCIANTE</label>
-                                    <input type="text" class="form-control" id="denunciante" wire:model="denunciante"
-                                        style="text-transform: uppercase;" required>
+                                    <input type="text" class="form-control" id="denunciante"
+                                        wire:model="denunciante" style="text-transform: uppercase;" required>
                                     <div class="invalid-feedback">Por favor, ingresa el nombre del denunciante.</div>
                                 </div>
                             </div>
@@ -378,7 +382,24 @@
                                         wire:model="denuncianteci" style="text-transform: uppercase;" required>
                                     <div class="invalid-feedback">Por favor, ingresa carnet del denunciante.</div>
                                 </div>
-
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denunciantetelf">TELEFONO DEL DENUNCIANTE</label>
+                                    <input type="number" class="form-control" id="denunciantetelf"
+                                        wire:model="denunciantetelf" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa numero de telefono del
+                                        denunciante.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denuncianteemail">EMAIL DEL DENUNCIANTE</label>
+                                    <input type="email" class="form-control" id="denuncianteemail"
+                                        wire:model="denuncianteemail">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
