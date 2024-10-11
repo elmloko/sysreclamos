@@ -70,8 +70,7 @@
                                 <tbody>
                                     @foreach ($claims as $claim)
                                         <tr>
-                                            <td><input type="checkbox" wire:model="selectedClaims"
-                                                    value="{{ $claim->id }}"></td>
+                                            <td><input type="checkbox" wire:model="selectedClaims" value="{{ $claim->id }}"></td>
                                             <td>{{ $claim->correlativo }}</td>
                                             <td>{{ $claim->denunciante }}</td>
                                             <td>{{ $claim->denunciantetelf }}</td>
@@ -85,9 +84,12 @@
                                             @endhasrole
                                             <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->created_at }}</td>
+                                            <td style="background-color: {{ $claim->color }}; color: white;">
+                                                {{ $claim->days_difference }} días
+                                            </td>
                                         </tr>
                                     @endforeach
-                                </tbody>
+                                </tbody>                                                               
                             </table>
                         </div>
                         <div class="card-footer">

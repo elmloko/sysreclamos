@@ -26,7 +26,7 @@ class Bandejareclamos extends Component
         $userCity = auth()->user()->city;
 
         // Filtrar los registros para que solo muestren los que tienen el estado 'INFORMACIONES'
-        $claim = Claim::where('estado', 'INFORMACIONES')
+        $claims = Claim::where('estado', 'INFORMACIONES')
             ->when(auth()->user()->hasAnyRole(['Reclamos', 'Informaciones']), function ($query) use ($userCity) {
                 // Si el usuario tiene el rol 'Reclamos' o 'Informaciones', filtrar por ciudad
                 return $query->where('ciudad', $userCity);
@@ -45,7 +45,22 @@ class Bandejareclamos extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
-        return view('livewire.bandejareclamos', ['claims' => $claim]);
+        // Calcular los días de diferencia y asignar colores
+        foreach ($claims as $claim) {
+            $daysDifference = now()->diffInDays($claim->created_at);
+            if ($daysDifference >= 0 && $daysDifference <= 4) {
+                $claim->color = 'green';
+            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
+                $claim->color = 'yellow';
+            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
+                $claim->color = 'orange';
+            } else {
+                $claim->color = 'red';
+            }
+            $claim->days_difference = $daysDifference;
+        }
+
+        return view('livewire.bandejareclamos', ['claims' => $claims]);
     }
 
     public function guardarTipoReclamo()
