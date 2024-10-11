@@ -51,14 +51,12 @@
                                     <tr>
                                         {{-- <th><input type="checkbox" wire:model="selectAll"></th> --}}
                                         <th>Codificacion</th>
-                                        <th>Remitente</th>
-                                        <th>Teléfono Remitente</th>
+                                        <th>Denunciante</th>
+                                        <th>Teléfono Denunciante</th>
+                                        <th>Email Denunciante</th>
                                         <th>Origen</th>
                                         <th>Destino</th>
                                         <th>Código</th>
-                                        <th>Fecha de Envío</th>
-                                        <th>Contenido</th>
-                                        <th>Valor</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Ciudad</th>
                                         @endhasrole
@@ -71,31 +69,25 @@
                                 <tbody>
                                     @foreach ($claims as $claim)
                                         <tr>
-                                            {{-- <td><input type="checkbox" wire:model="selectedClaims"
-                                                    value="{{ $claim->id }}"></td> --}}
                                             <td>{{ $claim->correlativo }}</td>
-                                            <td>{{ $claim->remitente }}</td>
-                                            <td>{{ $claim->telf_remitente }}</td>
+                                            <td>{{ $claim->denunciante }}</td>
+                                            <td>{{ $claim->denunciantetelf }}</td>
+                                            <td>{{ $claim->denuncianteemail }}</td>
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
-                                            <td>{{ $claim->fecha_envio }}</td>
-                                            <td>{{ $claim->contenido }}</td>
-                                            <td>{{ $claim->valor }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $claim->estado }} - {{ $claim->tipo_reclamo }}</td>
-                                            <td>
-                                                {{ \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now()) }}
-                                                días
+                                            <td style="background-color: {{ $claim->color }}; color: white;">
+                                                {{ $claim->days_difference }} días
                                             </td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
                                                     <button type="button" class="btn btn-info mr-2"
-                                                        wire:click="mostrarReclamo({{ $claim->id }})"
-                                                        target="_blank">
+                                                        wire:click="mostrarReclamo({{ $claim->id }})" target="_blank">
                                                         Ver Reclamo
                                                     </button>
                                                     @hasrole('SuperAdmin|Administrador')
@@ -108,7 +100,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>
+                                </tbody>                                
                             </table>
                         </div>
                         <div class="card-footer">

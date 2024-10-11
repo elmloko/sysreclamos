@@ -32,10 +32,9 @@ class Seguimientoreclamos extends Component
         // Obtener la ciudad del usuario autenticado
         $userCity = auth()->user()->city;
 
-        // Filtrar los registros según el rol del usuario utilizando Spatie
+        // Filtrar los registros según el rol del usuario
         $claims = Claim::where('estado', 'RECLAMOS')
             ->when(auth()->user()->hasRole('Reclamos'), function ($query) use ($userCity) {
-                // Aplicar filtro de ciudad solo si el usuario tiene el rol de Reclamos
                 return $query->where('ciudad', $userCity);
             })
             ->when($this->selectedDate, function ($query) {
@@ -52,8 +51,24 @@ class Seguimientoreclamos extends Component
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
 
+        // Calcular los días de diferencia y asignar colores
+        foreach ($claims as $claim) {
+            $daysDifference = Carbon::parse($claim->fecha_envio)->diffInDays(Carbon::now());
+            if ($daysDifference >= 0 && $daysDifference <= 4) {
+                $claim->color = 'green';
+            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
+                $claim->color = 'yellow';
+            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
+                $claim->color = 'orange';
+            } else {
+                $claim->color = 'red';
+            }
+            $claim->days_difference = $daysDifference;
+        }
+
         return view('livewire.seguimientoreclamos', ['claims' => $claims]);
     }
+
 
     public function savecn()
     {
