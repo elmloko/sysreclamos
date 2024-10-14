@@ -72,7 +72,7 @@
                                                 <td>{{ $record->ciudad }}</td>
                                             @endhasrole
                                             <td>
-                                                @if($record->estado == 'SAC')
+                                                @if($record->estado == 'SAC AUTOMATICO')
                                                     AUTOMATICO
                                                 @elseif($record->estado == 'SAC MANUAL')
                                                     MANUAL

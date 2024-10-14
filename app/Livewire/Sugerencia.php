@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Suggestion;
+use App\Models\Event;
 use PDF;
 
 class Sugerencia extends Component
@@ -51,6 +52,11 @@ class Sugerencia extends Component
 
         $pdf = PDF::loadView('livewire.pdf-sugerencia', compact('suggestions'));
 
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Sugerencias',
+            'user_id' => auth()->user()->name,
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Quejas Operativas' . ($this->selectedDate ?? 'all') . '.pdf');

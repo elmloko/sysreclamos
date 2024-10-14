@@ -176,7 +176,7 @@ class Dashboard extends Component
             'last_date' => isset($latestEvent['updated_at']) ? Carbon::createFromFormat('d/m/Y H:i:s', $latestEvent['updated_at'])->format('Y-m-d H:i:s') : null,
             'correlativo' => $codigoCorrelativo,
             'public' => $publicoCorrelativo,
-            'estado' => 'SAC MANUAL',
+            'estado' => 'SAC AUTOMATICO',
             'created_at' => Carbon::now(),
         ]);
     

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Information;
+use App\Models\Event;
 use PDF;
 
 class Records extends Component
@@ -62,6 +63,11 @@ class Records extends Component
     
         $pdf = PDF::loadView('livewire.pdf-records', compact('records'));
     
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Informaciones',
+            'user_id' => auth()->user()->name,
+        ]);
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'records_' . ($this->selectedDate ?? 'all') . '.pdf');

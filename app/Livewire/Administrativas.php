@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Complaint;
+use App\Models\Event;
 use PDF;
 
 class Administrativas extends Component
@@ -67,6 +68,12 @@ class Administrativas extends Component
             ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandejaq', compact('complaints'));
+
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Quejas Administrativas',
+            'user_id' => auth()->user()->name,
+        ]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();

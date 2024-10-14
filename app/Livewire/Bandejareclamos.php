@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
+use App\Models\Event;
 use PDF;
 
 class Bandejareclamos extends Component
@@ -69,14 +70,28 @@ class Bandejareclamos extends Component
             // Actualizar estado y tipo de reclamo
             Claim::whereIn('id', $this->selectedClaims)
                 ->update(['estado' => 'RECLAMOS', 'tipo_reclamo' => $this->tipoReclamo]);
-
+            
+            // Recorrer las reclamaciones seleccionadas para registrar un evento por cada una
+            foreach ($this->selectedClaims as $claimId) {
+                // Obtener el correlativo del reclamo
+                $claim = Claim::find($claimId);
+    
+                // Crear el evento para cada reclamo
+                Event::create([
+                    'action' => 'RECLAMO PROCESADO',
+                    'descripcion' => 'Reclamo recibido y procesado por el área de atención a reclamos.',
+                    'user_id' => auth()->user()->name,
+                    'codigo' => $claim->correlativo,
+                ]);
+            }
+    
             session()->flash('message', 'Reclamo recibido y tipo de reclamo guardado con éxito!');
             $this->reset(['selectedClaims', 'selectAll', 'tipoReclamo']); // Resetear las selecciones
             $this->dispatch('modal-close'); // Cerrar el modal
         } else {
             session()->flash('error', 'No has seleccionado ningún reclamo o no has seleccionado el tipo de reclamo.');
         }
-    }
+    }    
 
     public function updatedSelectAll($value)
     {
@@ -104,6 +119,12 @@ class Bandejareclamos extends Component
             ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandeja', compact('claims'));
+
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Bandeja de Reclamos',
+            'user_id' => auth()->user()->name,
+        ]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();

@@ -97,9 +97,7 @@
                 <th>Teléfono</th>
                 <th>Ciudad</th>
                 <th>Ventanilla</th>
-                <th>Último Estado</th>
                 <th>Descripción</th>
-                <th>Fecha del Último Evento</th>
                 <th>Estado</th>
                 <th>Feedback</th>
                 <th>Creado</th>
@@ -116,11 +114,9 @@
                     <td>{{ $record->telefono }}</td>
                     <td>{{ $record->ciudad }}</td>
                     <td>{{ $record->ventanilla }}</td>
-                    <td>{{ $record->last_status }}</td>
                     <td>{{ $record->last_description }}</td>
-                    <td>{{ $record->last_date }}</td>
                     <td>
-                        @if($record->estado == 'SAC')
+                        @if($record->estado == 'SAC AUTOMATICO')
                             AUTOMATICO
                         @elseif($record->estado == 'SAC MANUAL')
                             MANUAL

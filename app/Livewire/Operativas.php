@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Complaint;
+use App\Models\Event;
 use PDF;
 
 class Operativas extends Component
@@ -55,7 +56,7 @@ class Operativas extends Component
 
         // Filtrar los registros según el rol del usuario para el PDF
         $complaints = Complaint::where('estado', 'RECEPCIONADO')
-            ->where('tipo', 'ADMINISTRATIVO')
+            ->where('tipo', 'OPERATIVO')
             ->when(auth()->user()->hasRole('Informaciones'), function ($query) use ($userCity) {
                 // Filtrar por la ciudad del usuario solo si tiene el rol de Reclamos
                 return $query->where('ciudad', $userCity);
@@ -67,9 +68,15 @@ class Operativas extends Component
 
         $pdf = PDF::loadView('livewire.pdf-bandejaq', compact('complaints'));
 
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Quejas Operativas',
+            'user_id' => auth()->user()->name,
+        ]);
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Quejas Administrativas' . ($this->selectedDate ?? 'all') . '.pdf');
+        }, 'Quejas Operativas' . ($this->selectedDate ?? 'all') . '.pdf');
     }
 
     public function mostrarQueja($claimId)
