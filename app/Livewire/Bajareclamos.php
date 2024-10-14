@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
 use App\Models\Event;
+use Carbon\Carbon;
 use PDF;
 
 class Bajareclamos extends Component
@@ -40,9 +41,19 @@ class Bajareclamos extends Component
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
 
-        // Calcular los días de diferencia
+        // Calcular los días de diferencia y asignar colores
         foreach ($claims as $claim) {
-            $claim->days_difference = \Carbon\Carbon::parse($claim->fecha_envio)->diffInDays(\Carbon\Carbon::now());
+            $daysDifference = Carbon::parse($claim->fecha_envio)->diffInDays(Carbon::now());
+            if ($daysDifference >= 0 && $daysDifference <= 4) {
+                $claim->color = 'green';
+            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
+                $claim->color = 'yellow';
+            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
+                $claim->color = 'orange';
+            } else {
+                $claim->color = 'red';
+            }
+            $claim->days_difference = $daysDifference;
         }
 
         return view('livewire.bajareclamos', ['claims' => $claims]);

@@ -60,6 +60,7 @@
                                             <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
+                                        <th>Tiempo Trascurrido</th>
                                         <th>Actualizado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -81,6 +82,7 @@
                                                 <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $claim->estado }}</td>
+                                            <td>{{ $claim->days_difference }} días</td>
                                             <td>{{ $claim->updated_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
