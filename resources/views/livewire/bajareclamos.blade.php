@@ -52,18 +52,16 @@
                                         <th>Denunciante</th>
                                         <th>Teléfono Denunciante</th>
                                         <th>Email Denunciante</th>
+                                        <th>Origen</th>
                                         <th>Destino</th>
                                         <th>Código</th>
-                                        <th>Fecha de Envío</th>
-                                        <th>Contenido</th>
-                                        <th>Valor</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
                                             <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
                                         <th>Actualizado</th>
-                                        {{-- <th>Acciones</th> --}}
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,9 +76,6 @@
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
-                                            <td>{{ $claim->fecha_envio }}</td>
-                                            <td>{{ $claim->contenido }}</td>
-                                            <td>{{ $claim->valor }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>

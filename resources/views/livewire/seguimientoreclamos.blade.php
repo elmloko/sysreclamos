@@ -58,7 +58,8 @@
                                         <th>Destino</th>
                                         <th>Código</th>
                                         @hasrole('SuperAdmin|Administrador')
-                                            <th>Ciudad</th>
+                                        <th>Calificacion</th>    
+                                        <th>Ciudad</th>
                                         @endhasrole
                                         <th>Estado</th>
                                         <th>Tiempo Trascurrido</th>
@@ -70,12 +71,12 @@
                                     @foreach ($claims as $claim)
                                         <tr>
                                             <td>{{ $claim->correlativo }}</td>
-                                            <td>{{ $claim->remitente }}</td>
-                                            <td>{{ $claim->telf_remitente }}</td>
-                                            <td>{{ $claim->email_r }}</td>
+                                            <td>{{ $claim->denunciante }}</td>
+                                            <td>{{ $claim->denunciantetelf }}</td>
+                                            <td>{{ $claim->denuncianteemail }}</td>
+                                            <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
-                                            
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
@@ -100,7 +101,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>                                                              
+                                </tbody>
                             </table>
                         </div>
                         <div class="card-footer">
@@ -127,6 +128,7 @@
                     <form id="cnForm" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6">
+                                <h5>Datos de Remitente</h5>
                                 <div class="form-group">
                                     <label for="remitente">REMITENTE</label>
                                     <input type="text" class="form-control" id="remitente" wire:model="remitente"
@@ -136,7 +138,7 @@
 
                                 <div class="form-group">
                                     <label for="telf_remitente">TELÉFONO DEL REMITENTE</label>
-                                    <input type="text" class="form-control" id="telf_remitente"
+                                    <input type="number" class="form-control" id="telf_remitente"
                                         wire:model="telf_remitente" maxlength="15" required>
                                     <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.</div>
                                 </div>
@@ -177,6 +179,7 @@
                             </div>
 
                             <div class="col-md-6">
+                                <h5>Datos de Destinatario</h5>
                                 <div class="form-group">
                                     <label for="destinatario">DESTINATARIO</label>
                                     <input type="text" class="form-control" id="destinatario"
@@ -186,7 +189,7 @@
 
                                 <div class="form-group">
                                     <label for="telf_destinatario">TELÉFONO DEL DESTINATARIO</label>
-                                    <input type="text" class="form-control" id="telf_destinatario"
+                                    <input type="number" class="form-control" id="telf_destinatario"
                                         wire:model="telf_destinatario" maxlength="15">
                                     <div class="invalid-feedback">Por favor, ingresa un número de teléfono válido.
                                     </div>
@@ -239,7 +242,44 @@
                                 </div>
                             </div>
                         </div>
+                        <h5>Datos de Denunciante</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denunciante">NOMBRES DEL DENUNCIANTE</label>
+                                    <input type="text" class="form-control" id="denunciante"
+                                        wire:model="denunciante" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del denunciante.</div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denuncianteci">CARNET DEL DENUNCIANTE</label>
+                                    <input type="number" class="form-control" id="denuncianteci"
+                                        wire:model="denuncianteci" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa carnet del denunciante.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denunciantetelf">TELEFONO DEL DENUNCIANTE</label>
+                                    <input type="number" class="form-control" id="denunciantetelf"
+                                        wire:model="denunciantetelf" style="text-transform: uppercase;" required>
+                                    <div class="invalid-feedback">Por favor, ingresa numero de telefono del
+                                        denunciante.</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="denuncianteemail">EMAIL DEL DENUNCIANTE</label>
+                                    <input type="email" class="form-control" id="denuncianteemail"
+                                        wire:model="denuncianteemail">
+                                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="reclamo">DESCRIPCIÓN DEL RECLAMO</label>
                             <textarea class="form-control" id="reclamo" wire:model="reclamo" rows="5"

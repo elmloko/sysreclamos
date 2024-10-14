@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
+use App\Models\Event;
 use Carbon\Carbon;
 use PDF;
 
@@ -14,7 +15,7 @@ class Seguimientoreclamos extends Component
 
     // Propiedades del formulario de reclamo
     public $remitente, $telf_remitente, $email_r, $origen, $contenido, $valor, $fecha_envio;
-    public $destinatario, $telf_destinatario, $email_d, $destino, $direccion_d, $codigo_postal, $codigo, $reclamo;
+    public $destinatario, $telf_destinatario, $email_d, $destino, $direccion_d, $codigo_postal, $codigo, $reclamo, $denunciante, $denuncianteci,$denuncianteemail,$denunciantetelf;
 
     public $perPage = 10;
     public $selectedDate;
@@ -89,6 +90,10 @@ class Seguimientoreclamos extends Component
             'reclamo' => 'required|string|max:255',
             'valor' => 'required|numeric',
             'tipo_reclamo' => 'required|in:ENTRADA,SALIDA',
+            'denunciante' => 'required|string|max:255',
+            'denuncianteci' => 'required|numeric',
+            'denuncianteemail' => 'nullable|email|max:255',
+            'denunciantetelf' => 'required|numeric',
         ]);
 
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
@@ -127,9 +132,20 @@ class Seguimientoreclamos extends Component
             'valor' => $this->valor,
             'correlativo' => $codigoCorrelativo,
             'estado' => 'RECLAMOS',
+            'denunciante' => strtoupper($this->denunciante),
+            'denuncianteci' => strtoupper($this->denuncianteci),
+            'denunciantetelf' => $this->denunciantetelf,
+            'denuncianteemail' => $this->denuncianteemail,
+            'ciudad' => auth()->user()->city,
             'created_at' => Carbon::now(),
         ]);
 
+        Event::create([
+            'action' => 'RECLAMO',
+            'descripcion' => 'Registro Reclamo por Área de Reclamos',
+            'user_id' => auth()->user()->name,
+            'codigo' => $claim->codigoCorrelativo, // Usar el correlativo recién creado
+        ]);
         // Almacenar el ID del registro recién creado
         $this->createdId = $claim->public;
 
@@ -155,11 +171,17 @@ class Seguimientoreclamos extends Component
                 return $query->where('ciudad', $userCity);
             })
             ->when($this->selectedDate, function ($query) {
-                return $query->whereDate('created_at', $this->selectedDate);
+                return $query->whereDate('updated_at', $this->selectedDate);
             })
             ->get();
 
         $pdf = PDF::loadView('livewire.pdf-bandeja', compact('claims'));
+
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Seguimiento de Reclamos',
+            'user_id' => auth()->user()->name,
+        ]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
@@ -200,6 +222,12 @@ class Seguimientoreclamos extends Component
             $claim->update([
                 'deleted_at' => now(),
                 'estado' => 'RESUELTO'
+            ]);
+            Event::create([
+                'action' => 'RESUELTO',
+                'descripcion' => 'Reclamo Cerrado.',
+                'user_id' => auth()->user()->name,
+                'codigo' => $claim->correlativo,
             ]);
             session()->flash('message', 'Reclamo dado de baja y marcado como resuelto con éxito.');
         } else {

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Claim;
+use App\Models\Event;
 use PDF;
 
 class Bajareclamos extends Component
@@ -66,6 +67,12 @@ class Bajareclamos extends Component
 
         $pdf = PDF::loadView('livewire.pdf-bajareclamo', compact('claims'));
 
+        Event::create([
+            'action' => 'REPORTE',
+            'descripcion' => 'Generar Reporte para Inventario de Reclamos',
+            'user_id' => auth()->user()->name,
+        ]);
+
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Casos Resueltos.pdf');
@@ -84,6 +91,12 @@ class Bajareclamos extends Component
             $claim->update([
                 'estado' => 'RECLAMOS',
                 'deleted_at' => null // Si estás utilizando SoftDeletes y quieres restaurarlo
+            ]);
+            Event::create([
+                'action' => 'ALTA',
+                'descripcion' => 'Reclamo Aperturado.',
+                'user_id' => auth()->user()->name,
+                'codigo' => $claim->correlativo,
             ]);
             session()->flash('message', 'Reclamo dado de alta y marcado como RECLAMOS con éxito.');
         } else {
