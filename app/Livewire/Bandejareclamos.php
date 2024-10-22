@@ -46,23 +46,59 @@ class Bandejareclamos extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
-        // Calcular los días de diferencia y asignar colores
+        // Calcular el tiempo y asignar colores
         foreach ($claims as $claim) {
-            $daysDifference = now()->diffInDays($claim->created_at);
-            if ($daysDifference >= 0 && $daysDifference <= 4) {
-                $claim->color = 'green';
-            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
-                $claim->color = 'yellow';
-            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
-                $claim->color = 'orange';
-            } else {
-                $claim->color = 'red';
+            // Inicializar la variable de diferencia de tiempo
+            $timeDifference = 0;
+            $timeUnit = '';
+
+            // Determinar el tipo de reclamo y calcular el tiempo según corresponda
+            if ($claim->tipo_envio == 'LOCAL') {
+                // Calcular en horas
+                $timeDifference = now()->diffInHours($claim->created_at);
+                $timeUnit = 'horas';
+                // Asignar color según el tiempo en horas
+                if ($timeDifference >= 0 && $timeDifference <= 8) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 9 && $timeDifference <= 16) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
+            } elseif ($claim->tipo_envio == 'NACIONAL') {
+                // Calcular en días
+                $timeDifference = now()->diffInDays($claim->created_at);
+                $timeUnit = 'días';
+                // Asignar color según el tiempo en días
+                if ($timeDifference >= 0 && $timeDifference <= 5) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 6 && $timeDifference <= 10) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
+            } elseif ($claim->tipo_envio == 'INTERNACIONAL') {
+                // Calcular en días
+                $timeDifference = now()->diffInDays($claim->created_at);
+                $timeUnit = 'días';
+                // Asignar color según el tiempo en días
+                if ($timeDifference >= 0 && $timeDifference <= 2) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 3 && $timeDifference <= 5) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
             }
-            $claim->days_difference = $daysDifference;
+
+            // Guardar el tiempo de diferencia en horas o días
+            $claim->time_difference = $timeDifference;
+            $claim->time_unit = $timeUnit;
         }
 
         return view('livewire.bandejareclamos', ['claims' => $claims]);
     }
+
 
     public function guardarTipoReclamo()
     {
@@ -70,12 +106,12 @@ class Bandejareclamos extends Component
             // Actualizar estado y tipo de reclamo
             Claim::whereIn('id', $this->selectedClaims)
                 ->update(['estado' => 'RECLAMOS', 'tipo_reclamo' => $this->tipoReclamo]);
-            
+
             // Recorrer las reclamaciones seleccionadas para registrar un evento por cada una
             foreach ($this->selectedClaims as $claimId) {
                 // Obtener el correlativo del reclamo
                 $claim = Claim::find($claimId);
-    
+
                 // Crear el evento para cada reclamo
                 Event::create([
                     'action' => 'RECLAMO PROCESADO',
@@ -84,14 +120,14 @@ class Bandejareclamos extends Component
                     'codigo' => $claim->correlativo,
                 ]);
             }
-    
+
             session()->flash('message', 'Reclamo recibido y tipo de reclamo guardado con éxito!');
             $this->reset(['selectedClaims', 'selectAll', 'tipoReclamo']); // Resetear las selecciones
             $this->dispatch('modal-close'); // Cerrar el modal
         } else {
             session()->flash('error', 'No has seleccionado ningún reclamo o no has seleccionado el tipo de reclamo.');
         }
-    }    
+    }
 
     public function updatedSelectAll($value)
     {

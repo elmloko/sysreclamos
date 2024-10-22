@@ -59,6 +59,7 @@
                                         <th>Origen</th>
                                         <th>Destino</th>
                                         <th>Código de Rastreo</th>
+                                        <th>Tipo de Envio</th>
                                         @hasrole('SuperAdmin|Administrador')
                                             <th>Calificacion</th>
                                             <th>Ciudad</th>
@@ -78,6 +79,7 @@
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
+                                            <td>{{ $claim->tipo_envio }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
@@ -85,7 +87,7 @@
                                             <td>{{ $claim->estado }}</td>
                                             <td>{{ $claim->created_at }}</td>
                                             <td style="background-color: {{ $claim->color }}; color: white;">
-                                                {{ $claim->days_difference }} días
+                                                {{ $claim->time_difference }} {{ $claim->time_unit }}
                                             </td>
                                         </tr>
                                     @endforeach
