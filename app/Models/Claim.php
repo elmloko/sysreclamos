@@ -40,6 +40,7 @@ class Claim extends Model
         'denunciante',
         'denuncianteemail',
         'denunciantetelf',
+        'tipo_envio',
     ];
 
     // Especificar los campos que son de tipo fecha

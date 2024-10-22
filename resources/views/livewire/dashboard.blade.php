@@ -70,26 +70,38 @@
 
     <div style="text-align: right; margin-top: 20px;">
         @if ($additionalInfo)
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal">
-                Registro AUTOMATICO
-            </button>
+            @hasrole('SuperAdmin|Administrador|Informaciones')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atmModal">
+                    Registro AUTOMATICO
+                </button>}
+            @endhasrole
         @else
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sacModal">
-                Registro MANUAL
-            </button>
+            @hasrole('SuperAdmin|Administrador|Informaciones')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sacModal">
+                    Registro MANUAL
+                </button>
+            @endhasrole
         @endif
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
-            Registro Llamadas
-        </button>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qaModal">
-            Queja ADMINISTRATIVA
-        </button>
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qoModal">
-            Queja OPERATIVA
-        </button>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cnModal">
-            Registro de Reclamo
-        </button>
+        @hasrole('SuperAdmin|Administrador|Informaciones')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#llamadaModal">
+                Registro Llamadas
+            </button>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador|Informaciones')
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qaModal">
+                Queja ADMINISTRATIVA
+            </button>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador|Reclamos')
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#qoModal">
+                Queja OPERATIVA
+            </button>
+            @hasrole('SuperAdmin|Administrador|Reclamos')
+            @endhasrole
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cnModal">
+                Registro de Reclamo
+            </button>
+        @endhasrole
 
     </div>
 
@@ -256,6 +268,30 @@
                 </div>
                 <div class="modal-body">
                     <form id="cnForm">
+                        <div class="form-group">
+                            <label for="tipo_envio">TIPO DE ENVÍO</label>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4 form-check">
+                                        <input class="form-check-input" type="radio" name="tipo_envio"
+                                            id="local" value="LOCAL" wire:model="tipo_envio" required>
+                                        <label class="form-check-label" for="local">LOCAL</label>
+                                    </div>
+                                    <div class="col-md-4 form-check">
+                                        <input class="form-check-input" type="radio" name="tipo_envio"
+                                            id="nacional" value="NACIONAL" wire:model="tipo_envio" required>
+                                        <label class="form-check-label" for="nacional">NACIONAL</label>
+                                    </div>
+                                    <div class="col-md-4 form-check">
+                                        <input class="form-check-input" type="radio" name="tipo_envio"
+                                            id="internacional" value="INTERNACIONAL" wire:model="tipo_envio"
+                                            required>
+                                        <label class="form-check-label" for="internacional">INTERNACIONAL</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invalid-feedback">Por favor, selecciona el tipo de envío.</div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <h5>Datos de Remitente</h5>

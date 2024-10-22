@@ -39,6 +39,7 @@ class Dashboard extends Component
     public $cliente;
     public $telf;
     public $ci;
+    public $tipo_envio;
     public $email;
     public $queja;
     public $funcionario;
@@ -322,6 +323,7 @@ class Dashboard extends Component
             'denuncianteci' => 'required|numeric',
             'denuncianteemail' => 'nullable|email|max:255',
             'denunciantetelf' => 'required|numeric',
+            'tipo_envio' => 'required|string|in:LOCAL,NACIONAL,INTERNACIONAL',
         ]);
 
         // Obtener el último registro de Claim para determinar el siguiente número correlativo
@@ -363,6 +365,7 @@ class Dashboard extends Component
             'denuncianteci' => strtoupper($this->denuncianteci),
             'denunciantetelf' => $this->denunciantetelf,
             'denuncianteemail' => $this->denuncianteemail,
+            'tipo_envio' => $this->tipo_envio,
             'created_at' => Carbon::now(),
         ]);
 
