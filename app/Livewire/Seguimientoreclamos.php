@@ -15,7 +15,7 @@ class Seguimientoreclamos extends Component
 
     // Propiedades del formulario de reclamo
     public $remitente, $telf_remitente, $email_r, $origen, $contenido, $valor, $fecha_envio;
-    public $destinatario, $telf_destinatario, $email_d, $destino, $direccion_d, $codigo_postal, $codigo, $reclamo, $denunciante, $denuncianteci,$denuncianteemail,$denunciantetelf;
+    public $destinatario, $telf_destinatario, $email_d, $destino, $direccion_d, $codigo_postal, $codigo, $reclamo, $denunciante, $denuncianteci, $denuncianteemail, $denunciantetelf;
 
     public $perPage = 10;
     public $selectedDate;
@@ -52,19 +52,56 @@ class Seguimientoreclamos extends Component
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
 
-        // Calcular los días de diferencia y asignar colores
+        // Calcular el tiempo y asignar colores según el tipo de envío
         foreach ($claims as $claim) {
-            $daysDifference = Carbon::parse($claim->fecha_envio)->diffInDays(Carbon::now());
-            if ($daysDifference >= 0 && $daysDifference <= 4) {
-                $claim->color = 'green';
-            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
-                $claim->color = 'yellow';
-            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
-                $claim->color = 'orange';
-            } else {
-                $claim->color = 'red';
+            $timeDifference = 0;
+            $timeUnit = '';
+
+            // Determinar el tipo de reclamo y calcular el tiempo
+            if ($claim->tipo_envio == 'LOCAL') {
+                // Calcular en horas
+                $timeDifference = Carbon::parse($claim->created_at)->diffInHours(Carbon::now());
+                $timeUnit = 'horas';
+
+                // Asignar color según el tiempo en horas
+                if ($timeDifference >= 0 && $timeDifference <= 8) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 9 && $timeDifference <= 16) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
+            } elseif ($claim->tipo_envio == 'NACIONAL') {
+                // Calcular en días
+                $timeDifference = Carbon::parse($claim->created_at)->diffInDays(Carbon::now());
+                $timeUnit = 'días';
+
+                // Asignar color según el tiempo en días
+                if ($timeDifference >= 0 && $timeDifference <= 5) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 6 && $timeDifference <= 10) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
+            } elseif ($claim->tipo_envio == 'INTERNACIONAL') {
+                // Calcular en días
+                $timeDifference = Carbon::parse($claim->created_at)->diffInDays(Carbon::now());
+                $timeUnit = 'días';
+
+                // Asignar color según el tiempo en días
+                if ($timeDifference >= 0 && $timeDifference <= 2) {
+                    $claim->color = 'green';
+                } elseif ($timeDifference >= 3 && $timeDifference <= 5) {
+                    $claim->color = 'yellow';
+                } else {
+                    $claim->color = 'red';
+                }
             }
-            $claim->days_difference = $daysDifference;
+
+            // Guardar el tiempo de diferencia y la unidad de tiempo
+            $claim->time_difference = $timeDifference;
+            $claim->time_unit = $timeUnit;
         }
 
         return view('livewire.seguimientoreclamos', ['claims' => $claims]);

@@ -78,7 +78,6 @@
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
                                             @hasrole('SuperAdmin|Administrador')
-                                                <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
                                             <td>{{ $claim->estado }}</td>

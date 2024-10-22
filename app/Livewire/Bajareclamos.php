@@ -41,18 +41,12 @@ class Bajareclamos extends Component
             ->orderBy('updated_at', 'desc')
             ->paginate($this->perPage);
 
-        // Calcular los días de diferencia y asignar colores
+        // Calcular la diferencia en días entre created_at y updated_at
         foreach ($claims as $claim) {
-            $daysDifference = Carbon::parse($claim->fecha_envio)->diffInDays(Carbon::now());
-            if ($daysDifference >= 0 && $daysDifference <= 4) {
-                $claim->color = 'green';
-            } elseif ($daysDifference >= 5 && $daysDifference <= 9) {
-                $claim->color = 'yellow';
-            } elseif ($daysDifference >= 10 && $daysDifference <= 14) {
-                $claim->color = 'orange';
-            } else {
-                $claim->color = 'red';
-            }
+            // Calcular la diferencia en días
+            $daysDifference = Carbon::parse($claim->created_at)->diffInDays(Carbon::parse($claim->updated_at));
+
+            // Almacenar la diferencia de días en el objeto claim
             $claim->days_difference = $daysDifference;
         }
 

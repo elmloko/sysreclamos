@@ -56,12 +56,12 @@
                                         <th>Email Denunciante</th>
                                         <th>Origen</th>
                                         <th>Destino</th>
-                                        <th>Código</th>
+                                        <th>Código de Rastreo</th>
+                                        <th>Tipo de Envio</th>
                                         @hasrole('SuperAdmin|Administrador')
-                                        <th>Calificacion</th>    
-                                        <th>Ciudad</th>
+                                            <th>Calificacion</th>
+                                            <th>Ciudad</th>
                                         @endhasrole
-                                        <th>Estado</th>
                                         <th>Tiempo Trascurrido</th>
                                         <th>Fecha Recibido</th>
                                         <th>Acciones</th>
@@ -77,13 +77,15 @@
                                             <td>{{ $claim->origen }}</td>
                                             <td>{{ $claim->destino }}</td>
                                             <td>{{ $claim->codigo }}</td>
+                                            <td>{{ $claim->tipo_envio }}</td>
                                             @hasrole('SuperAdmin|Administrador')
                                                 <td>{{ $claim->feedback ?? 0 }}</td>
                                                 <td>{{ $claim->ciudad }}</td>
                                             @endhasrole
-                                            <td>{{ $claim->estado }}</td>
-                                            <td>{{ $claim->days_difference }} días</td>
-                                            <td>{{ $claim->updated_at }}</td>
+                                            <td style="background-color: {{ $claim->color }}; color: white;">
+                                                {{ $claim->time_difference }} {{ $claim->time_unit }}
+                                            </td>
+                                            <td>{{ $claim->created_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
                                                     <button type="button" class="btn btn-info mr-2"
