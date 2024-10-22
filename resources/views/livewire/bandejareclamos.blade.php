@@ -51,7 +51,7 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox" wire:model="selectAll"></th>
+                                        <th></th>
                                         <th>Codificacion</th>
                                         <th>Denunciante</th>
                                         <th>Teléfono Denunciante</th>
