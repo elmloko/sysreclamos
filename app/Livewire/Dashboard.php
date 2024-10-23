@@ -10,6 +10,7 @@ use App\Models\Information;
 use PDF;
 use App\Models\Claim;
 use App\Models\Event;
+use App\Models\Suggestion;
 use App\Models\Complaint;
 
 class Dashboard extends Component
@@ -49,10 +50,20 @@ class Dashboard extends Component
     public $denunciante;
     public $denunciantetelf;
     public $denuncianteemail;
+    public $suggestionsCountToday;
+    public $claimsCountToday;
+    public $complaintsCountTodayadm;
+    public $complaintsCountTodayop;
+    public $informationCountToday;
+    public $claimsCount;
+    public $claimsCountlocal;
+    public $claimsCountinter;
+    public $claimsCountnat;
 
     public function mount($view = 'dashboard')
     {
         $this->view = $view;
+        $this->loadStatistics();
     }
 
     public function search()
@@ -139,19 +150,19 @@ class Dashboard extends Component
         usort($this->events, function ($a, $b) {
             return strtotime($b['updated_at']) - strtotime($a['updated_at']);
         });
-    
+
         // Recupera el evento más reciente
         $latestEvent = $this->events[0] ?? null;
-    
+
         // Obtener la descripción más reciente
         $this->last_status = substr(($latestEvent['action'] ?? ''), 0, 255);
-    
+
         // Obtener el último registro de Information con el estado "SAC MANUAL" para determinar el siguiente número correlativo
         $lastRecord = Information::where('estado', 'SAC MANUAL')
             ->where('correlativo', 'LIKE', 'INFSAM%')
             ->orderBy('id', 'desc')
             ->first();
-    
+
         // Si existe un registro anterior, incrementar el número correlativo, de lo contrario, comenzar en 1
         if ($lastRecord) {
             $lastCorrelativo = intval(substr($lastRecord->correlativo, 6));
@@ -159,11 +170,11 @@ class Dashboard extends Component
         } else {
             $newCorrelativo = '0001';
         }
-    
+
         // Crear el nuevo código correlativo
         $codigoCorrelativo = 'INFSAM' . $newCorrelativo;
         $publicoCorrelativo = 'T' . $newCorrelativo;
-    
+
         // Crear el nuevo registro en la base de datos
         $information = Information::create([
             'codigo' => $this->codigo,
@@ -180,21 +191,21 @@ class Dashboard extends Component
             'estado' => 'SAC AUTOMATICO',
             'created_at' => Carbon::now(),
         ]);
-    
+
         Event::create([
             'action' => 'INFORMACIONES',
             'descripcion' => 'Consulta SAC Automático',
             'user_id' => auth()->user()->name,
             'codigo' => $information->correlativo,
         ]);
-    
+
         $this->createdId = $information->public;
-    
+
         session()->flash('message', 'Información guardada exitosamente.');
-    
+
         // Resetear los campos del formulario
         $this->reset(['codigo', 'destinatario', 'telefono', 'last_description']);
-    
+
         // Emitir un evento para cerrar el modal y abrir el modal de calificación
         $this->dispatch('close-modal');
         $this->dispatch('open-calificando-modal');
@@ -533,12 +544,62 @@ class Dashboard extends Component
         }, 'Formulario Queja Operativa.pdf');
     }
 
+    protected function loadStatistics()
+    {
+        $this->suggestionsCountToday = Suggestion::whereDate('created_at', Carbon::today())->count();
+        $this->claimsCountToday = Claim::whereDate('created_at', Carbon::today())->count();
+        $this->complaintsCountTodayop = Complaint::where('tipo', 'OPERATIVO')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+        $this->complaintsCountTodayadm = Complaint::where('tipo', 'ADMINISTRATIVO')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+        $this->informationCountToday = Information::whereDate('created_at', Carbon::today())->count();
+        $this->claimsCount = Claim::where('estado', 'INFORMACIONES')->count();
+        $this->claimsCountlocal = Claim::where('tipo_envio', 'LOCAL')
+            ->whereBetween('created_at', [Carbon::now()->subHours(24), Carbon::now()->subHours(12)])
+            ->count();
+        $this->claimsCountinter = Claim::where('tipo_envio', 'INTERNACIONAL')
+            ->whereBetween('created_at', [Carbon::now()->subDays(7), Carbon::now()->subDays(5)])
+            ->count();
+        $this->claimsCountnat = Claim::where('tipo_envio', 'NACIONAL')
+            ->whereBetween('created_at', [Carbon::now()->subDays(10), Carbon::now()->subDays(15)])
+            ->count();
+    }
+
     public function render()
     {
         if ($this->view === 'feedback') {
             return view('livewire.feedback');
         }
 
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Informaciones', 'Administrador']) && $this->suggestionsCountToday > 0) {
+            toastr()->warning("TIENES NUEVA SUGERENCIA EN EL LIBRO DE SUGERENCIAS :{$this->suggestionsCountToday} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Administrador']) && $this->complaintsCountTodayadm > 0) {
+            toastr()->warning("SE PRESENTARON NUEVAS QUEJAS ADMINISTRATIVAS:{$this->complaintsCountTodayadm} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Administrador']) && $this->complaintsCountTodayop > 0) {
+            toastr()->warning("SE PRESENTARON NUEVAS QUEJAS OPERATIVAS:{$this->complaintsCountTodayop} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Administrador']) && $this->claimsCountToday > 0) {
+            toastr()->warning("LLEGO UN NUEVO RECLAMO:{$this->claimsCountToday} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Administrador']) && $this->claimsCount > 0) {
+            toastr()->success("HAY RECLAMOS PENDIENTES A SER RECIBIDOS:{$this->claimsCount} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Administrador']) && $this->claimsCountlocal > 0) {
+            toastr()->error("HAY RECLAMOS LOCALES PENDIENTES VENCERAN PRONTO:{$this->claimsCountlocal} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Administrador']) && $this->claimsCountinter > 0) {
+            toastr()->error("HAY RECLAMOS INTERNACIONALES PENDIENTES VENCERAN PRONTO:{$this->claimsCountinter} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Reclamos', 'Administrador']) && $this->claimsCountnat > 0) {
+            toastr()->error("HAY RECLAMOS NACIONALES PENDIENTES VENCERAN PRONTO:{$this->claimsCountnat} CASOS PARA VER");
+        }
+        if (auth()->user()->hasAnyRole(['SuperAdmin', 'Administrador']) && $this->informationCountToday > 0) {
+            toastr()->warning("SE GENERARON NUEVAS CONSULTAS EN INFORMACIONES :{$this->informationCountToday} CASOS PARA VER");
+        }
         return view('livewire.dashboard');
     }
 }

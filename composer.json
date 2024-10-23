@@ -19,7 +19,7 @@
         "opcodesio/log-viewer": "^3.10",
         "spatie/laravel-backup": "^9.0",
         "spatie/laravel-permission": "^6.9",
-        "yoeunes/toastr": "^2.3"
+        "yoeunes/toastr": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
