@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes Ordinarios')
+@section('title', 'SIRECO')
 @section('template_title')
     Paqueteria Postal
 @endsection

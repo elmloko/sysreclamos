@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Estadísticas de Paquetes')
+@section('title', 'SIRECO')
 
 @section('template_title')
     Todo

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'SIRECO')
 
 @section('content_header')
     <h1>Sistema de Informacion, Consultas, Quejas y Reclamos de la AGBC</h1>
@@ -14,12 +14,4 @@
         @livewire('dashboard')
     @endhasrole
     @include('footer')
-@stop
-
-@section('css')
-
-@stop
-
-@section('js')
-
 @stop
