@@ -299,9 +299,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=32764 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32900 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~11.251 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~11.253 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(7100, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
 	(7104, 1725020640, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 2180.00, NULL),
@@ -11386,7 +11386,76 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(32760, 1729793100, 60, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 1604.00, NULL),
 	(32761, 1729792800, 360, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 1604.00, NULL),
 	(32762, 1729792800, 1440, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 1604.00, NULL),
-	(32763, 1729788480, 10080, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 1604.00, NULL);
+	(32763, 1729788480, 10080, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 'max', 1604.00, NULL),
+	(32764, 1729889820, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32765, 1729889640, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32766, 1729889280, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32767, 1729889280, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32768, 1729889820, 60, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(32769, 1729889640, 360, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(32770, 1729889280, 1440, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(32771, 1729889280, 10080, 'slow_user_request', '1', 'count', 2.00, NULL),
+	(32772, 1729889820, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(32773, 1729889640, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(32774, 1729889280, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(32775, 1729889280, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(32776, 1729889820, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1885.00, NULL),
+	(32777, 1729889640, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1885.00, NULL),
+	(32778, 1729889280, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1885.00, NULL),
+	(32779, 1729889280, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1885.00, NULL),
+	(32780, 1729889820, 60, 'slow_request', '["GET","\\/dashboard","Closure"]', 'count', 1.00, NULL),
+	(32781, 1729889640, 360, 'slow_request', '["GET","\\/dashboard","Closure"]', 'count', 1.00, NULL),
+	(32782, 1729889280, 1440, 'slow_request', '["GET","\\/dashboard","Closure"]', 'count', 1.00, NULL),
+	(32783, 1729889280, 10080, 'slow_request', '["GET","\\/dashboard","Closure"]', 'count', 1.00, NULL),
+	(32784, 1729889820, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32785, 1729889640, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32786, 1729889280, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32787, 1729889280, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32796, 1729889820, 60, 'slow_request', '["GET","\\/dashboard","Closure"]', 'max', 1059.00, NULL),
+	(32797, 1729889640, 360, 'slow_request', '["GET","\\/dashboard","Closure"]', 'max', 1059.00, NULL),
+	(32798, 1729889280, 1440, 'slow_request', '["GET","\\/dashboard","Closure"]', 'max', 1059.00, NULL),
+	(32799, 1729889280, 10080, 'slow_request', '["GET","\\/dashboard","Closure"]', 'max', 1059.00, NULL),
+	(32800, 1729889820, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32801, 1729889640, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32802, 1729889280, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32803, 1729889280, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(32808, 1729955820, 60, 'user_request', '1', 'count', 3.00, NULL),
+	(32809, 1729955520, 360, 'user_request', '1', 'count', 3.00, NULL),
+	(32810, 1729955520, 1440, 'user_request', '1', 'count', 3.00, NULL),
+	(32811, 1729949760, 10080, 'user_request', '1', 'count', 3.00, NULL),
+	(32812, 1729955820, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(32813, 1729955520, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(32814, 1729955520, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(32815, 1729949760, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(32828, 1729958400, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32829, 1729958400, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32830, 1729958400, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32831, 1729949760, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'count', 1.00, NULL),
+	(32832, 1729958400, 60, 'slow_user_request', '2', 'count', 1.00, NULL),
+	(32833, 1729958400, 360, 'slow_user_request', '2', 'count', 1.00, NULL),
+	(32834, 1729958400, 1440, 'slow_user_request', '2', 'count', 1.00, NULL),
+	(32835, 1729949760, 10080, 'slow_user_request', '2', 'count', 1.00, NULL),
+	(32836, 1729958400, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(32837, 1729958400, 360, 'user_request', '2', 'count', 7.00, NULL),
+	(32838, 1729958400, 1440, 'user_request', '2', 'count', 7.00, NULL),
+	(32839, 1729949760, 10080, 'user_request', '2', 'count', 7.00, NULL),
+	(32840, 1729958400, 60, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'count', 1.00, NULL),
+	(32841, 1729958400, 360, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'count', 1.00, NULL),
+	(32842, 1729958400, 1440, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'count', 1.00, NULL),
+	(32843, 1729949760, 10080, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'count', 1.00, NULL),
+	(32844, 1729958400, 60, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1516.00, NULL),
+	(32845, 1729958400, 360, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1516.00, NULL),
+	(32846, 1729958400, 1440, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1516.00, NULL),
+	(32847, 1729949760, 10080, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 'max', 1516.00, NULL),
+	(32848, 1729958400, 60, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'max', 1329.00, NULL),
+	(32849, 1729958400, 360, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'max', 1329.00, NULL),
+	(32850, 1729958400, 1440, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'max', 1329.00, NULL),
+	(32851, 1729949760, 10080, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 'max', 1329.00, NULL),
+	(32852, 1729958400, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(32853, 1729958400, 360, 'cache_hit', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(32854, 1729958400, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(32868, 1729958700, 60, 'user_request', '2', 'count', 4.00, NULL),
+	(32869, 1729958700, 60, 'cache_hit', 'spatie.permission.cache', 'count', 4.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -11401,9 +11470,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=8001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8031 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~6.069 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~6.099 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(1593, 1725026071, 'slow_request', '["GET","\\/","Closure"]', 2180),
 	(1594, 1725026096, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 7111),
@@ -17812,7 +17881,37 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(7997, 1729716313, 'user_request', '1', NULL),
 	(7998, 1729716313, 'cache_hit', 'spatie.permission.cache', NULL),
 	(7999, 1729793033, 'slow_request', '["GET","\\/users","App\\\\Http\\\\Controllers\\\\UserController@index"]', 48786),
-	(8000, 1729793130, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 1604);
+	(8000, 1729793130, 'slow_request', '["GET","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@create"]', 1604),
+	(8001, 1729889843, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 1885),
+	(8002, 1729889843, 'slow_user_request', '1', NULL),
+	(8003, 1729889843, 'user_request', '1', NULL),
+	(8004, 1729889845, 'slow_request', '["GET","\\/dashboard","Closure"]', 1059),
+	(8005, 1729889845, 'slow_user_request', '1', NULL),
+	(8006, 1729889845, 'user_request', '1', NULL),
+	(8007, 1729889846, 'cache_miss', 'spatie.permission.cache', NULL),
+	(8008, 1729889852, 'user_request', '1', NULL),
+	(8009, 1729889853, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8010, 1729955823, 'user_request', '1', NULL),
+	(8011, 1729955823, 'user_request', '1', NULL),
+	(8012, 1729955824, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8013, 1729955831, 'user_request', '1', NULL),
+	(8014, 1729955831, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8015, 1729958437, 'slow_request', '["POST","\\/login","App\\\\Http\\\\Controllers\\\\Auth\\\\AuthenticatedSessionController@store"]', 1516),
+	(8016, 1729958437, 'slow_user_request', '2', NULL),
+	(8017, 1729958437, 'user_request', '2', NULL),
+	(8018, 1729958438, 'slow_outgoing_request', '["POST","https:\\/\\/www.google.com\\/recaptcha\\/api\\/siteverify"]', 1329),
+	(8019, 1729958438, 'user_request', '2', NULL),
+	(8020, 1729958438, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8021, 1729958456, 'user_request', '2', NULL),
+	(8022, 1729958456, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8023, 1729958723, 'user_request', '2', NULL),
+	(8024, 1729958723, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8025, 1729958729, 'user_request', '2', NULL),
+	(8026, 1729958729, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8027, 1729958752, 'user_request', '2', NULL),
+	(8028, 1729958752, 'cache_hit', 'spatie.permission.cache', NULL),
+	(8029, 1729958756, 'user_request', '2', NULL),
+	(8030, 1729958756, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -17899,9 +17998,9 @@ CREATE TABLE IF NOT EXISTS `suggestions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.suggestions: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.suggestions: ~9 rows (aproximadamente)
 INSERT INTO `suggestions` (`id`, `correlativo`, `fullName`, `address`, `country`, `identityCard`, `codepostal`, `email`, `phone`, `description`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'SGR0001', 'NADIA RODRIGUEZ ', 'VILLA COPACABANA ', 'BOLIVIA ', NULL, 'RP849633874', 'camila.nadia16@gmail.com', '65562748', 'EXCELENTE SERVIO MEJORO BASTANTE ', 'PUBLICADO', '2024-10-01 03:51:51', '2024-10-01 03:51:51', NULL),
 	(2, 'SGR0002', 'HéLIO AUGUSTO FONSêCA PEREIRA', 'AV. JOSé SAMPAIO LUZ, 327 - APT 202 - P VERDE - MACEIó/AL', 'BRASIL', NULL, 'RR001702813BR', 'helio7@bol.com.br', '5582999842385', 'BUENOS DIAS!\n\nLA ENCOMIENDA RR001702813BR TODAVIA NO HA SIDO ENTREGUE.\nHAY ALGUNA DIFICULDAD? CUáL LA ESTIMATIVA PARA QUE EL SERVICIO SEA CONCLUIDO, CON LA ENTREGA .\nASí ESTá EN EL RASTREO.\n\nRECIBIR ENVíO EN OFICINA DE ENTREGA (ENTRADA)\nRR001702813BROFICINA: BOTDDB - TRINIDAD\n2024-09-27 14:40:00\n\nAGRADEZCO POR LA CONTESTACIóN.\n\nSALUDOS CORDIALES,\n\nHéLIO AUGUSTO FONSêCA PEREIRA\n\n', 'PUBLICADO', '2024-10-06 18:22:01', '2024-10-06 18:22:01', NULL),
@@ -17910,7 +18009,8 @@ INSERT INTO `suggestions` (`id`, `correlativo`, `fullName`, `address`, `country`
 	(5, 'SGR0005', 'MARTHA VALENCIA', 'TRANSV.35 #65D39 ED.ALSACIA 603', 'COLOMBIA', NULL, 'RR000741435BO', 'marthicava@hotmail.com', '3017146243', 'DESDE EL 21/08/2024 ME FUE ENVIADO DESDE COCHABAMBA -BOLIVIA UN SOBRE CORRESPONDECIA Y A LA FECHA NO LO HE RECIBIDO. ', 'PUBLICADO', '2024-10-14 23:55:55', '2024-10-14 23:55:55', NULL),
 	(6, 'SGR0006', 'ELIAS MONTAñO', 'AV. TUPAC YUPANQUI Y PUCARA URB. PLAN 500, OR.', 'BOLIVIA', NULL, 'RP434820840MU', 'traxex.vs.nevermore@gmail.com', '73312901', 'COMPRE POR ALIEXPRESS Y MENCIONARON QUE YA LLEGO MI PEDIDO, PERO AQUI CORREOS NO SE COMUNICARON PARA NADA CONMIGO. NECESITO SABER SI LLEGO PARA ASI RECLAMAR DEVOLUCION YA QUE NO ME LLEGO EL PRODUCTO QUE COMPRE.', 'PUBLICADO', '2024-10-16 11:19:55', '2024-10-16 11:19:55', NULL),
 	(7, 'SGR0007', 'KEVIN SALOMON SOLIZ INOCHEA ', 'VINTO', 'BOLIVIA ', '8819020', 'RP126402208MU', 'kevinsolizinochea@gmail.com', '70777731', 'SALUDOS MI RECLAMO ES EL SIGUIENTE ENVIé A MI ESPOSA A RECOGER EL PAQUETE DESPUéS DE RECIBIR UN MENSAJE DE WHATSAPP DONDE INDICABAN COMO ES EL RECOJO CON TERCERAS PERSONAS Y SEGUIMOS DICHA INDICACION Y AHORA EN LA OFICINA DE CORREOS DE COCHABAMBA LE INDICAN Q MI ESPOSA QUE YO DEBO PASAR PERSONALMENTE PARA HABER SELLAR UNA ESPECIE DE GUIA EN OFICINAS DE ADUANA QUE SE ENCUENTRAN ABAJO DE SUS INSTALACIONES, AHORA YO TRABAJO EN UNA ENTIDAD BANCARIA POR LO CUAL NO DISPONGO DEL TIEMPO PARA IR HASTA ALLá SOLO A HACER SELLAR COMO ES POSIBLE QUE A ESTáS ALTURAS ESA ENTIDAD SEA TAN INEFICIENTE ', 'PUBLICADO', '2024-10-18 14:15:55', '2024-10-18 14:15:55', NULL),
-	(8, 'SGR0008', 'HERNAN FERRUFINO', 'AV SAAVEDRA 2316', 'BOLIVIA', '3375938', '', 'hernan.fv@gmail.com', '72585087', 'SE SUGIERE INVITAR SALTEÑAS A PLANIFICACIÓN ', 'PUBLICADO', '2024-10-18 18:37:35', '2024-10-18 18:37:35', NULL);
+	(8, 'SGR0008', 'HERNAN FERRUFINO', 'AV SAAVEDRA 2316', 'BOLIVIA', '3375938', '', 'hernan.fv@gmail.com', '72585087', 'SE SUGIERE INVITAR SALTEÑAS A PLANIFICACIÓN ', 'PUBLICADO', '2024-10-18 18:37:35', '2024-10-18 18:37:35', NULL),
+	(9, 'SGR0009', 'MARIO ALAN JIMMY OSAKI LLANOS ', 'CONDOMINIO DADDARIO CASA 48 ', 'BOLIVIA', '2202310', 'LY577069961DE', 'jimmyosaki@gmail.com', '72533444', 'AYER FUI A RECOGER, ME DICEN QUE LO TIENE UN CARTERO Y HOY QUE LO EXTRAVIó PORQUE TUVO UN ACCIDENTE, SOLICITO LA REPOSICIóN E INVESTIGACIóN DE LOS FUNCIONARIOS ', 'PUBLICADO', '2024-10-26 18:34:33', '2024-10-26 18:34:33', NULL);
 
 -- Volcando estructura para tabla sysreclamos.users
 CREATE TABLE IF NOT EXISTS `users` (
