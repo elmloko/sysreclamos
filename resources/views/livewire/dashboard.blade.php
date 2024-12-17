@@ -15,58 +15,58 @@
     </div>
 
     @if (!empty($codigo) && !empty($events))
-        <h2 style="text-align: center; margin-bottom: 15px;">Eventos del código: {{ $codigo }}</h2>
+        <h2 style="background-color: #fff; color: #333; text-align: center; margin-bottom: 15px;">Eventos del código: {{ $codigo }}</h2>
     @endif
 
     @if ($additionalInfo)
-        <div style="margin-bottom: 20px;">
-            <h3 style="text-align: center;">Información Adicional</h3>
-            <table style="width: 100%; border-collapse: collapse; margin: 0 auto; text-align: left;">
-                <thead>
-                    <tr style="background-color: #f1f1f1;">
-                        <th style="padding: 10px;">Destinatario</th>
-                        <th style="padding: 10px;">Estado</th>
-                        <th style="padding: 10px;">Teléfono</th>
-                        <th style="padding: 10px;">Ciudad</th>
-                        <th style="padding: 10px;">Ventanilla</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 10px;">{{ $additionalInfo['DESTINATARIO'] }}</td>
-                        <td style="padding: 10px;">{{ $additionalInfo['ESTADO'] }}</td>
-                        <td style="padding: 10px;">{{ $additionalInfo['TELEFONO'] }}</td>
-                        <td style="padding: 10px;">{{ $additionalInfo['CUIDAD'] }}</td>
-                        <td style="padding: 10px;">{{ $additionalInfo['VENTANILLA'] }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    @endif
+    <div style="margin-bottom: 20px;">
+        <h3 style="background-color: #fff; color: #333; text-align: center;">Información Adicional</h3>
+        <table style="width: 100%; border-collapse: collapse; margin: 0 auto; text-align: left;">
+            <thead>
+                <tr style="background-color: #f1f1f1; color: #333;">
+                    <th style="padding: 10px;">Destinatario</th>
+                    <th style="padding: 10px;">Estado</th>
+                    <th style="padding: 10px;">Teléfono</th>
+                    <th style="padding: 10px;">Ciudad</th>
+                    <th style="padding: 10px;">Ventanilla</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background-color: #fff; color: #333;">
+                    <td style="padding: 10px;">{{ $additionalInfo['DESTINATARIO'] }}</td>
+                    <td style="padding: 10px;">{{ $additionalInfo['ESTADO'] }}</td>
+                    <td style="padding: 10px;">{{ $additionalInfo['TELEFONO'] }}</td>
+                    <td style="padding: 10px;">{{ $additionalInfo['CUIDAD'] }}</td>
+                    <td style="padding: 10px;">{{ $additionalInfo['VENTANILLA'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+@endif
 
-    <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr style="background-color: #007bff; color: #fff;">
-                <th style="padding: 10px; text-align: left;">Acción</th>
-                <th style="padding: 10px; text-align: left;">Descripción</th>
-                <th style="padding: 10px; text-align: left;">Fecha</th>
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #007bff; color: #fff;">
+            <th style="padding: 10px; text-align: left;">Acción</th>
+            <th style="padding: 10px; text-align: left;">Descripción</th>
+            <th style="padding: 10px; text-align: left;">Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($events as $event)
+            <tr style="background-color: #f9f9f9; color: #333; border-bottom: 1px solid #ddd;">
+                <td style="padding: 10px;">{{ $event['action'] }}</td>
+                <td style="padding: 10px;">{{ $event['descripcion'] }}</td>
+                <td style="padding: 10px;">{{ $event['updated_at'] }}</td>
             </tr>
-        </thead>
-        <tbody>
-            @forelse($events as $event)
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td style="padding: 10px;">{{ $event['action'] }}</td>
-                    <td style="padding: 10px;">{{ $event['descripcion'] }}</td>
-                    <td style="padding: 10px;">{{ $event['updated_at'] }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="3" style="padding: 10px; text-align: center;">No se encontraron eventos para este
-                        código.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+        @empty
+            <tr>
+                <td colspan="3" style="padding: 10px; text-align: center; color: #333;">No se encontraron eventos para este código.</td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
+
 
     <div style="text-align: right; margin-top: 20px;">
         @if ($additionalInfo)
@@ -187,7 +187,7 @@
                                 style="text-transform: uppercase;" required></textarea>
                             <div class="invalid-feedback">Por favor, ingresa la descripción de la llamada.</div>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="estado">ESTADO</label>
                             <input type="text" class="form-control" id="estado" value="LLAMADA" readonly
                                 style="text-transform: uppercase;">
@@ -197,7 +197,7 @@
                             <input type="text" class="form-control" id="fecha"
                                 value="{{ \Carbon\Carbon::now()->format('d/m/Y H:i:s') }}" readonly
                                 style="text-transform: uppercase;">
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
                 <div class="modal-footer">
