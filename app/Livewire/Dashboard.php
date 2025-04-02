@@ -111,7 +111,7 @@ class Dashboard extends Component
         // Segunda API: Buscar eventos con el código (repetidos)
         $response = Http::withHeaders([
             'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
-        ])->withOptions(['verify' => false])->get("http://correos.gob.bo:8000/api/events/repeated-codes/{$this->codigo}");
+        ])->withOptions(['verify' => false])->get("https://correos.gob.bo:8000/api/events/repeated-codes/{$this->codigo}");
 
         $secondApiEvents = [];
         if ($response->successful()) {
@@ -127,7 +127,7 @@ class Dashboard extends Component
         // Tercera API: Obtener la información adicional
         $additionalResponse = Http::withHeaders([
             'Authorization' => 'Bearer eZMlItx6mQMNZjxoijEvf7K3pYvGGXMvEHmQcqvtlAPOEAPgyKDVOpyF7JP0ilbK'
-        ])->withOptions(['verify' => false])->get("http://correos.gob.bo:8000/api/prueba/{$this->codigo}");
+        ])->withOptions(['verify' => false])->get("https://correos.gob.bo:8000/api/prueba/{$this->codigo}");
 
         if ($additionalResponse->successful()) {
             $this->additionalInfo = $additionalResponse->json();
