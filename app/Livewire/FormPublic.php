@@ -30,23 +30,23 @@ class FormPublic extends Component
 
     public function submit()
     {
-        $this->validate(); // Valida todos los campos incluidos los del reCAPTCHA
+        // $this->validate(); // Valida todos los campos incluidos los del reCAPTCHA
 
-        // Verificar reCAPTCHA
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => '6LdIqDcqAAAAAMb08_WCzPXCPDINC_aNSsCPgiH0', // Reemplaza con tu clave secreta
-            'response' => $this->recaptcha, // Utiliza la propiedad Livewire recaptcha
-        ]);
+        // // Verificar reCAPTCHA
+        // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        //     'secret' => '6LdIqDcqAAAAAMb08_WCzPXCPDINC_aNSsCPgiH0', // Reemplaza con tu clave secreta
+        //     'response' => $this->recaptcha, // Utiliza la propiedad Livewire recaptcha
+        // ]);
 
-        $responseBody = json_decode($response->body());
+        // $responseBody = json_decode($response->body());
 
-        if (!$responseBody->success) {
-            session()->flash('message', 'Por favor, verifica que no eres un robot.');
-            return;
-        }
+        // if (!$responseBody->success) {
+        //     session()->flash('message', 'Por favor, verifica que no eres un robot.');
+        //     return;
+        // }
 
-        // Continuar con el envío del formulario si el captcha es válido
-        $this->validate();
+        // // Continuar con el envío del formulario si el captcha es válido
+        // $this->validate();
 
         // Obtener el último correlativo y crear el nuevo registro
         $lastRecord = Suggestion::where('correlativo', 'like', 'SGR%')
