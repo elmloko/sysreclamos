@@ -43,19 +43,19 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
     
-        // Verificar reCAPTCHA con Google
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => '6LdIqDcqAAAAAMb08_WCzPXCPDINC_aNSsCPgiH0', // Cambia por tu clave secreta de reCAPTCHA
-            'response' => $this->input('g-recaptcha-response'),
-        ]);
+        // // Verificar reCAPTCHA con Google
+        // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+        //     'secret' => '6LdIqDcqAAAAAMb08_WCzPXCPDINC_aNSsCPgiH0', // Cambia por tu clave secreta de reCAPTCHA
+        //     'response' => $this->input('g-recaptcha-response'),
+        // ]);
     
-        $responseBody = json_decode($response->body());
+        // $responseBody = json_decode($response->body());
     
-        if (!$responseBody->success) {
-            throw ValidationException::withMessages([
-                'g-recaptcha-response' => 'Por favor, verifica que no eres un robot.',
-            ]);
-        }
+        // if (!$responseBody->success) {
+        //     throw ValidationException::withMessages([
+        //         'g-recaptcha-response' => 'Por favor, verifica que no eres un robot.',
+        //     ]);
+        // }
     
         // Proceder con la autenticación si el reCAPTCHA es válido
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
