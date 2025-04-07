@@ -78,9 +78,9 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6LdIqDcqAAAAAACT4SftkCarELry37YxM2cPRaJi"
+                    {{-- <div class="g-recaptcha" data-sitekey="6LdIqDcqAAAAAACT4SftkCarELry37YxM2cPRaJi"
                         data-callback="recaptchaSuccess"></div>
-                    @error('recaptcha')
+                    @error('recaptcha') --}}
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <button type="submit" class="btn btn-block btn-lg btn-primary">Enviar</button>

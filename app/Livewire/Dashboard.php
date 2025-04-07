@@ -68,45 +68,45 @@ class Dashboard extends Component
 
     public function search()
     {
-        // Primera API: Autenticación y obtención del token JWT
-        $client = new Client(['base_uri' => 'http://172.65.10.37/']);
-        $response = $client->post('api/Autenticacion/Validar', [
-            'json' => [
-                'correo' => 'Correos',
-                'clave' => 'AGBClp2020'
-            ]
-        ]);
-        $body = json_decode($response->getBody());
-        $token = $body->token;
+        // // Primera API: Autenticación y obtención del token JWT
+        // $client = new Client(['base_uri' => 'http://172.65.10.37/']);
+        // $response = $client->post('api/Autenticacion/Validar', [
+        //     'json' => [
+        //         'correo' => 'Correos',
+        //         'clave' => 'AGBClp2020'
+        //     ]
+        // ]);
+        // $body = json_decode($response->getBody());
+        // $token = $body->token;
 
-        // Primera API: Buscar eventos con el código
-        $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ],
-            'json' => [
-                'id' => $this->codigo
-            ]
-        ]);
+        // // Primera API: Buscar eventos con el código
+        // $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer ' . $token,
+        //         'Accept' => 'application/json',
+        //     ],
+        //     'json' => [
+        //         'id' => $this->codigo
+        //     ]
+        // ]);
 
-        $firstApiEvents = [];
-        if ($response->getStatusCode() === 200) {
-            $results = json_decode($response->getBody(), true);
+        // $firstApiEvents = [];
+        // if ($response->getStatusCode() === 200) {
+        //     $results = json_decode($response->getBody(), true);
 
-            // Ordenar y formatear los resultados
-            usort($results, function ($a, $b) {
-                return strtotime($b['eventDate']) - strtotime($a['eventDate']);
-            });
+        //     // Ordenar y formatear los resultados
+        //     usort($results, function ($a, $b) {
+        //         return strtotime($b['eventDate']) - strtotime($a['eventDate']);
+        //     });
 
-            $firstApiEvents = collect($results)->map(function ($event) {
-                return [
-                    'action' => $event['eventType'],
-                    'descripcion' => $event['office'] . ' - ' . $event['scanned'],
-                    'updated_at' => Carbon::parse($event['eventDate'])->format('d/m/Y H:i:s')
-                ];
-            })->toArray();
-        }
+        //     $firstApiEvents = collect($results)->map(function ($event) {
+        //         return [
+        //             'action' => $event['eventType'],
+        //             'descripcion' => $event['office'] . ' - ' . $event['scanned'],
+        //             'updated_at' => Carbon::parse($event['eventDate'])->format('d/m/Y H:i:s')
+        //         ];
+        //     })->toArray();
+        // }
 
         // Segunda API: Buscar eventos con el código (repetidos)
         $response = Http::withHeaders([

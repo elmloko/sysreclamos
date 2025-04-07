@@ -61,10 +61,10 @@
                         <input class="input100" type="password" name="password" required>
                         <span class="focus-input100"></span>
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6LdIqDcqAAAAAACT4SftkCarELry37YxM2cPRaJi"></div>
+                    {{-- <div class="g-recaptcha" data-sitekey="6LdIqDcqAAAAAACT4SftkCarELry37YxM2cPRaJi"></div>
                     @error('g-recaptcha-response')
                         <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                    @enderror --}}
                     <button class="login100-form-btn">
                         Ingresar
                     </button>

@@ -25,7 +25,7 @@ class FormPublic extends Component
         'phone' => 'required|integer',
         'identityCard' => 'required|integer',
         'description' => 'required|nullable|string',
-        'recaptcha' => 'required',
+        // 'recaptcha' => 'required',
     ];
 
     public function submit()
