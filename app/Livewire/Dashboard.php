@@ -136,7 +136,8 @@ class Dashboard extends Component
         }
 
         // Combinamos los resultados de ambas APIs
-        $this->events = array_merge($firstApiEvents, $secondApiEvents);
+        // $this->events = array_merge($firstApiEvents, $secondApiEvents);
+        $this->events = array_merge($secondApiEvents);
 
         // Ordenamos todos los eventos por fecha descendente
         usort($this->events, function ($a, $b) {
