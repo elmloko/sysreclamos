@@ -303,9 +303,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=64699 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64739 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.292 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.300 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(47624, 1738759680, 10080, 'user_request', '2', 'count', 5.00, NULL),
 	(47628, 1738759680, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
@@ -7813,7 +7813,31 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(64695, 1745426520, 60, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 'max', 1133.00, NULL),
 	(64696, 1745426520, 360, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 'max', 1133.00, NULL),
 	(64697, 1745425440, 1440, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 'max', 1133.00, NULL),
-	(64698, 1745422560, 10080, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 'max', 1133.00, NULL);
+	(64698, 1745422560, 10080, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 'max', 1133.00, NULL),
+	(64699, 1745593800, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64700, 1745593560, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64701, 1745592480, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64702, 1745583840, 10080, 'user_request', '2', 'count', 3.00, NULL),
+	(64703, 1745593800, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64704, 1745593560, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64705, 1745592480, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64706, 1745583840, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64711, 1745593800, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64712, 1745593560, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64713, 1745592480, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64714, 1745583840, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64719, 1745844780, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64720, 1745844480, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64721, 1745844480, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64722, 1745835840, 10080, 'user_request', '2', 'count', 3.00, NULL),
+	(64723, 1745844780, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64724, 1745844480, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64725, 1745844480, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64726, 1745835840, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64731, 1745844780, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64732, 1745844480, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64733, 1745844480, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64734, 1745835840, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -7828,9 +7852,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=16825 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16835 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.874 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.884 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(11797, 1738760353, 'user_request', '2', NULL),
 	(11798, 1738760354, 'user_request', '2', NULL),
@@ -12859,7 +12883,17 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(16821, 1745426230, 'user_request', '2', NULL),
 	(16822, 1745426572, 'slow_request', '["POST","\\/sugerencias","via \\/livewire\\/update"]', 1133),
 	(16823, 1745426572, 'slow_user_request', '2', NULL),
-	(16824, 1745426572, 'user_request', '2', NULL);
+	(16824, 1745426572, 'user_request', '2', NULL),
+	(16825, 1745593806, 'user_request', '2', NULL),
+	(16826, 1745593807, 'user_request', '2', NULL),
+	(16827, 1745593807, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16828, 1745593818, 'user_request', '2', NULL),
+	(16829, 1745593818, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16830, 1745844790, 'user_request', '2', NULL),
+	(16831, 1745844790, 'user_request', '2', NULL),
+	(16832, 1745844791, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16833, 1745844807, 'user_request', '2', NULL),
+	(16834, 1745844807, 'cache_hit', 'spatie.permission.cache', NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
