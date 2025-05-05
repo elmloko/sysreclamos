@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.events: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.events: ~5 rows (aproximadamente)
 INSERT INTO `events` (`id`, `action`, `user_id`, `descripcion`, `codigo`, `created_at`, `updated_at`) VALUES
 	(1, 'RECLAMO', 'Rodrigo Villa Sanjines', 'Registro Reclamo por Ventanilla', NULL, '2024-09-26 17:21:12', '2024-09-26 17:21:12'),
 	(2, 'INFORMACIONES', 'Rodrigo Villa Sanjines', 'Consulta SAC Manual', 'INFSAC0005', '2024-10-01 23:22:42', '2024-10-01 23:22:42'),
@@ -303,9 +303,9 @@ CREATE TABLE IF NOT EXISTS `pulse_aggregates` (
   KEY `pulse_aggregates_period_bucket_index` (`period`,`bucket`),
   KEY `pulse_aggregates_type_index` (`type`),
   KEY `pulse_aggregates_period_type_aggregate_bucket_index` (`period`,`type`,`aggregate`,`bucket`)
-) ENGINE=InnoDB AUTO_INCREMENT=64739 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64904 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.300 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_aggregates: ~7.264 rows (aproximadamente)
 INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggregate`, `value`, `count`) VALUES
 	(47624, 1738759680, 10080, 'user_request', '2', 'count', 5.00, NULL),
 	(47628, 1738759680, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
@@ -7837,7 +7837,90 @@ INSERT INTO `pulse_aggregates` (`id`, `bucket`, `period`, `type`, `key`, `aggreg
 	(64731, 1745844780, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(64732, 1745844480, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
 	(64733, 1745844480, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
-	(64734, 1745835840, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL);
+	(64734, 1745835840, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64739, 1745935680, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64740, 1745935560, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64741, 1745935200, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64742, 1745926560, 10080, 'user_request', '2', 'count', 3.00, NULL),
+	(64743, 1745935680, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64744, 1745935560, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64745, 1745935200, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64746, 1745926560, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64751, 1745935680, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64752, 1745935560, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64753, 1745935200, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64754, 1745926560, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64759, 1746019020, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64760, 1746018720, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64761, 1746018720, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64762, 1746017280, 10080, 'user_request', '2', 'count', 3.00, NULL),
+	(64763, 1746019020, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64764, 1746018720, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64765, 1746018720, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64766, 1746017280, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64779, 1746028380, 60, 'user_request', '2', 'count', 2.00, NULL),
+	(64780, 1746028080, 360, 'user_request', '2', 'count', 2.00, NULL),
+	(64781, 1746027360, 1440, 'user_request', '2', 'count', 2.00, NULL),
+	(64782, 1746027360, 10080, 'user_request', '2', 'count', 2.00, NULL),
+	(64783, 1746028380, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64784, 1746028080, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64785, 1746027360, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64786, 1746027360, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64791, 1746190680, 60, 'user_request', '2', 'count', 2.00, NULL),
+	(64792, 1746190440, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64793, 1746190080, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64794, 1746188640, 10080, 'user_request', '2', 'count', 3.00, NULL),
+	(64795, 1746190680, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64796, 1746190440, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64797, 1746190080, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64798, 1746188640, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64803, 1746190740, 60, 'user_request', '2', 'count', 1.00, NULL),
+	(64804, 1746190740, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64805, 1746190440, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64806, 1746190080, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64807, 1746188640, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64811, 1746212400, 60, 'user_request', '2', 'count', 2.00, NULL),
+	(64812, 1746212400, 360, 'user_request', '2', 'count', 2.00, NULL),
+	(64813, 1746211680, 1440, 'user_request', '2', 'count', 2.00, NULL),
+	(64814, 1746208800, 10080, 'user_request', '2', 'count', 2.00, NULL),
+	(64815, 1746212400, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64816, 1746212400, 360, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64817, 1746211680, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64818, 1746208800, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64823, 1746451260, 60, 'user_request', '2', 'count', 2.00, NULL),
+	(64824, 1746451080, 360, 'user_request', '2', 'count', 2.00, NULL),
+	(64825, 1746450720, 1440, 'user_request', '2', 'count', 8.00, NULL),
+	(64826, 1746450720, 10080, 'user_request', '2', 'count', 11.00, NULL),
+	(64827, 1746451260, 60, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64828, 1746451080, 360, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64829, 1746450720, 1440, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64830, 1746450720, 10080, 'cache_miss', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64835, 1746451440, 60, 'user_request', '2', 'count', 2.00, NULL),
+	(64836, 1746451440, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64837, 1746451440, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64838, 1746451440, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(64839, 1746450720, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 6.00, NULL),
+	(64840, 1746450720, 10080, 'cache_hit', 'spatie.permission.cache', 'count', 8.00, NULL),
+	(64851, 1746451740, 60, 'user_request', '2', 'count', 1.00, NULL),
+	(64852, 1746451740, 60, 'cache_hit', 'spatie.permission.cache', 'count', 1.00, NULL),
+	(64859, 1746451800, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64860, 1746451800, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64861, 1746451800, 60, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(64862, 1746451800, 360, 'cache_hit', 'spatie.permission.cache', 'count', 3.00, NULL),
+	(64883, 1746458700, 60, 'user_request', '2', 'count', 3.00, NULL),
+	(64884, 1746458640, 360, 'user_request', '2', 'count', 3.00, NULL),
+	(64885, 1746457920, 1440, 'user_request', '2', 'count', 3.00, NULL),
+	(64887, 1746458700, 60, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64888, 1746458640, 360, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64889, 1746457920, 1440, 'cache_hit', 'spatie.permission.cache', 'count', 2.00, NULL),
+	(64896, 1746471480, 60, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
+	(64897, 1746471240, 360, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
+	(64898, 1746470880, 1440, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
+	(64899, 1746470880, 10080, 'slow_request', '["GET","\\/","Closure"]', 'count', 1.00, NULL),
+	(64900, 1746471480, 60, 'slow_request', '["GET","\\/","Closure"]', 'max', 37457.00, NULL),
+	(64901, 1746471240, 360, 'slow_request', '["GET","\\/","Closure"]', 'max', 37457.00, NULL),
+	(64902, 1746470880, 1440, 'slow_request', '["GET","\\/","Closure"]', 'max', 37457.00, NULL),
+	(64903, 1746470880, 10080, 'slow_request', '["GET","\\/","Closure"]', 'max', 37457.00, NULL);
 
 -- Volcando estructura para tabla sysreclamos.pulse_entries
 CREATE TABLE IF NOT EXISTS `pulse_entries` (
@@ -7852,9 +7935,9 @@ CREATE TABLE IF NOT EXISTS `pulse_entries` (
   KEY `pulse_entries_type_index` (`type`),
   KEY `pulse_entries_key_hash_index` (`key_hash`),
   KEY `pulse_entries_timestamp_type_key_hash_value_index` (`timestamp`,`type`,`key_hash`,`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=16835 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16877 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.884 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.pulse_entries: ~4.847 rows (aproximadamente)
 INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(11797, 1738760353, 'user_request', '2', NULL),
 	(11798, 1738760354, 'user_request', '2', NULL),
@@ -12893,7 +12976,49 @@ INSERT INTO `pulse_entries` (`id`, `timestamp`, `type`, `key`, `value`) VALUES
 	(16831, 1745844790, 'user_request', '2', NULL),
 	(16832, 1745844791, 'cache_miss', 'spatie.permission.cache', NULL),
 	(16833, 1745844807, 'user_request', '2', NULL),
-	(16834, 1745844807, 'cache_hit', 'spatie.permission.cache', NULL);
+	(16834, 1745844807, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16835, 1745935707, 'user_request', '2', NULL),
+	(16836, 1745935708, 'user_request', '2', NULL),
+	(16837, 1745935708, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16838, 1745935715, 'user_request', '2', NULL),
+	(16839, 1745935715, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16840, 1746019025, 'user_request', '2', NULL),
+	(16841, 1746019026, 'user_request', '2', NULL),
+	(16842, 1746019026, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16843, 1746019030, 'user_request', '2', NULL),
+	(16844, 1746019031, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16845, 1746028399, 'user_request', '2', NULL),
+	(16846, 1746028400, 'user_request', '2', NULL),
+	(16847, 1746028400, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16848, 1746190725, 'user_request', '2', NULL),
+	(16849, 1746190725, 'user_request', '2', NULL),
+	(16850, 1746190725, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16851, 1746190743, 'user_request', '2', NULL),
+	(16852, 1746190743, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16853, 1746212430, 'user_request', '2', NULL),
+	(16854, 1746212431, 'user_request', '2', NULL),
+	(16855, 1746212431, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16856, 1746451268, 'user_request', '2', NULL),
+	(16857, 1746451269, 'user_request', '2', NULL),
+	(16858, 1746451269, 'cache_miss', 'spatie.permission.cache', NULL),
+	(16859, 1746451442, 'user_request', '2', NULL),
+	(16860, 1746451442, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16861, 1746451448, 'user_request', '2', NULL),
+	(16862, 1746451448, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16863, 1746451795, 'user_request', '2', NULL),
+	(16864, 1746451796, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16865, 1746451800, 'user_request', '2', NULL),
+	(16866, 1746451800, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16867, 1746451804, 'user_request', '2', NULL),
+	(16868, 1746451804, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16869, 1746451814, 'user_request', '2', NULL),
+	(16870, 1746451815, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16871, 1746458739, 'user_request', '2', NULL),
+	(16872, 1746458740, 'user_request', '2', NULL),
+	(16873, 1746458740, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16874, 1746458744, 'user_request', '2', NULL),
+	(16875, 1746458744, 'cache_hit', 'spatie.permission.cache', NULL),
+	(16876, 1746471503, 'slow_request', '["GET","\\/","Closure"]', 37457);
 
 -- Volcando estructura para tabla sysreclamos.pulse_values
 CREATE TABLE IF NOT EXISTS `pulse_values` (
@@ -12982,7 +13107,7 @@ CREATE TABLE IF NOT EXISTS `suggestions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla sysreclamos.suggestions: ~40 rows (aproximadamente)
+-- Volcando datos para la tabla sysreclamos.suggestions: ~38 rows (aproximadamente)
 INSERT INTO `suggestions` (`id`, `correlativo`, `fullName`, `address`, `country`, `identityCard`, `codepostal`, `email`, `phone`, `description`, `estado`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'SGR0001', 'NADIA RODRIGUEZ ', 'VILLA COPACABANA ', 'BOLIVIA ', NULL, 'RP849633874', 'camila.nadia16@gmail.com', '65562748', 'EXCELENTE SERVIO MEJORO BASTANTE ', 'PUBLICADO', '2024-10-01 03:51:51', '2024-10-01 03:51:51', NULL),
 	(2, 'SGR0002', 'HéLIO AUGUSTO FONSêCA PEREIRA', 'AV. JOSé SAMPAIO LUZ, 327 - APT 202 - P VERDE - MACEIó/AL', 'BRASIL', NULL, 'RR001702813BR', 'helio7@bol.com.br', '5582999842385', 'BUENOS DIAS!\n\nLA ENCOMIENDA RR001702813BR TODAVIA NO HA SIDO ENTREGUE.\nHAY ALGUNA DIFICULDAD? CUáL LA ESTIMATIVA PARA QUE EL SERVICIO SEA CONCLUIDO, CON LA ENTREGA .\nASí ESTá EN EL RASTREO.\n\nRECIBIR ENVíO EN OFICINA DE ENTREGA (ENTRADA)\nRR001702813BROFICINA: BOTDDB - TRINIDAD\n2024-09-27 14:40:00\n\nAGRADEZCO POR LA CONTESTACIóN.\n\nSALUDOS CORDIALES,\n\nHéLIO AUGUSTO FONSêCA PEREIRA\n\n', 'PUBLICADO', '2024-10-06 18:22:01', '2024-10-06 18:22:01', NULL),
