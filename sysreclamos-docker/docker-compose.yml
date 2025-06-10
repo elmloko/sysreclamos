@@ -1,0 +1,50 @@
+services:
+  app:
+    build: .
+    container_name: sysreclamos_app
+    restart: unless-stopped
+    volumes:
+      - sysreclamos_code:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=sysreclamos
+      - DB_USERNAME=root
+      - DB_PASSWORD=agbc
+    depends_on:
+      - db
+
+  web:
+    image: nginx:stable-alpine
+    container_name: sysreclamos_web
+    restart: unless-stopped
+    ports:
+      - "8002:80"
+    volumes:
+      - sysreclamos_code:/var/www/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+  db:
+    image: mysql:8.0
+    container_name: sysreclamos_db
+    restart: unless-stopped
+    environment:
+      # Hacemos que root tenga contraseña "agbc"
+      MYSQL_ROOT_PASSWORD: agbc
+      # La base de datos de tu app
+      MYSQL_DATABASE: sysreclamos
+      # (Opcional) si no quieres un usuario extra, comenta las siguientes líneas:
+      # MYSQL_USER: trackpak
+      # MYSQL_PASSWORD: trackpak
+    ports:
+      - "3309:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # Montamos tu script SQL en el arranque
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+volumes:
+  sysreclamos_code:
+  db_data:
