@@ -17,7 +17,6 @@
         "livewire/livewire": "^3.5",
         "maatwebsite/excel": "^3.1",
         "opcodesio/log-viewer": "^3.10",
-        "spatie/laravel-backup": "^8.0",
         "spatie/laravel-permission": "^6.9",
         "yoeunes/toastr": "*"
     },
