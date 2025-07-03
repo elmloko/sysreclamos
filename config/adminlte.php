@@ -315,103 +315,103 @@ return [
             'text' => 'Dashboard',
             'url' => '/dashboard',
             'can'  => 'dashboard',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-tachometer-alt',
         ],
         [
-            'text' => 'Todos los Casos',
-            'url' => '/all',
-            'can'  => 'dashboard',
-            'icon' => 'fas fa-user',
-        ],
-        [
-            'text' => 'Gestion Usuarios',
-            'icon' => 'fas fa-users',
+            'text' => 'Gestión Usuarios',
+            'icon' => 'fas fa-users', // Grupo de usuarios
             'can'  => 'odin',
             'submenu' => [
                 [
                     'text' => 'Personal AGBC',
                     'url' => 'users',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-id-badge', // Identificación del personal
                 ],
                 [
                     'text' => 'Roles',
                     'url' => 'roles',
-                    'icon' => 'fas fa-users-cog',
+                    'icon' => 'fas fa-user-shield', // Representa roles con privilegios
                 ],
                 [
                     'text' => 'Permisos',
                     'url' => 'permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-unlock-alt', // Permiso, acceso autorizado
                 ],
                 [
                     'text' => 'Accesos',
                     'url' => 'role-has-permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-door-open', // Acceso físico o lógico
                 ],
             ],
         ],
         [
-            'text' => 'Consultas Informacion',
-            'icon' => 'fas fa-users',
+            'text' => 'Todos los Casos',
+            'url' => '/all',
+            'can'  => 'dashboard',
+            'icon' => 'fas fa-folder-open',
+        ],
+        [
+            'text' => 'Consultas Información',
+            'icon' => 'fas fa-info-circle', // Consulta de datos informativos
             'can'  => 'informaciones.consulta',
             'submenu' => [
                 [
-                    'text' => 'Registros de Informacion',
+                    'text' => 'Registros de Información',
                     'url' => '/records',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-book', // Representa registros o archivos
                 ],
             ],
         ],
         [
             'text' => 'Consultas Sugerencias',
-            'icon' => 'fas fa-users',
+            'icon' => 'fas fa-lightbulb', // Ideas, aportes
             'can'  => 'sugerencias',
             'submenu' => [
                 [
                     'text' => 'Libro de Sugerencias',
                     'url' => '/sugerencias',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-comment-dots', // Entrada tipo sugerencia
                 ],
             ],
         ],
         [
             'text' => 'Consultas Quejas',
-            'icon' => 'fas fa-users',
+            'icon' => 'fas fa-frown', // Descontento o quejas
             'can'  => 'quejas',
             'submenu' => [
                 [
                     'text' => 'Quejas Administrativas',
                     'url' => '/seguimientoquejasad',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-briefcase', // Temas administrativos
                 ],
                 [
                     'text' => 'Quejas Operativas',
                     'url' => '/seguimientoquejasop',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-cogs', // Problemas en operaciones
                 ],
             ],
         ],
         [
             'text' => 'Consultas Reclamos',
-            'icon' => 'fas fa-users',
+            'icon' => 'fas fa-exclamation-circle', // Advertencia o reclamo formal
             'submenu' => [
                 [
                     'text' => 'Bandeja',
                     'url' => '/bandejareclamos',
                     'can'  => 'reclamos.bandeja',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-inbox', // Bandeja de entrada
                 ],
                 [
                     'text' => 'Seguimiento de Reclamos',
                     'url' => '/seguimientoreclamos',
                     'can'  => 'reclamos.casos',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-route', // Seguimiento de proceso
                 ],
                 [
                     'text' => 'Casos Cerrados',
                     'url' => '/bajareclamos',
                     'can'  => 'reclamos.casos',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-check-circle', // Casos concluidos
                 ],
             ],
         ],
@@ -419,19 +419,20 @@ return [
             'text' => 'Eventos',
             'url' => '/events',
             'can'  => 'odin',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-calendar-check', // Evento agendado o confirmado
+        ],
+
+        [
+            'text' => 'Logs',
+            'url' => '/log-viewer',
+            'icon' => 'fas fa-file-alt', // Representa claramente registros/logs
+            'can'  => 'odin',
         ],
         [
             'text' => 'Rendimiento',
             'url' => '/pulse',
+            'icon' => 'fas fa-tachometer-alt', // Icono de panel o rendimiento
             'can'  => 'odin',
-            'icon' => 'fas fa-user',
-        ],
-        [
-            'text' => 'Logs',
-            'url' => '/log-viewer',
-            'can'  => 'odin',
-            'icon' => 'fas fa-user',
         ],
     ],
 
