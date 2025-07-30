@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Inicio Session sysReclamos</title>
+    <title>SIRECO|AGBC</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('vendor/adminlte/dist/img/AGBClogo.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/AGBClogo.png') }}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
