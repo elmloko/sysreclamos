@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-
     public function index()
     {
         $users = User::withTrashed()->paginate(); // Incluye usuarios eliminados
@@ -20,32 +18,36 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = new User();
+        $user  = new User();
         $roles = Role::all();
+
         return view('user.create', compact('user','roles'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'city' => 'required',
-            'ci' => 'required',
+            'city'     => 'required',
+            'ci'       => 'required',
+            'roles'    => 'required|array',          // <- validar roles
+            'roles.*'  => 'exists:roles,id',         // <- que existan en tabla roles
         ]);
     
         $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
-        $user->city = $request->input('city');
-        $user->ci = $request->input('ci');
-
+        $user->name     = $request->input('name');
+        $user->email    = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->city     = $request->input('city');
+        $user->ci       = $request->input('ci');
         $user->save();
 
-        $user->assignRole($request->input('roles'));
-        
+        // Convertir IDs a NOMBRES, que es lo que usa Spatie internamente
+        $roleNames = Role::whereIn('id', $request->roles)->pluck('name')->toArray();
+        $user->syncRoles($roleNames);
+
         return redirect()->route('users.index')
             ->with('success', 'Usuario creado correctamente');
     }
@@ -59,7 +61,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user  = User::find($id);
         $roles = Role::all();
 
         return view('user.edit', compact('user','roles'));
@@ -68,19 +70,23 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
-            'city' => 'required',
-            'ci' => 'required',
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
+            'city'     => 'required',
+            'ci'       => 'required',
+            'roles'    => 'required|array',
+            'roles.*'  => 'exists:roles,id',
         ]);
 
-        $user->name = $request->input('name');
+        $user->name  = $request->input('name');
         $user->email = $request->input('email');
-        $user->roles()->sync($request->roles);
-        $user->city = $request->input('city');
-        $user->ci = $request->input('ci');
-        
+        $user->city  = $request->input('city');
+        $user->ci    = $request->input('ci');
         $user->save();
+
+        // Igual que en store: convertir IDs a nombres
+        $roleNames = Role::whereIn('id', $request->roles)->pluck('name')->toArray();
+        $user->syncRoles($roleNames);
 
         return redirect()->route('users.index')
             ->with('success', 'Usuario actualizado correctamente');
