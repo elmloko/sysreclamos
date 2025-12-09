@@ -245,8 +245,8 @@ URI     : https://colorlib.com
                         <div class="mt-4">
                             <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO"
                                 style="max-width: 200px; height: auto;" class="mb-3">
-                            <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO"
-                                style="max-width: 200px; height: auto;">
+                            {{-- <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO"
+                                style="max-width: 200px; height: auto;"> --}}
                         </div>
                     </div>
 
@@ -315,7 +315,7 @@ URI     : https://colorlib.com
 
     <footer class="my-5 text-center">
         <!-- Copyright removal is not prohibited! -->
-        <p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p>
+        {{-- <p class="mb-2"><small>#EstamosSaliendoAdelante #RumboalBicentenario</small></p> --}}
         <p class="mb-2"><small>&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
                 Boliviana de Correos <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
                     title="Marco Antonio Espinoza Rojas">Copyright © MAER
